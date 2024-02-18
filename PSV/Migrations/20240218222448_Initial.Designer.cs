@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PSV.Models;
 
@@ -11,9 +12,11 @@ using PSV.Models;
 namespace PSV.Migrations
 {
     [DbContext(typeof(Repository))]
-    partial class RepositoryModelSnapshot : ModelSnapshot
+    [Migration("20240218222448_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,7 +77,7 @@ namespace PSV.Migrations
                     b.HasIndex("IdOrder")
                         .IsUnique();
 
-                    b.ToTable("Cut", (string)null);
+                    b.ToTable("Cuts");
                 });
 
             modelBuilder.Entity("PSV.Models.Milling", b =>
@@ -103,7 +106,7 @@ namespace PSV.Migrations
                     b.HasIndex("IdOrder")
                         .IsUnique();
 
-                    b.ToTable("Milling", (string)null);
+                    b.ToTable("Millings");
                 });
 
             modelBuilder.Entity("PSV.Models.Order", b =>
@@ -138,7 +141,7 @@ namespace PSV.Migrations
 
                     b.HasIndex("IdClient");
 
-                    b.ToTable("Order", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("PSV.Models.Wrapping", b =>
@@ -167,7 +170,7 @@ namespace PSV.Migrations
                     b.HasIndex("IdOrder")
                         .IsUnique();
 
-                    b.ToTable("Wrapping", (string)null);
+                    b.ToTable("Wrappings");
                 });
 
             modelBuilder.Entity("PSV.Models.Cut", b =>

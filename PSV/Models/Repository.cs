@@ -34,6 +34,7 @@ public class Repository : DbContext
         modelBuilder.Entity<Order>(entity =>
         {
             entity.HasKey(e => new { e.Id }).HasName("Order_pk");
+            entity.ToTable("Order");
             entity.Property(e => e.QrCode);
             entity.Property(e => e.Format);
             entity.Property(e => e.Comments);
@@ -71,6 +72,7 @@ public class Repository : DbContext
         modelBuilder.Entity<Cut>(entity =>
         {
             entity.HasKey(e => new { e.Id }).HasName("Cut_pk");
+            entity.ToTable("Cut");
             entity.Property(e => e.From);
             entity.Property(e => e.To);
             entity.Property(e => e.IsPresent);
@@ -79,6 +81,7 @@ public class Repository : DbContext
         modelBuilder.Entity<Milling>(entity =>
         {
             entity.HasKey(e => new { e.Id }).HasName("Milling_pk");
+            entity.ToTable("Milling");
             entity.Property(e => e.From);
             entity.Property(e => e.To);
             entity.Property(e => e.IsPresent);
@@ -87,6 +90,7 @@ public class Repository : DbContext
         modelBuilder.Entity<Wrapping>(entity =>
         {
             entity.HasKey(e => new { e.Id }).HasName("Wrapping_pk");
+            entity.ToTable("Wrapping");
             entity.Property(e => e.From);
             entity.Property(e => e.To);
             entity.Property(e => e.IsPresent);

@@ -12,8 +12,8 @@ using PSV.Models;
 namespace PSV.Migrations
 {
     [DbContext(typeof(Repository))]
-    [Migration("20231214152539_Initial")]
-    partial class Initial
+    [Migration("20240218222805_UpdateDbSchema")]
+    partial class UpdateDbSchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,7 +77,7 @@ namespace PSV.Migrations
                     b.HasIndex("IdOrder")
                         .IsUnique();
 
-                    b.ToTable("Cuts");
+                    b.ToTable("Cut", (string)null);
                 });
 
             modelBuilder.Entity("PSV.Models.Milling", b =>
@@ -106,7 +106,7 @@ namespace PSV.Migrations
                     b.HasIndex("IdOrder")
                         .IsUnique();
 
-                    b.ToTable("Millings");
+                    b.ToTable("Milling", (string)null);
                 });
 
             modelBuilder.Entity("PSV.Models.Order", b =>
@@ -141,7 +141,7 @@ namespace PSV.Migrations
 
                     b.HasIndex("IdClient");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("PSV.Models.Wrapping", b =>
@@ -170,7 +170,7 @@ namespace PSV.Migrations
                     b.HasIndex("IdOrder")
                         .IsUnique();
 
-                    b.ToTable("Wrappings");
+                    b.ToTable("Wrapping", (string)null);
                 });
 
             modelBuilder.Entity("PSV.Models.Cut", b =>
