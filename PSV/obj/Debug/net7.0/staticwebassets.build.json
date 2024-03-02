@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "laYhGj3z90L60EuYQYfA4pfBKr4eaEdaT4lo2LageHA=",
+  "Hash": "sZgJuXNmWyM4j9mMy5jHDe+DeNDgfW10RLTrZYhh6ac=",
   "Source": "PSV",
   "BasePath": "_content/PSV",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/assets/logo.png",
+      "SourceId": "PSV",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/",
+      "BasePath": "_content/PSV",
+      "RelativePath": "assets/logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/assets/logo.png"
+    },
     {
       "Identity": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/css/style.css",
       "SourceId": "PSV",

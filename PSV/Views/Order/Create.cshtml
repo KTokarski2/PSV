@@ -1,3 +1,38 @@
-<form method="post">
-    
-</form>
+<main>
+        <h2 class="page-title">Nowe zamówienie</h2>
+        <form novalidate onsubmit="" class="upload-form">
+            <label for="file">Wczytaj plik zamówienia</label>
+            <input type="file" id="file" name="file">
+            <input class="form-submit" type="submit" value="Prześlij">
+        </form>
+        <form novalidate onsubmit="" class="create-form">
+            <div class="input-group">
+                <label for="orderNumber">Numer zamówienia: <span class="symbol-required">*</span></label>
+                <input type="text" name="orderNumber" id="orderNumber" placeholder="">
+                <span id="errorOrderNumber" class="errors-text"></span>
+            </div>
+            <div class="input-group-checkbox">
+                <input type="checkbox" id="cutCheckbox" name="cutCheckbox" value="Cut">
+                <label for="cutCheckbox">Cięcie</label>
+                <input type="checkbox" id="millingCheckbox" name="millingCheckbox" value="Milling">
+                <label for="millingCheckbox">Frezowanie</label>
+                <input type="checkbox" id="wrappingCheckbox" name="wrappingCheckbox" value="Wrapping">
+                <label for="wrappingCheckbox">Oklejanie</label>
+            </div>
+            <div class="input-group">
+                <label for="formatCode">Kod formatki: <span class="symbol-required">*</span></label>
+                <input type="text" name="formatCode" id="formatCode" placeholder="">
+                <span id="errorFormatCode" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="comment">Komentarz: </label>
+                <textarea name="comment" id="comment"></textarea>
+                <span id="errorComment" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="photos">Zdjęcia: </label>
+                <input type="file" id="photos" name="photos">
+            </div>
+            <input class="form-submit" type="submit" value="Dodaj zamówienie">
+        </form>
+</main>
