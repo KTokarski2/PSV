@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/assets/logo.png",
+      "PackagePath": "staticwebassets/assets/logo.png"
+    },
+    {
       "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/css/style.css",
       "PackagePath": "staticwebassets/css/style.css"
     },

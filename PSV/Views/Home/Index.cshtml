@@ -1,4 +1,12 @@
-﻿<div class="text-center">
-    <p><a href="">Wprowadź zamówienie</a></p>
-    <p><a href="">Stanowisko</a></p>
-</div>
+﻿<main class="starting-page">
+    <h2>Zamówienia</h2>
+    <div class="button-wrapper">
+        <a class="starting-page-button" href="@Url.Action("New", "Order")">Dodaj zamówienie</a>
+    </div>
+    <div class="button-wrapper">
+        <a class="starting-page-button" href="@Url.Action("List", "Order")">Lista zamówień</a>
+    </div>
+    <div class="button-wrapper">
+        <a class="logout-button" href="">Wyloguj się</a>
+    </div>
+</main>

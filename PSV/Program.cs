@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PSV.Models;
+using PSV.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ var configuration = configurationBuilder.Build();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IDbService, DbService>();
 builder.Services.AddDbContext<Repository>(options =>
 {
     options.UseSqlServer(configuration.GetConnectionString("SqlServer"));
