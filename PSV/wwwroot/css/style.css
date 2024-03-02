@@ -1,0 +1,282 @@
+html {
+    background: linear-gradient(to bottom, white, #ced4da);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-width: 600px;
+    font-family: sans-serif;
+    background: linear-gradient(to bottom, white, #ced4da);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    background: white;
+    padding: 1rem 2rem;
+    color: #fff;
+    border-radius: 10px;
+}
+
+h1,
+h2,
+h3 {
+    color: black;
+    margin-bottom: 0.5rem; /* Reduce margins for cleaner look */
+}
+
+header,
+main {
+    margin: 1rem;
+}
+
+.system-title {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 35px;
+}
+
+/* STARTING PAGE */
+
+.starting-page {
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 8rem;
+    padding: 4rem;
+    min-height: 100%;
+}
+
+.button-wrapper {
+    margin-top: 1rem;
+}
+
+.starting-page-button {
+    font-weight: bold;
+    display: inline-block;
+    padding: 1rem 1rem;
+    background-color: #ba181b;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+    transition: background-color 0.2s ease-in-out;
+    text-decoration: none;
+    width: 25%;
+    margin: 0.75rem;
+}
+
+.logout-button {
+    font-weight: bold;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #495057;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+    transition: background-color 0.2s ease-in-out;
+    text-decoration: none;
+    width: 10%;
+}
+
+.starting-page-button:hover {
+    background-color: #e5383b;
+    border: solid 1px black;
+}
+
+.logout-button:hover {
+    background-color: #6c757d;
+    border: solid 1px black;
+}
+
+/* CREATE FROM */
+
+.create-form,
+.upload-form {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid ; /* Subtle border for separation */
+    padding: 2rem; /* Maintain sufficient padding */
+    border-radius: 5px; /* Add a slight border radius for softness */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 2);
+    width: 40%;
+    margin: 0 auto;
+}
+
+.create-form {
+    margin-top: 2rem;
+}
+
+.upload-form {
+    margin-bottom: 2rem;
+}
+
+.create-form label,
+.upload-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.create-form input[type="text"],
+.create-form input[type="file"],
+.create-form textarea,
+.upload-form input[type="file"] {
+    padding: 0.5rem;
+    border-radius: 3px;
+    font-size: 16px;
+    width: 500px;
+    border: solid 2px #d8271f;
+}
+
+.input-group {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 500px;
+}
+
+.input-group-checkbox label {
+    margin-left: 0.5rem
+}
+
+.form-submit {
+    margin: 2rem;
+    width: 25%;
+    padding: 0.5rem 1rem;
+    background-color: #ba181b;
+    border: solid 1px black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.upload-form input[type="submit"]:hover {
+    background-color: #e5383b;
+}
+
+.create-form input[type="submit"]:hover {
+    background-color: #e5383b;
+}
+
+.upload-form-border {
+    border: 1px solid ; /* Subtle border for separation */
+    padding: 2rem; /* Maintain sufficient padding */
+    border-radius: 5px; /* Add a slight border radius for softness */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 2); /* Subtle shadow for depth */
+}
+
+.upload-form label {
+    margin-bottom: 1rem; /* Adjust margin for upload form label */
+}
+
+/* TABLE */
+
+.orders-list {
+    width: 100%;
+    border-collapse: collapse;
+    border: solid 2px black;
+}
+
+.orders-list th,
+.orders-list td {
+    padding: 0.5rem;
+    border: solid 1px black;
+}
+
+.orders-list th {
+    background-color: #ba181b;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.orders-list tbody td {
+    text-align: center;
+}
+
+.orders-list tbody tr:nth-child(even) {
+    background-color: #ced4da;
+}
+
+.orders-list tbody tr:hover {
+    background-color: #e5383b;
+}
+
+.orders-list-row:hover {
+    cursor: pointer;
+}
+
+/* CONTROL PAGE */
+
+.control-buttons {
+    margin-top: 3rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.start-end {
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.control-button,
+.comments-button {
+    padding: 1rem 1rem;
+    background-color: #ba181b;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.2s ease-in-out;
+    margin: 1rem;
+    text-align: center;
+}
+
+.control-button {
+    width: 30%;
+}
+
+.comments-button {
+    width: 25%;
+}
+
+.control-button:hover,
+.comments-button:hover {
+    background-color: #e5383b;
+    border: solid 2px black;
+}
+
+
+
