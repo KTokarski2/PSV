@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PSV.Aplication
-build_property.ProjectDir = C:\Users\Antoni\RiderProjects\PSV\PSV.Aplication\
+build_property.ProjectDir = /home/ant0on/RiderProjects/PSV/PSV.Aplication/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

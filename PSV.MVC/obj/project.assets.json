@@ -1133,17 +1133,17 @@
           }
         }
       },
-      "PSV.Aplication/1.0.0": {
+      "Application/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "PSV.Domain": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/PSV.Aplication.dll": {}
+          "bin/placeholder/Application.dll": {}
         },
         "runtime": {
-          "bin/placeholder/PSV.Aplication.dll": {}
+          "bin/placeholder/Application.dll": {}
         }
       },
       "PSV.Domain/1.0.0": {
@@ -3476,10 +3476,10 @@
         "version.txt"
       ]
     },
-    "PSV.Aplication/1.0.0": {
+    "Application/1.0.0": {
       "type": "project",
-      "path": "../PSV.Aplication/PSV.Aplication.csproj",
-      "msbuildProject": "../PSV.Aplication/PSV.Aplication.csproj"
+      "path": "../Application/Application.csproj",
+      "msbuildProject": "../Application/Application.csproj"
     },
     "PSV.Domain/1.0.0": {
       "type": "project",
@@ -3489,41 +3489,39 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Application >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 7.0.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.5",
-      "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
-      "PSV.Aplication >= 1.0.0"
+      "Microsoft.EntityFrameworkCore.Tools >= 7.0.5"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Antoni\\.nuget\\packages\\": {}
+    "/home/ant0on/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Antoni\\RiderProjects\\PSV\\PSV.MVC\\PSV.MVC.csproj",
+      "projectUniqueName": "/home/ant0on/RiderProjects/PSV/PSV.MVC/PSV.MVC.csproj",
       "projectName": "PSV.MVC",
-      "projectPath": "C:\\Users\\Antoni\\RiderProjects\\PSV\\PSV.MVC\\PSV.MVC.csproj",
-      "packagesPath": "C:\\Users\\Antoni\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Antoni\\RiderProjects\\PSV\\PSV.MVC\\obj\\",
+      "projectPath": "/home/ant0on/RiderProjects/PSV/PSV.MVC/PSV.MVC.csproj",
+      "packagesPath": "/home/ant0on/.nuget/packages/",
+      "outputPath": "/home/ant0on/RiderProjects/PSV/PSV.MVC/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Antoni\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/ant0on/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\Antoni\\RiderProjects\\PSV\\PSV.Aplication\\PSV.Aplication.csproj": {
-              "projectPath": "C:\\Users\\Antoni\\RiderProjects\\PSV\\PSV.Aplication\\PSV.Aplication.csproj"
+            "/home/ant0on/RiderProjects/PSV/Application/Application.csproj": {
+              "projectPath": "/home/ant0on/RiderProjects/PSV/Application/Application.csproj"
             }
           }
         }
@@ -3572,7 +3570,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.116/RuntimeIdentifierGraph.json"
       }
     }
   }

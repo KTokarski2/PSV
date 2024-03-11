@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "D4ZzzIsOry5Io1LiVmf+zBo/6KnC/d3pWq+G1qAK5uM8TxZSH5ZXtf0Ujk1h9Ure1kfOXOI1KF/8dO+b0lky/A==",
+  "dgSpecHash": "gbgNGJ1KlyrZC5Ba4+yWB2UCZ7zGGjir1inpN2vWv2rKnuUroSIq1DuUK2nXwK4bvTjYvxir3KYt+9hZ+ILc3w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Antoni\\RiderProjects\\PSV\\PSV.Domain\\PSV.Domain.csproj",
+  "projectFilePath": "/home/ant0on/RiderProjects/PSV/PSV.Domain/PSV.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

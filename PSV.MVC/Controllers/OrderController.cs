@@ -27,11 +27,11 @@ public class OrderController : Controller
         return View("Create");
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create(OrderPost request)
-    {
-        await _service.AddOrder(request);
-        return RedirectToAction("List");
-    }
+    // [HttpPost]
+    // public async Task<IActionResult> Create(Domain.Entities.DTOs.OrderPost request)
+    // {
+    //     await _service.AddOrder(request);
+    //     return RedirectToAction("List");
+    // }
 
 }
