@@ -7,5 +7,6 @@ namespace PSV.Services
     {
         public Task AddOrder(OrderPost request);
         public Task <List<Order>> GetAllOrders();
+        public Task<OrderDetails> GetOrderDetails(int orderId);
     }
 }
