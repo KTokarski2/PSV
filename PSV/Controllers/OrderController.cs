@@ -46,4 +46,11 @@ public class OrderController : Controller
         return RedirectToAction("New");
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetAllOrders()
+    {
+        await _service.GetAllOrders();
+        return RedirectToAction("List");
+    }
+
 }

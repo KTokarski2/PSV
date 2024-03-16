@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/fedora/RiderProjects/PSV/PSV/PSV.csproj": {}
+    "C:\\Users\\Antek\\RiderProjects\\PSV\\PSV\\PSV.csproj": {}
   },
   "projects": {
-    "/home/fedora/RiderProjects/PSV/PSV/PSV.csproj": {
+    "C:\\Users\\Antek\\RiderProjects\\PSV\\PSV\\PSV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/fedora/RiderProjects/PSV/PSV/PSV.csproj",
+        "projectUniqueName": "C:\\Users\\Antek\\RiderProjects\\PSV\\PSV\\PSV.csproj",
         "projectName": "PSV",
-        "projectPath": "/home/fedora/RiderProjects/PSV/PSV/PSV.csproj",
-        "packagesPath": "/home/fedora/.nuget/packages/",
-        "outputPath": "/home/fedora/RiderProjects/PSV/PSV/obj/",
+        "projectPath": "C:\\Users\\Antek\\RiderProjects\\PSV\\PSV\\PSV.csproj",
+        "packagesPath": "C:\\Users\\Antek\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Antek\\RiderProjects\\PSV\\PSV\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/fedora/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Antek\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -76,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/7.0.116/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.407\\RuntimeIdentifierGraph.json"
         }
       }
     }
