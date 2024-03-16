@@ -2,14 +2,20 @@ namespace PSV.Models.DTOs
 {
     public class OrderPost
     {
-        public int IdClient { get; set; }
-        public string Client { get; set; }
-        public string QrCode { get; set; }
-        public string Format { get; set; }
-        public string Comments { get; set; }
-        public string Photos { get; set; }
-        public bool IsCutPresent { get; set; }
-        public bool IsMillingPresent { get; set; }
-        public bool IsWrappingPresent{ get; set; }
+       public string OrderNumber { get; set; }
+       
+       public bool Cut { get; set; }
+       
+       public bool Milling { get; set; }
+       
+       public bool Wrapping { get; set; }
+       
+       public string FormatCode { get; set; }
+       
+       public string Client { get; set; }
+       
+       public string Comments { get; set; }
+       
+       public List<IFormFile> Photos { get; set; }
     }
 }

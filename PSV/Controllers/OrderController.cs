@@ -31,7 +31,7 @@ public class OrderController : Controller
     public async Task<IActionResult> Create(OrderPost request)
     {
         await _service.AddOrder(request);
-        return RedirectToAction("List");
+        return RedirectToAction("New");
     }
 
 }

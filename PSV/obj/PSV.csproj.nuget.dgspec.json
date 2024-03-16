@@ -51,6 +51,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.3, )"
             }
           },
           "imports": [
@@ -72,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/7.0.115/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/7.0.116/RuntimeIdentifierGraph.json"
         }
       }
     }

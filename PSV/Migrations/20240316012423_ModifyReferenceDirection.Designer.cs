@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PSV.Models;
 
@@ -11,9 +12,11 @@ using PSV.Models;
 namespace PSV.Migrations
 {
     [DbContext(typeof(Repository))]
-    partial class RepositoryModelSnapshot : ModelSnapshot
+    [Migration("20240316012423_ModifyReferenceDirection")]
+    partial class ModifyReferenceDirection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,15 +123,12 @@ namespace PSV.Migrations
                     b.Property<int>("IdWrapping")
                         .HasColumnType("int");
 
-                    b.Property<string>("OrderNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Photos")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QrCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id")

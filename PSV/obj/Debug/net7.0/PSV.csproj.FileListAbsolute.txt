@@ -71,3 +71,4 @@
 /home/fedora/RiderProjects/PSV/PSV/obj/Debug/net7.0/PSV.pdb
 /home/fedora/RiderProjects/PSV/PSV/obj/Debug/net7.0/PSV.genruntimeconfig.cache
 /home/fedora/RiderProjects/PSV/PSV/obj/Debug/net7.0/ref/PSV.dll
+/home/fedora/RiderProjects/PSV/PSV/bin/Debug/net7.0/QRCoder.dll

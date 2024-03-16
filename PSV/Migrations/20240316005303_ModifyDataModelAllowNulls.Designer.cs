@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PSV.Models;
 
@@ -11,9 +12,11 @@ using PSV.Models;
 namespace PSV.Migrations
 {
     [DbContext(typeof(Repository))]
-    partial class RepositoryModelSnapshot : ModelSnapshot
+    [Migration("20240316005303_ModifyDataModelAllowNulls")]
+    partial class ModifyDataModelAllowNulls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,6 +60,9 @@ namespace PSV.Migrations
                     b.Property<DateTime?>("From")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdOrder")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsPresent")
                         .HasColumnType("bit");
 
@@ -65,6 +71,9 @@ namespace PSV.Migrations
 
                     b.HasKey("Id")
                         .HasName("Cut_pk");
+
+                    b.HasIndex("IdOrder")
+                        .IsUnique();
 
                     b.ToTable("Cut", (string)null);
                 });
@@ -80,6 +89,9 @@ namespace PSV.Migrations
                     b.Property<DateTime?>("From")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdOrder")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsPresent")
                         .HasColumnType("bit");
 
@@ -88,6 +100,9 @@ namespace PSV.Migrations
 
                     b.HasKey("Id")
                         .HasName("Milling_pk");
+
+                    b.HasIndex("IdOrder")
+                        .IsUnique();
 
                     b.ToTable("Milling", (string)null);
                 });
@@ -111,39 +126,18 @@ namespace PSV.Migrations
                     b.Property<int>("IdClient")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdCut")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdMilling")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdWrapping")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OrderNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Photos")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QrCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id")
                         .HasName("Order_pk");
 
                     b.HasIndex("IdClient");
-
-                    b.HasIndex("IdCut")
-                        .IsUnique();
-
-                    b.HasIndex("IdMilling")
-                        .IsUnique();
-
-                    b.HasIndex("IdWrapping")
-                        .IsUnique();
 
                     b.ToTable("Order", (string)null);
                 });
@@ -159,6 +153,9 @@ namespace PSV.Migrations
                     b.Property<DateTime?>("From")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdOrder")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsPresent")
                         .HasColumnType("bit");
 
@@ -168,7 +165,34 @@ namespace PSV.Migrations
                     b.HasKey("Id")
                         .HasName("Wrapping_pk");
 
+                    b.HasIndex("IdOrder")
+                        .IsUnique();
+
                     b.ToTable("Wrapping", (string)null);
+                });
+
+            modelBuilder.Entity("PSV.Models.Cut", b =>
+                {
+                    b.HasOne("PSV.Models.Order", "Order")
+                        .WithOne("Cut")
+                        .HasForeignKey("PSV.Models.Cut", "IdOrder")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("Order_Cut");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("PSV.Models.Milling", b =>
+                {
+                    b.HasOne("PSV.Models.Order", "Order")
+                        .WithOne("Milling")
+                        .HasForeignKey("PSV.Models.Milling", "IdOrder")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("Order_Milling");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("PSV.Models.Order", b =>
@@ -180,34 +204,19 @@ namespace PSV.Migrations
                         .IsRequired()
                         .HasConstraintName("Client_Orders");
 
-                    b.HasOne("PSV.Models.Cut", "Cut")
-                        .WithOne("Order")
-                        .HasForeignKey("PSV.Models.Order", "IdCut")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("Order_Cut");
+                    b.Navigation("Client");
+                });
 
-                    b.HasOne("PSV.Models.Milling", "Milling")
-                        .WithOne("Order")
-                        .HasForeignKey("PSV.Models.Order", "IdMilling")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("Order_Milling");
-
-                    b.HasOne("PSV.Models.Wrapping", "Wrapping")
-                        .WithOne("Order")
-                        .HasForeignKey("PSV.Models.Order", "IdWrapping")
+            modelBuilder.Entity("PSV.Models.Wrapping", b =>
+                {
+                    b.HasOne("PSV.Models.Order", "Order")
+                        .WithOne("Wrapping")
+                        .HasForeignKey("PSV.Models.Wrapping", "IdOrder")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("Order_Wrapping");
 
-                    b.Navigation("Client");
-
-                    b.Navigation("Cut");
-
-                    b.Navigation("Milling");
-
-                    b.Navigation("Wrapping");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("PSV.Models.Client", b =>
@@ -215,21 +224,15 @@ namespace PSV.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("PSV.Models.Cut", b =>
+            modelBuilder.Entity("PSV.Models.Order", b =>
                 {
-                    b.Navigation("Order")
+                    b.Navigation("Cut")
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("PSV.Models.Milling", b =>
-                {
-                    b.Navigation("Order")
+                    b.Navigation("Milling")
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("PSV.Models.Wrapping", b =>
-                {
-                    b.Navigation("Order")
+                    b.Navigation("Wrapping")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
