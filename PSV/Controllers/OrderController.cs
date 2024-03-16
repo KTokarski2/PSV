@@ -27,6 +27,18 @@ public class OrderController : Controller
         return View("Create");
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Details()
+    {
+        return View("Details");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Search()
+    {
+        return View("Search");
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create(OrderPost request)
     {

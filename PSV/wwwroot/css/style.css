@@ -278,5 +278,115 @@ main {
     border: solid 2px black;
 }
 
+/* Details */
 
+.details-container {
+    width: 40%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
+.order-details label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.order-details input[type="text"],
+textarea {
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.input-group-details-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.input-group-details-checkbox label {
+    margin-right: 40px;
+}
+
+.input-group-details-checkbox input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.photos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.order-photo {
+    width: calc(33.33% - 20px);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: solid 2px black;
+    transition: border 0.1s ease-in-out;
+}
+
+.order-photo:hover {
+    border: solid 4px red;
+}
+
+.actions-container {
+    text-align: center;
+}
+
+.details-action {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 5px;
+    background-color: #ba181b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    border: solid 1px black;
+}
+
+.details-action:hover {
+    background-color: #e5383b;
+}
+
+/* SEARCH */
+
+.search-container {
+    width: 40%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.search-form input[type="text"] {
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.input-group-search {
+    text-align: center;
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: #e5383b;
+}
