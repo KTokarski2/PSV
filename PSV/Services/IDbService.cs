@@ -6,5 +6,6 @@ namespace PSV.Services
     public interface IDbService
     {
         public Task AddOrder(OrderPost request);
+        public Task <List<Order>> GetAllOrders();
     }
 }
