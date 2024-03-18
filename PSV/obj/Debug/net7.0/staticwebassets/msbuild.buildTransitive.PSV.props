@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../buildMultiTargeting/PSV.props" />
+  <Import Project="..\buildMultiTargeting\PSV.props" />
 </Project>
