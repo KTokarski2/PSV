@@ -358,6 +358,46 @@ textarea {
     background-color: #e5383b;
 }
 
+.time-info-container {
+    text-align: center;
+    margin: 10px;
+}
+
+.time-info-group {
+    padding: 1rem;
+    display: inline-block;
+    margin: 0 10px;
+    text-align: left;
+    border: solid 1px black;
+    border-radius: 5px;
+    background-color: #ced4da;
+    width: 170px;
+    height: 120px;
+}
+
+.time-info-group:hover {
+    background-color: #e5383b;
+    cursor: pointer;
+}
+
+.time-info-heading {
+    text-decoration: underline;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: black;
+}
+
+.time-info-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.time-info-label {
+    margin-bottom: 5px;
+    color: black;
+}
+
 /* SEARCH */
 
 .search-container {
@@ -388,5 +428,21 @@ textarea {
 }
 
 .search-form input[type="submit"]:hover {
+    background-color: #e5383b;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #ba181b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    border: solid 1px black;
+}
+
+.action-button:hover {
     background-color: #e5383b;
 }

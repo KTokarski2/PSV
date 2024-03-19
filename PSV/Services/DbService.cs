@@ -26,6 +26,7 @@ public class DbService : IDbService
         var order = new Order
         {
             OrderNumber = request.OrderNumber,
+            CreatedAt = DateTime.Now,
             Client = client,
             Format = request.FormatCode,
             Comments = request.Comments,
@@ -41,43 +42,34 @@ public class DbService : IDbService
         
     }
 
-    public async Task<List<Order>> GetAllOrders()
+    public async Task<List<OrderList>> GetAllOrders()
     {
-        return await _context.Orders.ToListAsync();
+        return await _context.Orders.Select(o => new OrderList
+        {
+            Id = o.Id,
+            OrderNumber = o.OrderNumber,
+            CreatedAt = o.CreatedAt,
+            Client = o.Client.Name,
+            Cut = o.Cut.IsPresent,
+            Milling = o.Milling.IsPresent,
+            Wrapping = o.Wrapping.IsPresent
+        }).ToListAsync();
     }
 
-    public async Task<OrderDetails> GetOrderDetails(int orderId)
+    public async Task<OrderDetails?> GetOrderDetails(int orderId)
     {
-        try
-        {
-            var order = await _context.Orders.FindAsync(orderId);
-
-            if (order == null)
-                return null;
-
-            var orderDetails = new OrderDetails
+        return await _context.Orders.Where(o => o.Id == orderId)
+            .Select(o => new OrderDetails
             {
-                OrderNumber = order.OrderNumber,
-                Cut = order.Cut?.IsPresent ?? false,
-                Milling = order.Milling?.IsPresent ?? false,
-                Wrapping = order.Wrapping?.IsPresent ?? false,
-                FormatCode = order.Format,
-                Client = order.Client.Name,
-                Comments = order.Comments,
-                Photos = await _dataService.GetPhotosFromDirectory(order.Photos)
-            };
-
-            return orderDetails;
-        }
-        catch (ArgumentNullException ex)
-        {
-            Console.WriteLine($"Argument null exception occurred while retrieving order details: {ex.Message}");
-            throw;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred while retrieving order details: {ex.Message}");
-            throw;
-        }
+                Id = o.Id,
+                OrderNumber = o.OrderNumber,
+                Cut = o.Cut.IsPresent,
+                Milling = o.Milling.IsPresent,
+                Wrapping = o.Wrapping.IsPresent,
+                FormatCode = o.Format,
+                Client = o.Client.Name,
+                Comments = o.Comments,
+                Photos = _dataService.GetPhotosFromDirectory(o.Photos)
+            }).FirstOrDefaultAsync();
     }
 }

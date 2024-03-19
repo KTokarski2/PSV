@@ -1,0 +1,4 @@
+1) Błąd z brakiem przesyłanych zdjęć w formularzu
+2) Lista dla stanowisk
+3) Serwisy do kontroli 
+4) Czasy dla szczegółów zamówienia

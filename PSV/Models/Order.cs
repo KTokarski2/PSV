@@ -7,6 +7,8 @@ public class Order
     [Key]
     public int Id { get; set; }
     public string OrderNumber { get; set; }
+    
+    public DateTime CreatedAt { get; set; }
     public int IdClient { get; set; }
     public virtual Client Client { get; set; }
     public string? QrCode { get; set; }

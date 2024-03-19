@@ -16,9 +16,10 @@ public class OrderController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> List()
+    public async Task<IActionResult> All()
     {
-        return View("List");
+        var dto = await _service.GetAllOrders();
+        return View("List", dto);
     }
 
     [HttpGet]
@@ -26,19 +27,7 @@ public class OrderController : Controller
     {
         return View("Create");
     }
-
-    [HttpGet]
-    public async Task<IActionResult> Details()
-    {
-        return View("Details");
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> Search()
-    {
-        return View("Search");
-    }
-
+    
     [HttpPost]
     public async Task<IActionResult> Create(OrderPost request)
     {
@@ -47,16 +36,17 @@ public class OrderController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllOrders()
+    public async Task<IActionResult> Details(int id)
     {
-        await _service.GetAllOrders();
-        return RedirectToAction("List");
+        var dto = await _service.GetOrderDetails(id);
+        return View("Details", dto);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetOrderDetails(int orderId)
+    public async Task<IActionResult> Search()
     {
-        await _service.GetOrderDetails(orderId);
-        return RedirectToAction("Details");
+        return View("Search");
     }
+
+    
 }

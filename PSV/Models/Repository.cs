@@ -36,6 +36,7 @@ public class Repository : DbContext
             entity.HasKey(e => new { e.Id }).HasName("Order_pk");
             entity.ToTable("Order");
             entity.Property(e => e.OrderNumber);
+            entity.Property(e => e.CreatedAt);
             entity.Property(e => e.QrCode);
             entity.Property(e => e.Format);
             entity.Property(e => e.Comments);

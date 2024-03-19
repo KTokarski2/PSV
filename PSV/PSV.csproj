@@ -16,4 +16,15 @@
       <PackageReference Include="QRCoder" Version="1.4.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\images\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="wwwroot\images\OrdersData\1\krzesło.jpg" />
+      <None Include="wwwroot\images\OrdersData\1\QRCode.png" />
+      <None Include="wwwroot\images\OrdersData\2\krzeslo.png" />
+      <None Include="wwwroot\images\OrdersData\2\QRCode.png" />
+    </ItemGroup>
+
 </Project>

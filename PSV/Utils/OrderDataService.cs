@@ -5,7 +5,7 @@ namespace PSV.Utils;
 
 public class OrderDataService
 {
-    private const string DataDir = "OrdersData";
+    private const string DataDir = "wwwroot/images/OrdersData";
     
     public async Task<string> SavePhotos(OrderPost request)
     {
@@ -27,43 +27,12 @@ public class OrderDataService
         return orderDirectoryPath;
     }
     
-    public async Task<List<IFormFile>> GetPhotosFromDirectory(string directoryPath)
+    public List<string> GetPhotosFromDirectory(string path)
     {
-        try
-        {
-            var photoFiles = new List<IFormFile>();
-
-            if (!Directory.Exists(directoryPath))
-            {
-                return photoFiles;
-            }
-
-            var files = Directory.GetFiles(directoryPath);
-            foreach (var file in files)
-            {
-                var fileName = Path.GetFileName(file);
-                var fileStream = new FileStream(file, FileMode.Open);
-                var formFile = new FormFile(fileStream, 0, fileStream.Length, null, fileName)
-                {
-                    Headers = new HeaderDictionary(),
-                    ContentType = "image/jpeg" 
-                };
-
-                photoFiles.Add(formFile);
-            }
-
-            return photoFiles;
-        }
-        catch (DirectoryNotFoundException ex)
-        {
-            Console.WriteLine($"Directory not found exception occurred while retrieving photos from directory: {ex.Message}");
-            throw;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred while retrieving photos from directory: {ex.Message}");
-            throw; 
-        }
+        string[] files = Directory.GetFiles(path)
+            .Where(file => Path.GetFileName(file) != "QRCode.png")
+            .ToArray();
+        return files.ToList();
     }
 
     public async Task<string> GenerateQrCode(string orderNumber)
