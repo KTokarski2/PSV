@@ -9,53 +9,85 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PSV
 build_property.RootNamespace = PSV
-build_property.ProjectDir = /home/ant0on/RiderProjects/PSV/PSV/
+build_property.ProjectDir = /home/fedora/RiderProjects/PSV/PSV/
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /home/ant0on/RiderProjects/PSV/PSV
+build_property.MSBuildProjectDirectory = /home/fedora/RiderProjects/PSV/PSV
 build_property._RazorSourceGeneratorDebug = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/Cut/Control.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3V0L0NvbnRyb2wuY3NodG1s
+[/home/fedora/RiderProjects/PSV/PSV/Views/Cut/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3V0L0xpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/Home/Index.cshtml]
+[/home/fedora/RiderProjects/PSV/PSV/Views/Cut/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3V0L01lbnUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/Cut/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3V0L1NlYXJjaC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/Milling/Control.cshtml]
+[/home/fedora/RiderProjects/PSV/PSV/Views/Milling/Control.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWlsbGluZy9Db250cm9sLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/Order/Create.cshtml]
+[/home/fedora/RiderProjects/PSV/PSV/Views/Milling/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWlsbGluZy9MaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/Milling/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWlsbGluZy9NZW51LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/Milling/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWlsbGluZy9TZWFyY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/Order/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/Order/Details.cshtml]
+[/home/fedora/RiderProjects/PSV/PSV/Views/Order/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/Order/List.cshtml]
+[/home/fedora/RiderProjects/PSV/PSV/Views/Order/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/Order/Search.cshtml]
+[/home/fedora/RiderProjects/PSV/PSV/Views/Order/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvU2VhcmNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/Shared/_Layout.cshtml]
+[/home/fedora/RiderProjects/PSV/PSV/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/Wrapping/Control.cshtml]
+[/home/fedora/RiderProjects/PSV/PSV/Views/Wrapping/Control.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JhcHBpbmcvQ29udHJvbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/_ViewImports.cshtml]
+[/home/fedora/RiderProjects/PSV/PSV/Views/Wrapping/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JhcHBpbmcvTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/Wrapping/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JhcHBpbmcvTWVudS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/Wrapping/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JhcHBpbmcvU2VhcmNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/ant0on/RiderProjects/PSV/PSV/Views/_ViewStart.cshtml]
+[/home/fedora/RiderProjects/PSV/PSV/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

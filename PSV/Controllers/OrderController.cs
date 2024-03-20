@@ -32,7 +32,7 @@ public class OrderController : Controller
     public async Task<IActionResult> Create(OrderPost request)
     {
         await _service.AddOrder(request);
-        return RedirectToAction("New");
+        return RedirectToAction("All");
     }
 
     [HttpGet]

@@ -1,0 +1,75 @@
+@model List<PSV.Models.DTOs.OrderList>;
+
+<main>
+    <a class="action-button" href="@Url.Action("Menu", "Cut")">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+    </a>
+    <table class="orders-list">
+        <thead>
+        <tr>
+            <th>Numer zlecenia</th>
+            <th>Data wprowadzenia</th>
+            <th>Klient</th>
+            <th>Cięcie</th>
+            <th>Frezowanie</th>
+            <th>Oklejanie</th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var order in Model)
+            {
+                <tr class="orders-list-row">
+                    <td><a href="@Url.Action("Order", "Cut", new { id = order.Id })">@order.OrderNumber</a></td>
+                    <td>@order.CreatedAt</td>
+                    <td>@order.Client</td>
+                    <td>
+                        @if (order.Cut)
+                        {
+                            <span class="material-symbols-outlined">
+                                done
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="material-symbols-outlined">
+                                close
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        @if (order.Milling)
+                        {
+                            <span class="material-symbols-outlined">
+                                done
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="material-symbols-outlined">
+                                close
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        @if (order.Milling)
+                        {
+                            <span class="material-symbols-outlined">
+                                done
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="material-symbols-outlined">
+                                close
+                            </span>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</main>

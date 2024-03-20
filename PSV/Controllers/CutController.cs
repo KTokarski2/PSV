@@ -12,23 +12,43 @@ public class CutController : Controller
         _service = service;
     }
 
-    public async Task<IActionResult> Order()
+    [HttpGet]
+    public IActionResult Menu()
     {
-        return View("Control");
-    }
-    
-    [HttpPost]
-    public async Task<IActionResult> UpdateCutStartTime(int orderId)
-    {
-        await _service.UpdateCutStartTime(orderId);
-        return RedirectToAction();
+        return View("Menu");
     }
 
-    [HttpPost]
-    public async Task<IActionResult> UpdateCutEndTime(int orderId)
+    [HttpGet]
+    public async Task<IActionResult> All()
     {
-        await _service.UpdateCutEndTime(orderId);
-        return RedirectToAction();
+        var dto = await _service.GetAllOrders();
+        return View("List", dto);
+    }
+
+    [HttpGet]
+    public IActionResult Search()
+    {
+        return View("Search");
+    }
+
+    public async Task<IActionResult> Order(int id)
+    {
+        var dto = await _service.GetCutControlData(id);
+        return View("Control", dto);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> UpdateCutStartTime(int id)
+    {
+        await _service.UpdateCutStartTime(id);
+        return RedirectToAction("Order", new {id});
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> UpdateCutEndTime(int id)
+    {
+        await _service.UpdateCutEndTime(id);
+        return RedirectToAction("Order", new {id});
     }
 
 }

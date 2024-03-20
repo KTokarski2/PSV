@@ -6,7 +6,7 @@ namespace PSV.Utils;
 public class OrderDataService
 {
     private const string DataDir = "wwwroot/images/OrdersData";
-    
+
     public async Task<string> SavePhotos(OrderPost request)
     {
         var ordersDataPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir);
@@ -31,6 +31,11 @@ public class OrderDataService
     {
         string[] files = Directory.GetFiles(path)
             .Where(file => Path.GetFileName(file) != "QRCode.png")
+            .Select(file =>
+            {
+                string relativePath = file.Substring(file.IndexOf("/images"));
+                return $"~{relativePath}"; 
+            })
             .ToArray();
         return files.ToList();
     }
@@ -45,4 +50,6 @@ public class OrderDataService
         await File.WriteAllBytesAsync(filePath, qrCode.GetGraphic(20));
         return filePath;
     }
+    
+    
 }

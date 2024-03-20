@@ -14,5 +14,8 @@ namespace PSV.Services
         public Task UpdateMillingEndTime(int orderId);
         public Task UpdateWrappingStartTime(int orderId);
         public Task UpdateWrappingEndTime(int orderId);
+        public Task<OrderControl> GetCutControlData(int orderId);
+        public Task<OrderControl> GetMillingControlData(int orderId);
+        public Task<OrderControl> GetWrappingControlData(int orderId);
     }
 }
