@@ -16,4 +16,19 @@ public class CutController : Controller
     {
         return View("Control");
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> UpdateCutStartTime(int orderId)
+    {
+        await _service.UpdateCutStartTime(orderId);
+        return RedirectToAction();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateCutEndTime(int orderId)
+    {
+        await _service.UpdateCutEndTime(orderId);
+        return RedirectToAction();
+    }
+
 }

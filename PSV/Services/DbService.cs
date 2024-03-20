@@ -58,18 +58,128 @@ public class DbService : IDbService
 
     public async Task<OrderDetails?> GetOrderDetails(int orderId)
     {
-        return await _context.Orders.Where(o => o.Id == orderId)
-            .Select(o => new OrderDetails
-            {
-                Id = o.Id,
-                OrderNumber = o.OrderNumber,
-                Cut = o.Cut.IsPresent,
-                Milling = o.Milling.IsPresent,
-                Wrapping = o.Wrapping.IsPresent,
-                FormatCode = o.Format,
-                Client = o.Client.Name,
-                Comments = o.Comments,
-                Photos = _dataService.GetPhotosFromDirectory(o.Photos)
-            }).FirstOrDefaultAsync();
+        var order = await _context.Orders
+            .Include(o => o.Client)
+            .Include(o => o.Cut)
+            .Include(o => o.Milling)
+            .Include(o => o.Wrapping)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        if (order == null)
+            return null;
+
+        var orderDetails = new OrderDetails
+        {
+            Id = order.Id,
+            OrderNumber = order.OrderNumber,
+            Cut = order.Cut?.IsPresent ?? false,
+            Milling = order.Milling?.IsPresent ?? false,
+            Wrapping = order.Wrapping?.IsPresent ?? false,
+            FormatCode = order.Format,
+            Client = order.Client.Name,
+            Comments = order.Comments,
+            Photos = _dataService.GetPhotosFromDirectory(order.Photos)
+        };
+
+        if (order.Cut != null && order.Cut.IsPresent && order.Cut.From.HasValue && order.Cut.To.HasValue)
+        {
+            orderDetails.CutStart = order.Cut.From.Value;
+            orderDetails.CutEnd = order.Cut.To.Value;
+            orderDetails.CutTime = (orderDetails.CutEnd - orderDetails.CutStart).ToString("hh\\:mm\\:ss");
+        }
+
+        if (order.Milling != null && order.Milling.IsPresent && order.Milling.From.HasValue && order.Milling.To.HasValue)
+        {
+            orderDetails.MillingStart = order.Milling.From.Value;
+            orderDetails.MillingEnd = order.Milling.To.Value;
+            orderDetails.MillingTime = (orderDetails.MillingEnd - orderDetails.MillingStart).ToString("hh\\:mm\\:ss");
+        }
+
+        if (order.Wrapping != null && order.Wrapping.IsPresent && order.Wrapping.From.HasValue && order.Wrapping.To.HasValue)
+        {
+            orderDetails.WrappingStart = order.Wrapping.From.Value;
+            orderDetails.WrappingEnd = order.Wrapping.To.Value;
+            orderDetails.WrappingTime = (orderDetails.WrappingEnd - orderDetails.WrappingStart).ToString("hh\\:mm\\:ss");
+        }
+
+        return orderDetails;
+    }
+    
+    public async Task UpdateCutStartTime(int orderId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.Cut)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        if (order != null)
+        { 
+            order.Cut.From = DateTime.Now;
+            await _context.SaveChangesAsync();
+        }
+    }
+    
+    public async Task UpdateCutEndTime(int orderId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.Cut)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        if (order != null)
+        { 
+            order.Cut.To = DateTime.Now;
+            await _context.SaveChangesAsync();
+        }
+    }
+    
+    public async Task UpdateMillingStartTime(int orderId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.Milling)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        if (order != null)
+        { 
+            order.Milling.From = DateTime.Now;
+            await _context.SaveChangesAsync();
+        }
+    }
+    
+    public async Task UpdateMillingEndTime(int orderId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.Milling)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        if (order != null)
+        { 
+            order.Milling.To = DateTime.Now;
+            await _context.SaveChangesAsync();
+        }
+    }
+    
+    public async Task UpdateWrappingStartTime(int orderId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.Wrapping)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        if (order != null)
+        { 
+            order.Wrapping.From = DateTime.Now;
+            await _context.SaveChangesAsync();
+        }
+    }
+    
+    public async Task UpdateWrappingEndTime(int orderId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.Wrapping)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        if (order != null)
+        { 
+            order.Wrapping.To = DateTime.Now;
+            await _context.SaveChangesAsync();
+        }
     }
 }
