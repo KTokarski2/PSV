@@ -16,4 +16,33 @@ public class MillingController : Controller
     {
         return View("Control");
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> UpdateMillingStartTime(int orderId)
+    {
+        await _service.UpdateMillingStartTime(orderId);
+        return RedirectToAction();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateMillingEndTime(int orderId)
+    {
+        await _service.UpdateMillingEndTime(orderId);
+        return RedirectToAction();
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> UpdateWrappingStartTime(int orderId)
+    {
+        await _service.UpdateWrappingStartTime(orderId);
+        return RedirectToAction();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateWrappingEndTime(int orderId)
+    {
+        await _service.UpdateWrappingEndTime(orderId);
+        return RedirectToAction();
+    }
+
 }
