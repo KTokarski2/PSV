@@ -244,14 +244,45 @@ main {
     background-color: white;
 }
 
+.comments-form {
+    width: 50%;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.comments-form textarea {
+    width: 70%;
+    height: 100px;
+}
+
+.comments-form button[type="submit"] {
+    padding: 1rem 1rem;
+    background-color: #ba181b;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.2s ease-in-out;
+    margin: 1rem;
+    text-align: center;
+}
+
+.comments-form button[type="submit"]:hover{
+    background-color: #e5383b;
+    border: solid 2px black;
+}
+
 .start-end {
     width: 25%;
     display: flex;
     justify-content: space-between;
 }
 
-.control-button,
-.comments-button {
+.control-button {
     padding: 1rem 1rem;
     background-color: #ba181b;
     border-radius: 5px;
@@ -268,15 +299,12 @@ main {
     width: 30%;
 }
 
-.comments-button {
-    width: 25%;
-}
-
-.control-button:hover,
-.comments-button:hover {
+.control-button:hover{
     background-color: #e5383b;
     border: solid 2px black;
 }
+
+
 
 /* Details */
 
@@ -302,6 +330,10 @@ textarea {
     border: 1px solid black;
     border-radius: 5px;
     font-size: 16px;
+}
+
+.order-details textarea {
+    min-height: 200px;
 }
 
 .input-group-details-checkbox {
@@ -371,8 +403,8 @@ textarea {
     border: solid 1px black;
     border-radius: 5px;
     background-color: #ced4da;
-    width: 170px;
-    height: 120px;
+    width: 180px;
+    height: 160px;
 }
 
 .time-info-group:hover {

@@ -203,7 +203,9 @@ public class DbService : IDbService
 
     public async Task<OrderControl> GetMillingControlData(int orderId)
     {
-        var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+        var order = await _context.Orders
+            .Include(o => o.Milling)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
         var dto = new OrderControl
         {
             Id = order.Id,
@@ -218,7 +220,9 @@ public class DbService : IDbService
 
     public async Task<OrderControl> GetWrappingControlData(int orderId)
     {
-        var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+        var order = await _context.Orders
+            .Include(o => o.Wrapping)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
         var dto = new OrderControl
         {
             Id = order.Id,
@@ -229,5 +233,18 @@ public class DbService : IDbService
 
         };
         return dto;
+    }
+
+    public async Task CommentOrder(OrderControl dto)
+    {
+        var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == dto.Id);
+        order.Comments = dto.Comments;
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<string> GetQrCodePath(int id)
+    {
+        var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+        return order.QrCode;
     }
 }

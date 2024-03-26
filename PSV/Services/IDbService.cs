@@ -17,5 +17,7 @@ namespace PSV.Services
         public Task<OrderControl> GetCutControlData(int orderId);
         public Task<OrderControl> GetMillingControlData(int orderId);
         public Task<OrderControl> GetWrappingControlData(int orderId);
+        public Task CommentOrder(OrderControl dto);
+        public Task<string> GetQrCodePath(int id);
     }
 }

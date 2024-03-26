@@ -48,5 +48,19 @@ public class OrderController : Controller
         return View("Search");
     }
 
+    public async Task<IActionResult> GetQrCode(int id)
+    {
+        /*
+        var path = await _service.GetQrCodePath(id);
+        if (System.IO.File.Exists(path))
+        {
+            byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(path);
+            Response.ContentType = "image/png";
+            Response.Headers("")
+            Response.AppendHeader("Content-Disposition", "attachment; filename=kodQR.png");
+        }
+        */
+        return RedirectToAction("Details", new { id });
+    }
     
 }

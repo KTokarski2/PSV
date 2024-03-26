@@ -1,0 +1,16 @@
+@model PSV.Models.DTOs.OrderControl
+
+<main>
+    <h2 class="page-title">Stanowisko cięcia - zlecenie nr. @Model.OrderNumber</h2>
+    <div class="control-buttons">
+        <div class="start-end">
+            <a class="control-button" href="@Url.Action("UpdateCutStartTime", new {Model.Id})">Początek</a>
+            <a class="control-button" href="@Url.Action("UpdateCutEndTime", new {Model.Id})">Koniec</a>
+        </div>
+        <form class="comments-form" asp-action="AddComment" asp-controller="Cut" method="post">
+            <input asp-for="Id" type="hidden" value="@Model.Id"/>
+            <textarea asp-for="Comments">@Model.Comments</textarea>
+            <button type="submit">Dodaj komentarz</button>
+        </form>
+    </div>
+</main>

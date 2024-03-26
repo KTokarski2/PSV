@@ -1,12 +1,16 @@
+@model PSV.Models.DTOs.OrderControl
+
 <main>
-    <h2 class="page-title">Zlecenie nr. 2432352454</h2>
+    <h2 class="page-title">Stanowisko oklejania - zlecenie nr. @Model.OrderNumber</h2>
     <div class="control-buttons">
         <div class="start-end">
-            <a class="control-button">Początek</a>
-            <a class="control-button">Koniec</a>
+            <a class="control-button" href="@Url.Action("UpdateWrappingStartTime", "Wrapping", new {Model.Id})">Początek</a>
+            <a class="control-button" href="@Url.Action("UpdateWrappingEndTime", "Wrapping",new {Model.Id})">Koniec</a>
         </div>
-        <div class="comments-button">
-            <a class="comment-button">Komentarz</a>
-        </div>
+        <form class="comments-form" asp-action="AddComment" asp-controller="Wrapping" method="post">
+            <input asp-for="Id" type="hidden" value="@Model.Id"/>
+            <textarea asp-for="Comments">@Model.Comments</textarea>
+            <button type="submit">Dodaj komentarz</button>
+        </form>
     </div>
 </main>

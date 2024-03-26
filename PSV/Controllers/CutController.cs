@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PSV.Models.DTOs;
 using PSV.Services;
 
 namespace PSV.Controllers;
@@ -51,4 +52,10 @@ public class CutController : Controller
         return RedirectToAction("Order", new {id});
     }
 
+    [HttpPost]
+    public async Task<IActionResult> AddComment(OrderControl dto)
+    {
+        await _service.CommentOrder(dto);
+        return RedirectToAction("Order", new { dto.Id });
+    }
 }

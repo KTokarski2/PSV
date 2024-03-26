@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PSV.Models.DTOs;
 using PSV.Services;
 
 namespace PSV.Controllers;
@@ -12,37 +13,49 @@ public class MillingController : Controller
         _service = service;
     }
 
-    public async Task<IActionResult> Order()
+    [HttpGet]
+    public IActionResult Menu()
     {
-        return View("Control");
+        return View("Menu");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> All()
+    {
+        var dto = await _service.GetAllOrders();
+        return View("List", dto);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Search()
+    {
+        return View("Search");
+    }
+
+    public async Task<IActionResult> Order(int id)
+    {
+        var dto = await _service.GetMillingControlData(id);
+        return View("Control", dto);
     }
     
-    [HttpPost]
-    public async Task<IActionResult> UpdateMillingStartTime(int orderId)
+    [HttpGet]
+    public async Task<IActionResult> UpdateMillingStartTime(int id)
     {
-        await _service.UpdateMillingStartTime(orderId);
-        return RedirectToAction();
+        await _service.UpdateMillingStartTime(id);
+        return RedirectToAction("Order", new {id});
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> UpdateMillingEndTime(int id)
+    {
+        await _service.UpdateMillingEndTime(id);
+        return RedirectToAction("Order", new {id});
     }
 
     [HttpPost]
-    public async Task<IActionResult> UpdateMillingEndTime(int orderId)
+    public async Task<IActionResult> AddComment(OrderControl dto)
     {
-        await _service.UpdateMillingEndTime(orderId);
-        return RedirectToAction();
+        await _service.CommentOrder(dto);
+        return RedirectToAction("Order", new { dto.Id });
     }
-    
-    [HttpPost]
-    public async Task<IActionResult> UpdateWrappingStartTime(int orderId)
-    {
-        await _service.UpdateWrappingStartTime(orderId);
-        return RedirectToAction();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> UpdateWrappingEndTime(int orderId)
-    {
-        await _service.UpdateWrappingEndTime(orderId);
-        return RedirectToAction();
-    }
-
 }

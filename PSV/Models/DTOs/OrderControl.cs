@@ -3,7 +3,7 @@ using System.Runtime.InteropServices.JavaScript;
 namespace PSV.Models.DTOs;
 
 public class OrderControl
-{
+{ 
     public int Id { get; set; }
     
     public string OrderNumber { get; set; }
