@@ -1,4 +1,20 @@
-1) Błąd z brakiem przesyłanych zdjęć w formularzu
-2) Lista dla stanowisk 
-3) Serwisy do kontroli \\
-4) Czasy dla szczegółów zamówienia \\
+
+
+V 1.0 
+---------------------
+1) Edycja + 
+2) Usuwanie +  
+3) Zmiana w widoku szczegółów z dat na stringi (określony format) + 3/29/2024 6:12:49PM -> 29.03.2024 18:12 GetOrderDetails()
+4) Zwiększenie miejsca na informacje dot. posczególnych etapów produkcji na całą dostępną szerokosć + 
+5) Dodanie generowania barcodeów +
+6) Dodanie licznika w widoku kontorli +
+7) Popup z przeglądarki (rozpoczęto, zakończono)
+8) Usunięcie podkresleń w przyciskach początek koniec
+9) Walidacja formularzy 
+10) Autentykacja i autoryzacja
+11) Walidacja na etapie wyboru zamówienia czy jest praca czy nie dla poszczególnych stanowisk
+12) Paginacja w listach 
+13) Zarządzanie klientami (wprowadzanie klientów, wybór klientów z rozwijanej listy przy tworzeniuu zamówienia) +
+-----------------------
+
+

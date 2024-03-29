@@ -85,6 +85,22 @@
       "PackagePath": "staticwebassets/images/OrdersData/27032024/krzesło.jpg"
     },
     {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/2903202401/QRCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/2903202401/QRCode.png"
+    },
+    {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/2903202401/chairpng.parspng.com-4.png",
+      "PackagePath": "staticwebassets/images/OrdersData/2903202401/chairpng.parspng.com-4.png"
+    },
+    {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/2903202401/krzeslo.png",
+      "PackagePath": "staticwebassets/images/OrdersData/2903202401/krzeslo.png"
+    },
+    {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/2903202401/krzesło.jpg",
+      "PackagePath": "staticwebassets/images/OrdersData/2903202401/krzesło.jpg"
+    },
+    {
       "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

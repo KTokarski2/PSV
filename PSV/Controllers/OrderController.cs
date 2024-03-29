@@ -51,13 +51,14 @@ public class OrderController : Controller
     public async Task<IActionResult> GetQrCode(int id)
     {
         /*
+        
         var path = await _service.GetQrCodePath(id);
         if (System.IO.File.Exists(path))
         {
             byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(path);
             Response.ContentType = "image/png";
-            Response.Headers("")
-            Response.AppendHeader("Content-Disposition", "attachment; filename=kodQR.png");
+            Response.Headers.Append("Content-Disposition", "attachment; filename=QRCode.png");
+            
         }
         */
         return RedirectToAction("Details", new { id });
