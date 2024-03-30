@@ -83,26 +83,105 @@ public class DbService : IDbService
 
         if (order.Cut != null && order.Cut.IsPresent && order.Cut.From.HasValue && order.Cut.To.HasValue)
         {
-            orderDetails.CutStart = order.Cut.From.Value;
-            orderDetails.CutEnd = order.Cut.To.Value;
-            orderDetails.CutTime = (orderDetails.CutEnd - orderDetails.CutStart).ToString("hh\\:mm\\:ss");
+            orderDetails.CutStart = order.Cut.From.Value.ToString("dd.MM.yyyy HH:mm");
+            orderDetails.CutEnd = order.Cut.To.Value.ToString("dd.MM.yyyy HH:mm");
+            var cutDuration = order.Cut.To.Value - order.Cut.From.Value;
+            orderDetails.CutTime = cutDuration.ToString(@"dd\.hh\:mm");
         }
 
         if (order.Milling != null && order.Milling.IsPresent && order.Milling.From.HasValue && order.Milling.To.HasValue)
         {
-            orderDetails.MillingStart = order.Milling.From.Value;
-            orderDetails.MillingEnd = order.Milling.To.Value;
-            orderDetails.MillingTime = (orderDetails.MillingEnd - orderDetails.MillingStart).ToString("hh\\:mm\\:ss");
+            orderDetails.MillingStart = order.Milling.From.Value.ToString("dd.MM.yyyy HH:mm");
+            orderDetails.MillingEnd = order.Milling.To.Value.ToString("dd.MM.yyyy HH:mm");
+            var millingDuration = order.Milling.To.Value - order.Milling.From.Value;
+            orderDetails.MillingTime = millingDuration.ToString(@"dd\.hh\:mm");
         }
 
         if (order.Wrapping != null && order.Wrapping.IsPresent && order.Wrapping.From.HasValue && order.Wrapping.To.HasValue)
         {
-            orderDetails.WrappingStart = order.Wrapping.From.Value;
-            orderDetails.WrappingEnd = order.Wrapping.To.Value;
-            orderDetails.WrappingTime = (orderDetails.WrappingEnd - orderDetails.WrappingStart).ToString("hh\\:mm\\:ss");
+            orderDetails.WrappingStart = order.Wrapping.From.Value.ToString("dd.MM.yyyy HH:mm");
+            orderDetails.WrappingEnd = order.Wrapping.To.Value.ToString("dd.MM.yyyy HH:mm");
+            var wrappingDuration = order.Wrapping.To.Value - order.Wrapping.From.Value;
+            orderDetails.WrappingTime = wrappingDuration.ToString(@"dd\.hh\:mm");
         }
 
         return orderDetails;
+    }
+
+public async Task EditOrder(int orderId, OrderEdit request)
+{
+    var order = await _context.Orders
+        .Include(o => o.Client)
+        .Include(o => o.Cut)
+        .Include(o => o.Milling)
+        .Include(o => o.Wrapping)
+        .FirstOrDefaultAsync(o => o.Id == orderId);
+
+    if (order == null)
+    {
+        throw new ArgumentException("Order not found");
+    }
+
+    if (request.OrderNumber != null && request.OrderNumber != order.OrderNumber)
+    {
+        order.OrderNumber = request.OrderNumber;
+    }
+
+    if (request.FormatCode != null && request.FormatCode != order.Format)
+    {
+        order.Format = request.FormatCode;
+    }
+
+    if (request.Comments != null && request.Comments != order.Comments)
+    {
+        order.Comments = request.Comments;
+    }
+
+    if (request.Milling.HasValue && request.Milling != order.Milling.IsPresent)
+    {
+        order.Milling.IsPresent = request.Milling.Value;
+    }
+
+    if (request.Wrapping.HasValue && request.Wrapping != order.Wrapping.IsPresent)
+    {
+        order.Wrapping.IsPresent = request.Wrapping.Value;
+    }
+
+    if (request.Cut.HasValue && request.Cut != order.Cut.IsPresent)
+    {
+        order.Cut.IsPresent = request.Cut.Value;
+    }
+
+    if (request.Client != null && request.Client != order.Client.Name)
+    {
+        var existingClient = await _context.Clients.FirstOrDefaultAsync(c => c.Name == request.Client);
+        if (existingClient != null)
+        {
+            order.Client = existingClient;
+        }
+        else
+        {
+            var newClient = new Client
+            {
+                Name = request.Client
+            };
+            order.Client = newClient;
+        }
+    }
+    
+    await _context.SaveChangesAsync();
+}
+    public async Task DeleteOrder(int orderId)
+    {
+        var order = await _context.Orders.FindAsync(orderId);
+        if (order == null)
+        {
+            throw new ArgumentException("Order not found");
+        }
+        
+        _context.Orders.Remove(order);
+
+        await _context.SaveChangesAsync();
     }
     
     public async Task UpdateCutStartTime(int orderId)
