@@ -8,6 +8,8 @@ namespace PSV.Services
         public Task AddOrder(OrderPost request);
         public Task <List<OrderList>> GetAllOrders();
         public Task<OrderDetails?> GetOrderDetails(int orderId);
+        public Task EditOrder(int orderId, OrderEdit request);
+        public Task DeleteOrder(int orderId);
         public Task UpdateCutStartTime(int orderId);
         public Task UpdateCutEndTime(int orderId);
         public Task UpdateMillingStartTime(int orderId);
