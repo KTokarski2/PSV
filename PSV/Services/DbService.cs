@@ -34,7 +34,8 @@ public class DbService : IDbService
             Milling = new Milling { IsPresent = request.Milling },
             Wrapping = new Wrapping { IsPresent = request.Wrapping },
             Cut = new Cut { IsPresent = request.Cut },
-            QrCode = await _dataService.GenerateQrCode(request.OrderNumber)
+            QrCode = await _dataService.GenerateQrCode(request.OrderNumber),
+            BarCode = await _dataService.GenerateBarcode(request.OrderNumber)
         };
 
         await _context.AddAsync(order);

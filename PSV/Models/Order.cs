@@ -12,6 +12,7 @@ public class Order
     public int IdClient { get; set; }
     public virtual Client Client { get; set; }
     public string? QrCode { get; set; }
+    public string? BarCode { get; set; }
     public string Format { get; set; }
     public string Comments { get; set; }
     public string Photos { get; set; }

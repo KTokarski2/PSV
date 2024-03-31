@@ -1,5 +1,11 @@
+using System.Runtime.CompilerServices;
+using BarcodeStandard;
 using PSV.Models.DTOs;
 using QRCoder;
+using SkiaSharp;
+using ZXing;
+using ZXing.Common;
+using Type = System.Type;
 
 namespace PSV.Utils;
 
@@ -50,6 +56,21 @@ public class OrderDataService
         await File.WriteAllBytesAsync(filePath, qrCode.GetGraphic(20));
         return filePath;
     }
-    
-    
+
+    public async Task<string> GenerateBarcode(string orderNumber)
+    {
+        string filePath;
+        var barcode = new Barcode();
+        barcode.IncludeLabel = true;
+        var img = barcode.Encode(BarcodeStandard.Type.Code128, orderNumber, SKColors.Black, SKColors.White, 290, 120);
+
+
+        using var image = SKImage.FromBitmap(SKBitmap.FromImage(img));
+        using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+        string orderDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir, orderNumber);
+        filePath = Path.Combine(orderDirectoryPath, "BarCode.png");
+        await File.WriteAllBytesAsync(filePath, data.ToArray());
+
+        return filePath;
+    }
 }

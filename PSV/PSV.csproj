@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="BarcodeLib" Version="3.0.3" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
@@ -14,10 +15,29 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="QRCoder" Version="1.4.3" />
+      <PackageReference Include="ZXing.Net" Version="0.16.9" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="wwwroot\images\" />
+      <Folder Include="wwwroot\images\OrdersData\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\2903202402\krzeslo.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\2903202402\krzesło.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\2903202402\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\27032024\chairpng.parspng.com-4.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\27032024\krzeslo.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\27032024\krzesło.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\27032024\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\12345\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\12345\Screenshot from 2024-02-29 01-38-15.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\13\krzeslo.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\13\krzesło.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\13\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\2\eugene-chystiakov-3neSwyntbQ8-unsplash.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\2\QRCode.png" />
     </ItemGroup>
 
 </Project>

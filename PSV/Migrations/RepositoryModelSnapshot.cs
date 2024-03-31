@@ -100,6 +100,9 @@ namespace PSV.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("BarCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Comments")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
