@@ -282,7 +282,8 @@ main {
     justify-content: space-between;
 }
 
-.control-button {
+.control-button-start,
+.control-button-end{
     padding: 1rem 1rem;
     background-color: #ba181b;
     border-radius: 5px;
@@ -295,11 +296,13 @@ main {
     text-align: center;
 }
 
-.control-button {
+.control-button-start,
+.control-button-end {
     width: 30%;
 }
 
-.control-button:hover{
+.control-button-start:hover,
+.control-button-end:hover{
     background-color: #e5383b;
     border: solid 2px black;
 }

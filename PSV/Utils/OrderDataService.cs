@@ -18,18 +18,22 @@ public class OrderDataService
         var ordersDataPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir);
         var orderDirectoryPath = Path.Combine(ordersDataPath, request.OrderNumber);
         Directory.CreateDirectory(orderDirectoryPath);
-        foreach (var photo in request.Photos)
-        {
-            if (photo.Length > 0)
-            {
-                string filePath = Path.Combine(orderDirectoryPath, photo.FileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await photo.CopyToAsync(stream);
-                }
-            }
-        }
 
+        if (request.Photos != null)
+        {
+            foreach (var photo in request.Photos)
+            {
+                if (photo.Length > 0)
+                {
+                    string filePath = Path.Combine(orderDirectoryPath, photo.FileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await photo.CopyToAsync(stream);
+                    }
+                }
+            } 
+            
+        }
         return orderDirectoryPath;
     }
     
@@ -37,6 +41,7 @@ public class OrderDataService
     {
         string[] files = Directory.GetFiles(path)
             .Where(file => Path.GetFileName(file) != "QRCode.png")
+            .Where(file => Path.GetFileName(file) != "BarCode.png")
             .Select(file =>
             {
                 string relativePath = file.Substring(file.IndexOf("/images"));
@@ -63,8 +68,6 @@ public class OrderDataService
         var barcode = new Barcode();
         barcode.IncludeLabel = true;
         var img = barcode.Encode(BarcodeStandard.Type.Code128, orderNumber, SKColors.Black, SKColors.White, 290, 120);
-
-
         using var image = SKImage.FromBitmap(SKBitmap.FromImage(img));
         using var data = image.Encode(SKEncodedImageFormat.Png, 100);
         string orderDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir, orderNumber);
@@ -72,5 +75,11 @@ public class OrderDataService
         await File.WriteAllBytesAsync(filePath, data.ToArray());
 
         return filePath;
+    }
+
+    public void DeleteOrderDirectory(string orderNumber)
+    {
+        string orderDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir, orderNumber);
+        Directory.Delete(orderDirectoryPath, true);
     }
 }

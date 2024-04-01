@@ -3,11 +3,11 @@
 V 1.0 
 ---------------------
 1) Edycja + 
-2) Usuwanie +  
-3) Zmiana w widoku szczegółów z dat na stringi (określony format) + 3/29/2024 6:12:49PM -> 29.03.2024 18:12 GetOrderDetails()
+2) Usuwanie +  DONE
+3) Zmiana w widoku szczegółów z dat na stringi (określony format) + 3/29/2024 6:12:49PM -> 29.03.2024 18:12 GetOrderDetails() DONE
 4) Zwiększenie miejsca na informacje dot. posczególnych etapów produkcji na całą dostępną szerokosć + 
-5) Dodanie generowania barcodeów +
-6) Dodanie licznika w widoku kontorli +
+5) Dodanie generowania barcodeów + DONE
+6) Dodanie licznika w widoku kontorli + DONE
 7) Popup z przeglądarki (rozpoczęto, zakończono)
 8) Usunięcie podkresleń w przyciskach początek koniec
 9) Walidacja formularzy 

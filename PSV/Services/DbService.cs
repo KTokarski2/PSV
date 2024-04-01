@@ -82,28 +82,40 @@ public class DbService : IDbService
             Photos = _dataService.GetPhotosFromDirectory(order.Photos)
         };
 
-        if (order.Cut != null && order.Cut.IsPresent && order.Cut.From.HasValue && order.Cut.To.HasValue)
+        if (order.Cut is { IsPresent: true, From: not null, To: not null })
         {
             orderDetails.CutStart = order.Cut.From.Value.ToString("dd.MM.yyyy HH:mm");
             orderDetails.CutEnd = order.Cut.To.Value.ToString("dd.MM.yyyy HH:mm");
             var cutDuration = order.Cut.To.Value - order.Cut.From.Value;
-            orderDetails.CutTime = cutDuration.ToString(@"dd\.hh\:mm");
+            var hours = cutDuration.Hours;
+            var minutes = cutDuration.Minutes;
+            var seconds = cutDuration.Seconds;
+            string cutTime = $"{hours:00}:{minutes:00}:{seconds:00}";
+            orderDetails.CutTime = cutTime;
         }
 
-        if (order.Milling != null && order.Milling.IsPresent && order.Milling.From.HasValue && order.Milling.To.HasValue)
+        if (order.Milling is { IsPresent: true, From: not null, To: not null })
         {
             orderDetails.MillingStart = order.Milling.From.Value.ToString("dd.MM.yyyy HH:mm");
             orderDetails.MillingEnd = order.Milling.To.Value.ToString("dd.MM.yyyy HH:mm");
             var millingDuration = order.Milling.To.Value - order.Milling.From.Value;
-            orderDetails.MillingTime = millingDuration.ToString(@"dd\.hh\:mm");
+            var hours = millingDuration.Hours;
+            var minutes = millingDuration.Minutes;
+            var seconds = millingDuration.Seconds;
+            string millingTime = $"{hours:00}:{minutes:00}:{seconds:00}";
+            orderDetails.MillingTime = millingTime;
         }
 
-        if (order.Wrapping != null && order.Wrapping.IsPresent && order.Wrapping.From.HasValue && order.Wrapping.To.HasValue)
+        if (order.Wrapping is { IsPresent: true, From: not null, To: not null })
         {
             orderDetails.WrappingStart = order.Wrapping.From.Value.ToString("dd.MM.yyyy HH:mm");
             orderDetails.WrappingEnd = order.Wrapping.To.Value.ToString("dd.MM.yyyy HH:mm");
             var wrappingDuration = order.Wrapping.To.Value - order.Wrapping.From.Value;
-            orderDetails.WrappingTime = wrappingDuration.ToString(@"dd\.hh\:mm");
+            var hours = wrappingDuration.Hours;
+            var minutes = wrappingDuration.Minutes;
+            var seconds = wrappingDuration.Seconds;
+            string wrappingTime = $"{hours:00}:{minutes:00}:{seconds:00}";
+            orderDetails.WrappingTime = wrappingTime;
         }
 
         return orderDetails;
@@ -175,12 +187,22 @@ public async Task EditOrder(int orderId, OrderEdit request)
     public async Task DeleteOrder(int orderId)
     {
         var order = await _context.Orders.FindAsync(orderId);
+        
         if (order == null)
         {
             throw new ArgumentException("Order not found");
         }
+        _dataService.DeleteOrderDirectory(order.OrderNumber);
+        var cut = await _context.Cuts.FirstOrDefaultAsync(c => c.Id == order.IdCut);
+        var milling = await _context.Millings.FirstOrDefaultAsync(m => m.Id == order.IdMilling);
+        var wrapping = await _context.Wrappings.FirstOrDefaultAsync(w => w.Id == order.IdWrapping);
+        
+        
         
         _context.Orders.Remove(order);
+        if (cut != null) _context.Cuts.Remove(cut);
+        if (milling != null) _context.Millings.Remove(milling);
+        if (wrapping != null) _context.Wrappings.Remove(wrapping);
 
         await _context.SaveChangesAsync();
     }
@@ -278,6 +300,17 @@ public async Task EditOrder(int orderId, OrderEdit request)
             Comments = order.Comments
 
         };
+
+        if (order.Cut is { IsPresent: true, From: not null, To: not null })
+        {
+            var timeDuration = order.Cut.To.Value - order.Cut.From.Value;
+            var hours = timeDuration.Hours;
+            var minutes = timeDuration.Minutes;
+            var seconds = timeDuration.Seconds;
+            string cutTime = $"{hours:00}:{minutes:00}:{seconds:00}";
+            dto.TotalTime = cutTime;
+        }
+        
         return dto;
     }
 

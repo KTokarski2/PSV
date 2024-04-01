@@ -68,16 +68,13 @@
                         <img src="@Url.Content(photo)" alt="order-photo" class="order-photo"> 
                     }
                 }
-                else
-                {
-                    <p>Brak zdjęć</p>
-                }
             }
         </div>
         <div class="actions-container">
             <a href="" class="details-action">Edytuj</a>
-            <a href="" class="details-action">Usuń</a>
+            <a href="@Url.Action("Delete", new {Model.Id})" class="details-action">Usuń</a>
             <a href="" class="details-action">Pobierz kod QR</a>
+            <a href="" class="details-action">Pobierz kod kreskowy</a>
         </div>
     </div>
 </main>

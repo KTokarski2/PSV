@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using PSV.Models.DTOs;
 using PSV.Services;
@@ -32,24 +33,24 @@ public class CutController : Controller
         return View("Search");
     }
 
-    public async Task<IActionResult> Order(int id)
+    public async Task<IActionResult> Order(int id, bool startTimer)
     {
         var dto = await _service.GetCutControlData(id);
+        dto.StartTimer = startTimer;
         return View("Control", dto);
     }
-
-    [HttpGet]
+    
     public async Task<IActionResult> UpdateCutStartTime(int id)
     {
         await _service.UpdateCutStartTime(id);
-        return RedirectToAction("Order", new {id});
+        const bool startTimer = true;
+        return RedirectToAction("Order", new { id, startTimer });
     }
-
-    [HttpGet]
+    
     public async Task<IActionResult> UpdateCutEndTime(int id)
     {
         await _service.UpdateCutEndTime(id);
-        return RedirectToAction("Order", new {id});
+        return RedirectToAction("Order", new { id });
     }
 
     [HttpPost]

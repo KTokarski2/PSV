@@ -63,18 +63,16 @@ public class OrderController : Controller
         */
         return RedirectToAction("Details", new { id });
     }
-
-    [HttpPut]
+    
     public async Task<IActionResult> EditOrder(int id, OrderEdit request)
     {
         await _service.EditOrder(id, request);
         return View("List");
     }
     
-    [HttpDelete]
-    public async Task<IActionResult> DeleteOrder(int id)
+    public async Task<IActionResult> Delete(int id)
     {
         await _service.DeleteOrder(id);
-        return View("List");
+        return RedirectToAction("All");
     }
 }
