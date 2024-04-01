@@ -43,6 +43,19 @@ public class OrderController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> EditForm(int id)
+    {
+        var dto = await _service.GetOrderDetails(id);
+        return View("Edit", dto);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(OrderDetails dto)
+    {
+        return RedirectToAction("Details", new { dto.Id });
+    }
+
+    [HttpGet]
     public async Task<IActionResult> Search()
     {
         return View("Search");

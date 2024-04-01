@@ -328,6 +328,17 @@ public async Task EditOrder(int orderId, OrderEdit request)
             Comments = order.Comments
 
         };
+        
+        if (order.Milling is { IsPresent: true, From: not null, To: not null })
+        {
+            var timeDuration = order.Milling.To.Value - order.Milling.From.Value;
+            var hours = timeDuration.Hours;
+            var minutes = timeDuration.Minutes;
+            var seconds = timeDuration.Seconds;
+            string cutTime = $"{hours:00}:{minutes:00}:{seconds:00}";
+            dto.TotalTime = cutTime;
+        }
+        
         return dto;
     }
 
@@ -345,6 +356,17 @@ public async Task EditOrder(int orderId, OrderEdit request)
             Comments = order.Comments
 
         };
+        
+        if (order.Wrapping is { IsPresent: true, From: not null, To: not null })
+        {
+            var timeDuration = order.Wrapping.To.Value - order.Wrapping.From.Value;
+            var hours = timeDuration.Hours;
+            var minutes = timeDuration.Minutes;
+            var seconds = timeDuration.Seconds;
+            string cutTime = $"{hours:00}:{minutes:00}:{seconds:00}";
+            dto.TotalTime = cutTime;
+        }
+        
         return dto;
     }
 

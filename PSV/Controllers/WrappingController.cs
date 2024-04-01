@@ -32,9 +32,10 @@ public class WrappingController : Controller
         return View("Search");
     }
     
-    public async Task<IActionResult> Order(int id)
+    public async Task<IActionResult> Order(int id, bool startTimer)
     {
         var dto = await _service.GetWrappingControlData(id);
+        dto.StartTimer = startTimer;
         return View("Control", dto);
     }
     
@@ -42,7 +43,8 @@ public class WrappingController : Controller
     public async Task<IActionResult> UpdateWrappingStartTime(int id)
     {
         await _service.UpdateWrappingStartTime(id);
-        return RedirectToAction("Order", new {id});
+        const bool startTimer = true;
+        return RedirectToAction("Order", new {id, startTimer});
     }
 
     [HttpGet]

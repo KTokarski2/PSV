@@ -32,9 +32,10 @@ public class MillingController : Controller
         return View("Search");
     }
 
-    public async Task<IActionResult> Order(int id)
+    public async Task<IActionResult> Order(int id, bool startTimer)
     {
         var dto = await _service.GetMillingControlData(id);
+        dto.StartTimer = startTimer;
         return View("Control", dto);
     }
     
@@ -42,7 +43,8 @@ public class MillingController : Controller
     public async Task<IActionResult> UpdateMillingStartTime(int id)
     {
         await _service.UpdateMillingStartTime(id);
-        return RedirectToAction("Order", new {id});
+        const bool startTimer = true;
+        return RedirectToAction("Order", new {id, startTimer});
     }
 
     [HttpGet]

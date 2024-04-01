@@ -294,6 +294,7 @@ main {
     transition: background-color 0.2s ease-in-out;
     margin: 1rem;
     text-align: center;
+    text-decoration: none;
 }
 
 .control-button-start,

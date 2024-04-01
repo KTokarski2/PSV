@@ -1,0 +1,41 @@
+@model PSV.Models.DTOs.OrderDetails;
+
+<main>
+    <h2 class="page-title">Zamówienie nr. @Model.OrderNumber</h2>
+    <div class="details-container">
+        <form class="order-details">
+            <div class="input-group">
+                <label for="orderNumber">Numer zamówienia: <span class="symbol-required">*</span></label>
+                <input type="text" name="orderNumber" id="orderNumber" value="@Model.OrderNumber">
+                <span id="errorOrderNumber" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="client">Klient: <span class="symbol-required">*</span></label>
+                <input type="text" name="client" id="client" value="@Model.Client">
+                <span id="errorClient" class="errors-text"></span>
+            </div>
+            <div class="input-group-details-checkbox">
+                <input type="checkbox" id="cutCheckbox" name="cutCheckbox" @(Model.Cut ? "checked" : "")>
+                <label for="cutCheckbox">Cięcie</label>
+                <input type="checkbox" id="millingCheckbox" name="millingCheckbox" @(Model.Milling ? "checked" : "")>
+                <label for="millingCheckbox">Frezowanie</label>
+                <input type="checkbox" id="wrappingCheckbox" name="wrappingCheckbox" @(Model.Wrapping ? "checked" : "")>
+                <label for="wrappingCheckbox">Oklejanie</label>
+            </div>
+            <div class="input-group">
+                <label for="formatCode">Kod formatki: <span class="symbol-required">*</span></label>
+                <input type="text" name="formatCode" id="formatCode" value="@Model.FormatCode">
+                <span id="errorFormatCode" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="comment">Komentarz: </label>
+                <textarea name="comment" id="comment" disabled>@Model.Comments</textarea>
+                <span id="errorComment" class="errors-text"></span>
+            </div>
+        </form>
+        <div class="actions-container">
+            <a href="@Url.Action("Details", new {Model.Id})" class="details-action">Powrót</a>
+            <a href="@Url.Action("Edit", new {Model.Id})" class="details-action">Zapisz</a>
+        </div>
+    </div>
+</main>

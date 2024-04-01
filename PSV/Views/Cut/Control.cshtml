@@ -1,6 +1,11 @@
 @model PSV.Models.DTOs.OrderControl
 
 <main>
+    <a class="action-button" href="@Url.Action("Menu", "Cut")">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+    </a>
     <h2 class="page-title">Stanowisko cięcia - zlecenie nr. @Model.OrderNumber</h2>
     <div class="control-buttons">
         <div id="timerOn" style="display: none">@Html.Raw(Json.Serialize(Model.StartTimer))</div>

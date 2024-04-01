@@ -65,6 +65,34 @@
       "PackagePath": "staticwebassets/images/OrdersData/0104202404/QRCode.png"
     },
     {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/0104202405/7b7ae6371c1adcee2ff88de3d51e09b6.png",
+      "PackagePath": "staticwebassets/images/OrdersData/0104202405/7b7ae6371c1adcee2ff88de3d51e09b6.png"
+    },
+    {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/0104202405/BarCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/0104202405/BarCode.png"
+    },
+    {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/0104202405/QRCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/0104202405/QRCode.png"
+    },
+    {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/0104202405/chairpng.parspng.com-4.png",
+      "PackagePath": "staticwebassets/images/OrdersData/0104202405/chairpng.parspng.com-4.png"
+    },
+    {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/0104202405/images.jpeg",
+      "PackagePath": "staticwebassets/images/OrdersData/0104202405/images.jpeg"
+    },
+    {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/TIMER_TEST/BarCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/TIMER_TEST/BarCode.png"
+    },
+    {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/TIMER_TEST/QRCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/TIMER_TEST/QRCode.png"
+    },
+    {
       "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },
