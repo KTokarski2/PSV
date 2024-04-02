@@ -32,6 +32,19 @@ public class WrappingController : Controller
         return View("Search");
     }
     
+    [HttpGet]
+    public async Task<IActionResult> Find(string orderNumber)
+    {
+        var id = await _service.GetIdByOrderNumber(orderNumber);
+        if (id == null)
+        {
+            return View("NotFound");
+        }
+
+        var dto = await _service.GetWrappingControlData(id);
+        return View("Control", dto);
+    }
+    
     public async Task<IActionResult> Order(int id, bool startTimer)
     {
         var dto = await _service.GetWrappingControlData(id);

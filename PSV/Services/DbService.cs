@@ -59,7 +59,7 @@ public class DbService : IDbService
         }).ToListAsync();
     }
 
-    public async Task<OrderDetails?> GetOrderDetails(int orderId)
+    public async Task<OrderDetails?> GetOrderDetails(int? orderId)
     {
         var order = await _context.Orders
             .Include(o => o.Client)
@@ -246,7 +246,7 @@ public class DbService : IDbService
         }
     }
 
-    public async Task<OrderControl> GetCutControlData(int orderId)
+    public async Task<OrderControl> GetCutControlData(int? orderId)
     {
         var order = await _context.Orders
             .Include(o => o.Cut)
@@ -275,7 +275,7 @@ public class DbService : IDbService
         return dto;
     }
 
-    public async Task<OrderControl> GetMillingControlData(int orderId)
+    public async Task<OrderControl> GetMillingControlData(int? orderId)
     {
         var order = await _context.Orders
             .Include(o => o.Milling)
@@ -303,7 +303,7 @@ public class DbService : IDbService
         return dto;
     }
 
-    public async Task<OrderControl> GetWrappingControlData(int orderId)
+    public async Task<OrderControl> GetWrappingControlData(int? orderId)
     {
         var order = await _context.Orders
             .Include(o => o.Wrapping)
@@ -348,5 +348,11 @@ public class DbService : IDbService
     {
         var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
         return order.BarCode;
+    }
+
+    public async Task<int?> GetIdByOrderNumber(string orderNumber)
+    {
+        var order = await _context.Orders.FirstOrDefaultAsync(o => o.OrderNumber == orderNumber);
+        return order?.Id;
     }
 }

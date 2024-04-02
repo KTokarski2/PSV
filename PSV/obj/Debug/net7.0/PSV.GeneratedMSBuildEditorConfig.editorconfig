@@ -28,6 +28,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3V0L01lbnUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/fedora/RiderProjects/PSV/PSV/Views/Cut/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3V0L05vdEZvdW5kLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/fedora/RiderProjects/PSV/PSV/Views/Cut/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3V0L1NlYXJjaC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -46,6 +50,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/fedora/RiderProjects/PSV/PSV/Views/Milling/Menu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWlsbGluZy9NZW51LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/Milling/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWlsbGluZy9Ob3RGb3VuZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/fedora/RiderProjects/PSV/PSV/Views/Milling/Search.cshtml]
@@ -68,6 +76,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/fedora/RiderProjects/PSV/PSV/Views/Order/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvTm90Rm91bmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/fedora/RiderProjects/PSV/PSV/Views/Order/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvU2VhcmNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -86,6 +98,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/fedora/RiderProjects/PSV/PSV/Views/Wrapping/Menu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JhcHBpbmcvTWVudS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/Wrapping/NotFound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JhcHBpbmcvTm90Rm91bmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/fedora/RiderProjects/PSV/PSV/Views/Wrapping/Search.cshtml]

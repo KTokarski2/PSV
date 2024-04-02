@@ -1,0 +1,13 @@
+<main>
+    <h2 class="page-title">Wyszukaj zamówienie</h2>
+    <div class="search-container">
+        <form class="search-form" method="get" action="@Url.Action("Find", "Cut")">
+            <div class="input-group-search">
+                <label for="orderNumber">Numer zamówienia: <span class="symbol-required">*</span></label>
+                <input type="text" name="orderNumber" id="orderNumber" placeholder="">
+                <span id="errorOrderNumber" class="errors-text"></span>
+                <input class="form-submit" type="submit" value="Wyszukaj">
+            </div>
+        </form>
+    </div>
+</main>

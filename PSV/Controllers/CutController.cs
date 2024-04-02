@@ -33,6 +33,19 @@ public class CutController : Controller
         return View("Search");
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Find(string orderNumber)
+    {
+        var id = await _service.GetIdByOrderNumber(orderNumber);
+        if (id == null)
+        {
+            return View("NotFound");
+        }
+
+        var dto = await _service.GetCutControlData(id);
+        return View("Control", dto);
+    }
+
     public async Task<IActionResult> Order(int id, bool startTimer)
     {
         var dto = await _service.GetCutControlData(id);
@@ -59,4 +72,5 @@ public class CutController : Controller
         await _service.CommentOrder(dto);
         return RedirectToAction("Order", new { dto.Id });
     }
+    
 }
