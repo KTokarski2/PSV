@@ -30,17 +30,19 @@ public class DbService : IDbService
             Client = client,
             Format = request.FormatCode,
             Comments = request.Comments,
-            Photos = await _dataService.SavePhotos(request),
             Milling = new Milling { IsPresent = request.Milling },
             Wrapping = new Wrapping { IsPresent = request.Wrapping },
-            Cut = new Cut { IsPresent = request.Cut },
-            QrCode = await _dataService.GenerateQrCode(request.OrderNumber),
-            BarCode = await _dataService.GenerateBarcode(request.OrderNumber)
+            Cut = new Cut { IsPresent = request.Cut }
         };
 
         await _context.AddAsync(order);
         await _context.SaveChangesAsync();
-        
+
+        order.Photos = await _dataService.SavePhotos(request, order.Id);
+        order.QrCode = await _dataService.GenerateQrCode(order.Id);
+        order.BarCode = await _dataService.GenerateBarcode(order.Id, order.OrderNumber);
+
+        await _context.SaveChangesAsync();
     }
 
     public async Task<List<OrderList>> GetAllOrders()
@@ -121,69 +123,28 @@ public class DbService : IDbService
         return orderDetails;
     }
 
-public async Task EditOrder(int orderId, OrderEdit request)
-{
-    var order = await _context.Orders
-        .Include(o => o.Client)
-        .Include(o => o.Cut)
-        .Include(o => o.Milling)
-        .Include(o => o.Wrapping)
-        .FirstOrDefaultAsync(o => o.Id == orderId);
-
-    if (order == null)
+    public async Task EditOrder(OrderDetails dto)
     {
-        throw new ArgumentException("Order not found");
-    }
 
-    if (request.OrderNumber != null && request.OrderNumber != order.OrderNumber)
-    {
-        order.OrderNumber = request.OrderNumber;
-    }
+        var order = await _context.Orders
+            .Include(o => o.Cut)
+            .Include(o => o.Milling)
+            .Include(o => o.Wrapping)
+            .FirstOrDefaultAsync(o => o.Id == dto.Id);
 
-    if (request.FormatCode != null && request.FormatCode != order.Format)
-    {
-        order.Format = request.FormatCode;
-    }
-
-    if (request.Comments != null && request.Comments != order.Comments)
-    {
-        order.Comments = request.Comments;
-    }
-
-    if (request.Milling.HasValue && request.Milling != order.Milling.IsPresent)
-    {
-        order.Milling.IsPresent = request.Milling.Value;
-    }
-
-    if (request.Wrapping.HasValue && request.Wrapping != order.Wrapping.IsPresent)
-    {
-        order.Wrapping.IsPresent = request.Wrapping.Value;
-    }
-
-    if (request.Cut.HasValue && request.Cut != order.Cut.IsPresent)
-    {
-        order.Cut.IsPresent = request.Cut.Value;
-    }
-
-    if (request.Client != null && request.Client != order.Client.Name)
-    {
-        var existingClient = await _context.Clients.FirstOrDefaultAsync(c => c.Name == request.Client);
-        if (existingClient != null)
+        if (order != null)
         {
-            order.Client = existingClient;
+            order.OrderNumber = dto.OrderNumber;
+            order.Format = dto.FormatCode;
+            order.Comments = dto.Comments;
+            order.Cut.IsPresent = dto.Cut;
+            order.Milling.IsPresent = dto.Milling;
+            order.Wrapping.IsPresent = dto.Wrapping;
         }
-        else
-        {
-            var newClient = new Client
-            {
-                Name = request.Client
-            };
-            order.Client = newClient;
-        }
+
+        await _context.SaveChangesAsync();
     }
     
-    await _context.SaveChangesAsync();
-}
     public async Task DeleteOrder(int orderId)
     {
         var order = await _context.Orders.FindAsync(orderId);
@@ -192,7 +153,7 @@ public async Task EditOrder(int orderId, OrderEdit request)
         {
             throw new ArgumentException("Order not found");
         }
-        _dataService.DeleteOrderDirectory(order.OrderNumber);
+        _dataService.DeleteOrderDirectory(order.Id);
         var cut = await _context.Cuts.FirstOrDefaultAsync(c => c.Id == order.IdCut);
         var milling = await _context.Millings.FirstOrDefaultAsync(m => m.Id == order.IdMilling);
         var wrapping = await _context.Wrappings.FirstOrDefaultAsync(w => w.Id == order.IdWrapping);
@@ -381,5 +342,11 @@ public async Task EditOrder(int orderId, OrderEdit request)
     {
         var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
         return order.QrCode;
+    }
+
+    public async Task<string> GetBarcodePath(int id)
+    {
+        var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+        return order.BarCode;
     }
 }

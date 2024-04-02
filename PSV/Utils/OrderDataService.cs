@@ -13,10 +13,10 @@ public class OrderDataService
 {
     private const string DataDir = "wwwroot/images/OrdersData";
 
-    public async Task<string> SavePhotos(OrderPost request)
+    public async Task<string> SavePhotos(OrderPost request, int id)
     {
         var ordersDataPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir);
-        var orderDirectoryPath = Path.Combine(ordersDataPath, request.OrderNumber);
+        var orderDirectoryPath = Path.Combine(ordersDataPath, id.ToString());
         Directory.CreateDirectory(orderDirectoryPath);
 
         if (request.Photos != null)
@@ -51,18 +51,18 @@ public class OrderDataService
         return files.ToList();
     }
 
-    public async Task<string> GenerateQrCode(string orderNumber)
+    public async Task<string> GenerateQrCode(int id)
     {
         QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
-        QRCodeData qrCodeData = qrCodeGenerator.CreateQrCode(orderNumber, QRCodeGenerator.ECCLevel.Q);
+        QRCodeData qrCodeData = qrCodeGenerator.CreateQrCode(id.ToString(), QRCodeGenerator.ECCLevel.Q);
         PngByteQRCode qrCode = new PngByteQRCode(qrCodeData);
-        string orderDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir, orderNumber);
+        string orderDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir, id.ToString());
         string filePath = Path.Combine(orderDirectoryPath, "QRCode.png");
         await File.WriteAllBytesAsync(filePath, qrCode.GetGraphic(20));
         return filePath;
     }
 
-    public async Task<string> GenerateBarcode(string orderNumber)
+    public async Task<string> GenerateBarcode(int id, string orderNumber)
     {
         string filePath;
         var barcode = new Barcode();
@@ -70,16 +70,16 @@ public class OrderDataService
         var img = barcode.Encode(BarcodeStandard.Type.Code128, orderNumber, SKColors.Black, SKColors.White, 290, 120);
         using var image = SKImage.FromBitmap(SKBitmap.FromImage(img));
         using var data = image.Encode(SKEncodedImageFormat.Png, 100);
-        string orderDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir, orderNumber);
+        string orderDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir, id.ToString());
         filePath = Path.Combine(orderDirectoryPath, "BarCode.png");
         await File.WriteAllBytesAsync(filePath, data.ToArray());
 
         return filePath;
     }
 
-    public void DeleteOrderDirectory(string orderNumber)
+    public void DeleteOrderDirectory(int id)
     {
-        string orderDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir, orderNumber);
+        string orderDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir, id.ToString());
         Directory.Delete(orderDirectoryPath, true);
     }
 }

@@ -38,6 +38,15 @@
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\13\QRCode.png" />
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\2\eugene-chystiakov-3neSwyntbQ8-unsplash.jpg" />
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\2\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\0104202404\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\0104202404\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\0104202402\7b7ae6371c1adcee2ff88de3d51e09b6.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\0104202402\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\0104202402\chairpng.parspng.com-4.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\0104202402\images.jpeg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\0104202402\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\TIMER_TEST\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\TIMER_TEST\QRCode.png" />
     </ItemGroup>
 
 </Project>

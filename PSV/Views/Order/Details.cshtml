@@ -73,8 +73,8 @@
         <div class="actions-container">
             <a href="@Url.Action("EditForm", new {Model.Id})" class="details-action">Edytuj</a>
             <a href="@Url.Action("Delete", new {Model.Id})" class="details-action">Usuń</a>
-            <a href="" class="details-action">Pobierz kod QR</a>
-            <a href="" class="details-action">Pobierz kod kreskowy</a>
+            <a href="@Url.Action("GetQrCode", new {Model.Id})" class="details-action">Pobierz kod QR</a>
+            <a href="@Url.Action("GetBarcode", new {Model.Id})" class="details-action">Pobierz kod kreskowy</a>
         </div>
     </div>
 </main>

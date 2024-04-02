@@ -15,7 +15,7 @@ public class Order
     public string? BarCode { get; set; }
     public string Format { get; set; }
     public string Comments { get; set; }
-    public string Photos { get; set; }
+    public string? Photos { get; set; }
     public int IdCut { get; set; }
     public virtual Cut Cut { get; set; }
     public int IdMilling { get; set; }

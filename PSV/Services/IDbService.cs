@@ -8,7 +8,7 @@ namespace PSV.Services
         public Task AddOrder(OrderPost request);
         public Task <List<OrderList>> GetAllOrders();
         public Task<OrderDetails?> GetOrderDetails(int orderId);
-        public Task EditOrder(int orderId, OrderEdit request);
+        public Task EditOrder(OrderDetails dto);
         public Task DeleteOrder(int orderId);
         public Task UpdateCutStartTime(int orderId);
         public Task UpdateCutEndTime(int orderId);
@@ -21,5 +21,6 @@ namespace PSV.Services
         public Task<OrderControl> GetWrappingControlData(int orderId);
         public Task CommentOrder(OrderControl dto);
         public Task<string> GetQrCodePath(int id);
+        public Task<string> GetBarcodePath(int id);
     }
 }

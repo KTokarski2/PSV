@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using PSV.Models;
 using PSV.Models.DTOs;
@@ -52,6 +53,7 @@ public class OrderController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(OrderDetails dto)
     {
+        await _service.EditOrder(dto);
         return RedirectToAction("Details", new { dto.Id });
     }
 
@@ -63,26 +65,21 @@ public class OrderController : Controller
 
     public async Task<IActionResult> GetQrCode(int id)
     {
-        /*
-        
         var path = await _service.GetQrCodePath(id);
-        if (System.IO.File.Exists(path))
-        {
-            byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(path);
-            Response.ContentType = "image/png";
-            Response.Headers.Append("Content-Disposition", "attachment; filename=QRCode.png");
-            
-        }
-        */
-        return RedirectToAction("Details", new { id });
+        var fileName = Path.GetFileName(path);
+        var fileContent = await System.IO.File.ReadAllBytesAsync(path);
+
+        return File(fileContent, "application/octet-stream", fileName);
     }
-    
-    public async Task<IActionResult> EditOrder(int id, OrderEdit request)
+
+    public async Task<IActionResult> GetBarcode(int id)
     {
-        await _service.EditOrder(id, request);
-        return View("List");
+        var path = await _service.GetBarcodePath(id);
+        var fileName = Path.GetFileName(path);
+        var fileContent = await System.IO.File.ReadAllBytesAsync(path);
+        return File(fileContent, "application/octet-stream", fileName);
     }
-    
+
     public async Task<IActionResult> Delete(int id)
     {
         await _service.DeleteOrder(id);
