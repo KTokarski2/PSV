@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /home/fedora/RiderProjects/PSV/PSV
 build_property._RazorSourceGeneratorDebug = 
 
+[/home/fedora/RiderProjects/PSV/PSV/Views/Client/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2xpZW50L0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/RiderProjects/PSV/PSV/Views/Client/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2xpZW50L0xpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/fedora/RiderProjects/PSV/PSV/Views/Cut/Control.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3V0L0NvbnRyb2wuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

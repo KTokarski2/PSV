@@ -23,5 +23,8 @@ namespace PSV.Services
         public Task<string> GetQrCodePath(int id);
         public Task<string> GetBarcodePath(int id);
         public Task<int?> GetIdByOrderNumber(string orderNumber);
+        public Task AddClient(ClientPost request);
+
+        public Task<List<ClientList>> GetAllClients();
     }
 }

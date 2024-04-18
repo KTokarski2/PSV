@@ -1,0 +1,39 @@
+@model List<PSV.Models.DTOs.ClientList>
+
+<main>
+    <a class="action-button" href="@Url.Action("Index", "Home")">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+    </a>
+    @{
+        if (Model.Count == 0)
+        {
+            <h1>Brak klientów w bazie danych</h1>
+        }
+        else
+        {
+            <table class="orders-list">
+        <thead>
+        <tr>
+            <th>Nazwa klienta</th>
+            <th>Adres klienta</th>
+            <th>Numer telefonu</th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var client in Model)
+            {
+                <tr class="orders-list-row">
+                    <td><a href="">@client.Name</a></td>
+                    <td>@client.Address</td>
+                    <td>@client.PhoneNumber</td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+        }
+    }
+</main>

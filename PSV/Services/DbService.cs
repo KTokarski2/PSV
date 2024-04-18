@@ -355,4 +355,29 @@ public class DbService : IDbService
         var order = await _context.Orders.FirstOrDefaultAsync(o => o.OrderNumber == orderNumber);
         return order?.Id;
     }
+
+    public async Task AddClient(ClientPost request)
+    {
+        var client = new Client
+        {
+            Name = request.Name,
+            Address = request.Address,
+            PhoneNumber = request.PhoneNumber
+        };
+
+        await _context.AddAsync(client);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<ClientList>> GetAllClients()
+    {
+        var clients = await _context.Clients.Select(c => new ClientList
+        {
+            Name = c.Name,
+            Address = c.Address,
+            PhoneNumber = c.PhoneNumber
+        }).ToListAsync();
+
+        return clients;
+    }
 }
