@@ -1,20 +1,17 @@
 
 
-V 1.0 
----------------------
-1) Edycja + DONE
-2) Usuwanie +  DONE
-3) Zmiana w widoku szczegółów z dat na stringi (określony format) + 3/29/2024 6:12:49PM -> 29.03.2024 18:12 GetOrderDetails() DONE
-4) Zwiększenie miejsca na informacje dot. posczególnych etapów produkcji na całą dostępną szerokosć + 
-5) Dodanie generowania barcodeów + DONE
-6) Dodanie licznika w widoku kontorli + DONE
-7) Popup z przeglądarki (rozpoczęto, zakończono)
-8) Usunięcie podkresleń w przyciskach początek koniec
-9) Walidacja formularzy 
-10) Autentykacja i autoryzacja
-11) Walidacja na etapie wyboru zamówienia czy jest praca czy nie dla poszczególnych stanowisk
-12) Paginacja w listach 
-13) Zarządzanie klientami (wprowadzanie klientów, wybór klientów z rozwijanej listy przy tworzeniuu zamówienia) +
------------------------
+v 1.1
+------------------------------------
+
+1) Debug GetAllClients i AddClient
+2) Serwisy do edycji i usuwania klientów
+3) Metoda do optiona -> (DTO: Id Client, String Name)
+4) Akcja cut/control/id -> sprawdza czy dla tego order order.cut.Ispresent == true x3
+
+1. na klientach (cicie, rezowanie... etc) od razu po załadowaniu strony powinien być pasek wyszukiwania zleceń i ustawiony kursor juz w pasku. Tak aby bez zbednych ruchow po prostu zeskanowac barcode 
+2. Początek i koniec muszą być bardzo duże tak aby łatwo można było kliknąć
+3. Gdy na przykład mam odznaczoną opcję oklejanie w zoeceniu to dalej na stanowisku oklejanie mogę kliknąć start. Nie powinno być takiej możliwości powinna pojawić się na przykład informacja" to zlecenie nie wymaga oklejania" 
+4. po kliknięciu koniec niech wyskoczy okno czy chcesz dodać komentarz po kliknięciu tak niech wyskoczy okno do wpisania czegokolwiek badz jesli ktos nie bedzie mial komentarza to po prostu END. i niech wraca do ekranu wyszukiwania po zakonczeniu procesu
 
 
+-------------------------------------
