@@ -42,6 +42,11 @@ public class MillingController : Controller
         }
 
         var dto = await _service.GetMillingControlData(id);
+        if (dto.TotalTime == "Milling is not present")
+        {
+            return View("NotFound");
+        }
+            
         return View("Control", dto);
     }
 

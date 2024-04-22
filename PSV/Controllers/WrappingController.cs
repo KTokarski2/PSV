@@ -42,6 +42,10 @@ public class WrappingController : Controller
         }
 
         var dto = await _service.GetWrappingControlData(id);
+        if (dto.TotalTime == "Wrapping is not present")
+        {
+            return View("NotFound");
+        }
         return View("Control", dto);
     }
     

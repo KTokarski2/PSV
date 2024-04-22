@@ -43,6 +43,11 @@ public class CutController : Controller
         }
 
         var dto = await _service.GetCutControlData(id);
+        if (dto.TotalTime == "Cut is not present")
+        {
+            return View("NotFound");
+        }
+
         return View("Control", dto);
     }
 
