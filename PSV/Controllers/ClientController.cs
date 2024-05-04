@@ -60,4 +60,10 @@ public class ClientController : Controller
             return NotFound(ex.Message);
         }
     }
+    [HttpGet]
+    public async Task<IActionResult> List()
+    {
+        var clients = await _service.GetAllClientsList();
+        return View("List", clients);
+    }
 }

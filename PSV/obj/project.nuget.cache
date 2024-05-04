@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "j533p+j5VvLpa51c4nsnQ54o7VNNn8ZrKs/ZjgpE3qNzaiiaaRexQ0PBrqD/fOCMFTm4a1n4+uB7aslMOVD+PA==",
+  "dgSpecHash": "1atkmYY9D+vu/0VsjqWS2/9I6twxMDWXBPgOF+FZJ9AtIukQL0kr2r6AR94EPaH0V0gKZKFM4Wr5gNTmsAz2iw==",
   "success": true,
   "projectFilePath": "/home/ant0on/RiderProjects/PSV/PSV/PSV.csproj",
   "expectedPackageFiles": [
     "/home/ant0on/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
+    "/home/ant0on/.nuget/packages/barcodelib/3.0.3/barcodelib.3.0.3.nupkg.sha512",
     "/home/ant0on/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/ant0on/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "/home/ant0on/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
@@ -43,6 +44,10 @@
     "/home/ant0on/.nuget/packages/microsoft.win32.systemevents/5.0.0/microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
     "/home/ant0on/.nuget/packages/qrcoder/1.4.3/qrcoder.1.4.3.nupkg.sha512",
+    "/home/ant0on/.nuget/packages/skiasharp/2.88.6/skiasharp.2.88.6.nupkg.sha512",
+    "/home/ant0on/.nuget/packages/skiasharp.nativeassets.linux.nodependencies/2.88.6/skiasharp.nativeassets.linux.nodependencies.2.88.6.nupkg.sha512",
+    "/home/ant0on/.nuget/packages/skiasharp.nativeassets.macos/2.88.6/skiasharp.nativeassets.macos.2.88.6.nupkg.sha512",
+    "/home/ant0on/.nuget/packages/skiasharp.nativeassets.win32/2.88.6/skiasharp.nativeassets.win32.2.88.6.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.codedom/4.4.0/system.codedom.4.4.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.configuration.configurationmanager/5.0.0/system.configuration.configurationmanager.5.0.0.nupkg.sha512",
@@ -57,6 +62,7 @@
     "/home/ant0on/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.reflection/4.3.0/system.reflection.4.3.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.reflection.primitives/4.3.0/system.reflection.primitives.4.3.0.nupkg.sha512",
+    "/home/ant0on/.nuget/packages/system.resources.extensions/7.0.0/system.resources.extensions.7.0.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.resources.resourcemanager/4.3.0/system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.runtime/4.3.0/system.runtime.4.3.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.runtime.caching/5.0.0/system.runtime.caching.5.0.0.nupkg.sha512",
@@ -68,10 +74,11 @@
     "/home/ant0on/.nuget/packages/system.text.encoding/4.3.0/system.text.encoding.4.3.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.text.encoding.codepages/5.0.0/system.text.encoding.codepages.5.0.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
-    "/home/ant0on/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
+    "/home/ant0on/.nuget/packages/system.text.json/7.0.3/system.text.json.7.0.3.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
     "/home/ant0on/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "/home/ant0on/.nuget/packages/system.windows.extensions/5.0.0/system.windows.extensions.5.0.0.nupkg.sha512"
+    "/home/ant0on/.nuget/packages/system.windows.extensions/5.0.0/system.windows.extensions.5.0.0.nupkg.sha512",
+    "/home/ant0on/.nuget/packages/zxing.net/0.16.9/zxing.net.0.16.9.nupkg.sha512"
   ],
   "logs": []
 }

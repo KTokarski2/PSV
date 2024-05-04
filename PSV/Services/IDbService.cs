@@ -29,5 +29,6 @@ namespace PSV.Services
         public Task EditClient(int clientId, ClientPost client);
 
         public Task DeleteClient(int clientId);
+        public Task<List<ClientOtherList>> GetAllClientsList();
     }
 }

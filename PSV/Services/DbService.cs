@@ -433,4 +433,16 @@ public class DbService : IDbService
         _context.Clients.Remove(client);
         await _context.SaveChangesAsync();
     }
+    public async Task<List<ClientOtherList>> GetAllClientsList()
+    {
+        var clients = await _context.Clients
+            .Select(c => new ClientOtherList
+            {
+                Id = c.Id,
+                Name = c.Name
+            })
+            .ToListAsync();
+
+        return clients;
+    }
 }
