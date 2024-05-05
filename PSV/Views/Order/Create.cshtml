@@ -30,7 +30,6 @@
                 <label asp-for="Client">Klient: <span class="symbol-required">*</span></label>
                 <select asp-for="Client">
                     @{
-                        <option value="new">Nowy klient</option>
                         foreach (var client in Model.AllClients)
                         {
                             <option value="@client.Id">@client.Name</option>

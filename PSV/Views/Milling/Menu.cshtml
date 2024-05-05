@@ -1,12 +1,22 @@
 <main class="starting-page">
     <h2>Frezowanie</h2>
-    <div class="button-wrapper">
-        <a class="starting-page-button" href="@Url.Action("Search", "Milling")">Wyszukaj</a>
+    <div class="search-container">
+        <form class="search-form" method="get" action="@Url.Action("Find", "Milling")">
+            <div class="input-group-search">
+                <label for="orderNumber">Numer zamówienia: <span class="symbol-required">*</span></label>
+                <input type="text" name="orderNumber" id="orderNumber" placeholder="">
+                <span id="errorOrderNumber" class="errors-text"></span>
+                <input class="form-submit" type="submit" value="Wyszukaj">
+            </div>
+        </form>
     </div>
     <div class="button-wrapper">
         <a class="starting-page-button" href="@Url.Action("All", "Milling")">Lista zamówień</a>
     </div>
-    <div class="button-wrapper">
-        <a class="logout-button" href="">Wyloguj się</a>
-    </div>
 </main>
+
+<script>
+    window.onload = function() {
+        document.getElementById('orderNumber').focus();
+    };
+</script>

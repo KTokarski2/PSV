@@ -25,12 +25,6 @@ public class MillingController : Controller
         var dto = await _service.GetAllOrders();
         return View("List", dto);
     }
-
-    [HttpGet]
-    public async Task<IActionResult> Search()
-    {
-        return View("Search");
-    }
     
     [HttpGet]
     public async Task<IActionResult> Find(string orderNumber)

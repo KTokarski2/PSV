@@ -18,10 +18,7 @@ public class DbService : IDbService
     
     public async Task AddOrder(OrderPost request)
     {
-        var client = new Client
-        {
-            Name = request.Client
-        };
+        var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == Int32.Parse(request.Client));
 
         var order = new Order
         {

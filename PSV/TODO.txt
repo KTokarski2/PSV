@@ -2,13 +2,8 @@
 
 v 1.1
 ------------------------------------
-
-1) Debug GetAllClients i AddClient -> DZIAŁA
-2) Serwisy do edycji i usuwania klientów -> DZIAŁA
-3) Metoda do optiona -> (DTO: Id Client, String Name) -> JEST 
 4) Akcja cut/control/id -> sprawdza czy dla tego order order.cut.Ispresent == true x3
 
-1. na klientach (cicie, rezowanie... etc) od razu po załadowaniu strony powinien być pasek wyszukiwania zleceń i ustawiony kursor juz w pasku. Tak aby bez zbednych ruchow po prostu zeskanowac barcode 
 2. Początek i koniec muszą być bardzo duże tak aby łatwo można było kliknąć
 3. Gdy na przykład mam odznaczoną opcję oklejanie w zoeceniu to dalej na stanowisku oklejanie mogę kliknąć start. Nie powinno być takiej możliwości powinna pojawić się na przykład informacja" to zlecenie nie wymaga oklejania" 
 4. po kliknięciu koniec niech wyskoczy okno czy chcesz dodać komentarz po kliknięciu tak niech wyskoczy okno do wpisania czegokolwiek badz jesli ktos nie bedzie mial komentarza to po prostu END. i niech wraca do ekranu wyszukiwania po zakonczeniu procesu

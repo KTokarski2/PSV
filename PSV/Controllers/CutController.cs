@@ -28,12 +28,6 @@ public class CutController : Controller
     }
 
     [HttpGet]
-    public IActionResult Search()
-    {
-        return View("Search");
-    }
-
-    [HttpGet]
     public async Task<IActionResult> Find(string orderNumber)
     {
         var id = await _service.GetIdByOrderNumber(orderNumber);
