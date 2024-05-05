@@ -4,9 +4,7 @@ v 1.1
 ------------------------------------
 4) Akcja cut/control/id -> sprawdza czy dla tego order order.cut.Ispresent == true x3
 
-2. Początek i koniec muszą być bardzo duże tak aby łatwo można było kliknąć
 3. Gdy na przykład mam odznaczoną opcję oklejanie w zoeceniu to dalej na stanowisku oklejanie mogę kliknąć start. Nie powinno być takiej możliwości powinna pojawić się na przykład informacja" to zlecenie nie wymaga oklejania" 
 4. po kliknięciu koniec niech wyskoczy okno czy chcesz dodać komentarz po kliknięciu tak niech wyskoczy okno do wpisania czegokolwiek badz jesli ktos nie bedzie mial komentarza to po prostu END. i niech wraca do ekranu wyszukiwania po zakonczeniu procesu
-
 
 -------------------------------------

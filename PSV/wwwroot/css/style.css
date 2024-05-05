@@ -398,20 +398,21 @@ textarea {
 }
 
 .time-info-container {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 10px;
 }
 
 .time-info-group {
     padding: 1rem;
     display: inline-block;
-    margin: 0 10px;
-    text-align: left;
+    margin: 1rem;
+    text-align: center;
     border: solid 1px black;
     border-radius: 5px;
     background-color: #ced4da;
-    width: 180px;
-    height: 160px;
+    width: 80%;
 }
 
 .time-info-group:hover {

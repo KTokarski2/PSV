@@ -25,7 +25,6 @@ namespace PSV.Services
         public Task<int?> GetIdByOrderNumber(string orderNumber);
         public Task AddClient(ClientPost request);
         public Task<List<ClientDetails>> GetAllClients();
-
         public Task<List<ClientInfo>> GetClientsInfo();
         public Task<ClientDetails> GetClientDetails(int id);
         public Task EditClient(int clientId, ClientPost client);
