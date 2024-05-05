@@ -384,10 +384,11 @@ public class DbService : IDbService
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<ClientList>> GetAllClients()
+    public async Task<List<ClientDetails>> GetAllClients()
     {
-        var clients = await _context.Clients.Select(c => new ClientList
+        var clients = await _context.Clients.Select(c => new ClientDetails
         {
+            Id = c.Id,
             Name = c.Name,
             Address = c.Address,
             PhoneNumber = c.PhoneNumber
@@ -433,15 +434,27 @@ public class DbService : IDbService
         _context.Clients.Remove(client);
         await _context.SaveChangesAsync();
     }
-    public async Task<List<ClientOtherList>> GetAllClientsList()
+
+    public async Task<ClientDetails> GetClientDetails(int id)
     {
-        var clients = await _context.Clients
-            .Select(c => new ClientOtherList
-            {
-                Id = c.Id,
-                Name = c.Name
-            })
-            .ToListAsync();
+        var client = await _context.Clients.Where(c => c.Id == id).Select(c => new ClientDetails
+        {
+            Id = c.Id,
+            Name = c.Name,
+            Address = c.Address,
+            PhoneNumber = c.PhoneNumber
+        }).FirstOrDefaultAsync();
+
+        return client;
+    }
+
+    public async Task<List<ClientInfo>> GetClientsInfo()
+    {
+        var clients = await _context.Clients.Select(c => new ClientInfo
+        {
+            Id = c.Id,
+            Name = c.Name
+        }).ToListAsync();
 
         return clients;
     }

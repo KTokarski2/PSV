@@ -12,6 +12,8 @@ namespace PSV.Models.DTOs
        
        public string FormatCode { get; set; }
        
+       public List<ClientInfo> AllClients { get; set; }
+       
        public string Client { get; set; }
        
        public string Comments { get; set; }

@@ -28,7 +28,15 @@
             </div>
             <div class="input-group">
                 <label asp-for="Client">Klient: <span class="symbol-required">*</span></label>
-                <input type="text" asp-for="Client" placeholder="">
+                <select asp-for="Client">
+                    @{
+                        <option value="new">Nowy klient</option>
+                        foreach (var client in Model.AllClients)
+                        {
+                            <option value="@client.Id">@client.Name</option>
+                        }
+                    }
+                </select>
                 <span asp-validation-for="Client" class="errors-text"></span>
             </div>
             <div class="input-group">

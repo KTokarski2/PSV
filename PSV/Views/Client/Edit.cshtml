@@ -1,0 +1,29 @@
+@model PSV.Models.DTOs.ClientDetails
+
+<main>
+    <h2 class="page-title"></h2>
+    <div class="details-container">
+        <form class="order-details" method="post" action="@Url.Action("Edit", "Client")">
+            <input type="hidden" asp-for="Id" value="@Model.Id"/>
+            <div class="input-group">
+                <label asp-for="Name">Nazwa klienta: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="Name" value="@Model.Name">
+                <span asp-validation-for="Name" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="Address">Adres klienta: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="Address" value="@Model.Address">
+                <span asp-validation-for="Address" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="PhoneNumber">Numer telefonu: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="PhoneNumber" value="@Model.PhoneNumber">
+                <span asp-validation-for="PhoneNumber" class="errors-text"></span>
+            </div>
+        </form>
+        <div class="actions-container">
+            <a href="@Url.Action("Details", "Client", new {Model.Id})" class="details-action">Powrót</a>
+            <a href="#" class="details-action" onclick="document.querySelector('.order-details').submit(); return false;">Zapisz</a>
+        </div>
+    </div>
+</main>

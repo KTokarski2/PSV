@@ -3,9 +3,9 @@
 v 1.1
 ------------------------------------
 
-1) Debug GetAllClients i AddClient -> done
-2) Serwisy do edycji i usuwania klientów -> done
-3) Metoda do optiona -> (DTO: Id Client, String Name) -> 
+1) Debug GetAllClients i AddClient -> DZIAŁA
+2) Serwisy do edycji i usuwania klientów -> DZIAŁA
+3) Metoda do optiona -> (DTO: Id Client, String Name) -> JEST 
 4) Akcja cut/control/id -> sprawdza czy dla tego order order.cut.Ispresent == true x3
 
 1. na klientach (cicie, rezowanie... etc) od razu po załadowaniu strony powinien być pasek wyszukiwania zleceń i ustawiony kursor juz w pasku. Tak aby bez zbednych ruchow po prostu zeskanowac barcode 

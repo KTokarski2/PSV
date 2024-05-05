@@ -26,7 +26,10 @@ public class OrderController : Controller
     [HttpGet]
     public async Task<IActionResult> New()
     {
-        return View("Create");
+        OrderPost newOrder = new OrderPost();
+        var allClients = await _service.GetClientsInfo();
+        newOrder.AllClients = allClients;
+        return View("Create", newOrder);
     }
     
     [HttpPost]

@@ -32,7 +32,21 @@ public class ClientController : Controller
         var clients = await _service.GetAllClients();
         return View("List", clients);
     }
-    
+
+    [HttpGet]
+    public async Task<IActionResult> Details(int id)
+    {
+        var dto = await _service.GetClientDetails(id);
+        return View("Details", dto);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> EditForm(int id)
+    {
+        var dto = await _service.GetClientDetails(id);
+        return View("Edit", dto);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Edit(int id, ClientPost client)
     {
@@ -47,7 +61,7 @@ public class ClientController : Controller
         }
     }
 
-    [HttpPost]
+    
     public async Task<IActionResult> Delete(int id)
     {
         try
@@ -60,10 +74,5 @@ public class ClientController : Controller
             return NotFound(ex.Message);
         }
     }
-    [HttpGet]
-    public async Task<IActionResult> List()
-    {
-        var clients = await _service.GetAllClientsList();
-        return View("List", clients);
-    }
+    
 }

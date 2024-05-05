@@ -1,4 +1,4 @@
-@model List<PSV.Models.DTOs.ClientList>
+@model List<PSV.Models.DTOs.ClientDetails>
 
 <main>
     <a class="action-button" href="@Url.Action("Index", "Home")">
@@ -26,7 +26,7 @@
             foreach (var client in Model)
             {
                 <tr class="orders-list-row">
-                    <td><a href="">@client.Name</a></td>
+                    <td><a href="@Url.Action("Details", "Client", new {client.Id})">@client.Name</a></td>
                     <td>@client.Address</td>
                     <td>@client.PhoneNumber</td>
                 </tr>

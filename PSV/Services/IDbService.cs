@@ -24,11 +24,11 @@ namespace PSV.Services
         public Task<string> GetBarcodePath(int id);
         public Task<int?> GetIdByOrderNumber(string orderNumber);
         public Task AddClient(ClientPost request);
+        public Task<List<ClientDetails>> GetAllClients();
 
-        public Task<List<ClientList>> GetAllClients();
+        public Task<List<ClientInfo>> GetClientsInfo();
+        public Task<ClientDetails> GetClientDetails(int id);
         public Task EditClient(int clientId, ClientPost client);
-
         public Task DeleteClient(int clientId);
-        public Task<List<ClientOtherList>> GetAllClientsList();
     }
 }
