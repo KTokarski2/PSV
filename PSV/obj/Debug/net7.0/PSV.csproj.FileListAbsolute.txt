@@ -232,3 +232,15 @@ C:/Users/Antek/RiderProjects/PSV/PSV/obj/Debug/net7.0/ref/PSV.dll
 /home/fedora/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/win-arm64/native/libSkiaSharp.dll
 /home/fedora/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/win-x64/native/libSkiaSharp.dll
 /home/fedora/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/win-x86/native/libSkiaSharp.dll
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/BarcodeStandard.dll
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/SkiaSharp.dll
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/System.Resources.Extensions.dll
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/zxing.dll
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/linux-arm/native/libSkiaSharp.so
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/linux-arm64/native/libSkiaSharp.so
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/linux-musl-x64/native/libSkiaSharp.so
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/linux-x64/native/libSkiaSharp.so
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/osx/native/libSkiaSharp.dylib
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/win-arm64/native/libSkiaSharp.dll
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/win-x64/native/libSkiaSharp.dll
+/home/ant0on/RiderProjects/PSV/PSV/bin/Debug/net7.0/runtimes/win-x86/native/libSkiaSharp.dll

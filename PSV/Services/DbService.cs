@@ -173,6 +173,7 @@ public class DbService : IDbService
         var order = await _context.Orders
             .Include(o => o.Cut)
             .FirstOrDefaultAsync(o => o.Id == orderId);
+        
 
         if (order != null)
         { 
@@ -261,7 +262,11 @@ public class DbService : IDbService
             Comments = order.Comments
 
         };
-
+        if (order.Cut is { IsPresent: false })
+        {
+            dto.TotalTime = "Cut is not present";
+        }
+        
         if (order.Cut is { IsPresent: true, From: not null, To: not null })
         {
             var timeDuration = order.Cut.To.Value - order.Cut.From.Value;
@@ -290,6 +295,11 @@ public class DbService : IDbService
 
         };
         
+        if (order.Milling is { IsPresent: false })
+        {
+            dto.TotalTime = "Milling is not present";
+        }
+        
         if (order.Milling is { IsPresent: true, From: not null, To: not null })
         {
             var timeDuration = order.Milling.To.Value - order.Milling.From.Value;
@@ -317,6 +327,11 @@ public class DbService : IDbService
             Comments = order.Comments
 
         };
+        
+        if (order.Wrapping is { IsPresent: false })
+        {
+            dto.TotalTime = "Wrapping is not present";
+        }
         
         if (order.Wrapping is { IsPresent: true, From: not null, To: not null })
         {
@@ -358,14 +373,14 @@ public class DbService : IDbService
 
     public async Task AddClient(ClientPost request)
     {
-        var client = new Client
+        var newClient = new Client
         {
             Name = request.Name,
             Address = request.Address,
             PhoneNumber = request.PhoneNumber
         };
 
-        await _context.AddAsync(client);
+        _context.Clients.Add(newClient);
         await _context.SaveChangesAsync();
     }
 
@@ -377,6 +392,56 @@ public class DbService : IDbService
             Address = c.Address,
             PhoneNumber = c.PhoneNumber
         }).ToListAsync();
+
+        return clients;
+    }
+    public async Task EditClient(int clientId, ClientPost client)
+    {
+        var existingClient = await _context.Clients.FindAsync(clientId);
+
+        if (existingClient == null)
+        {
+            throw new ArgumentException($"Client with ID {clientId} not found.");
+        }
+
+        if (client.Name != "")
+        {
+            existingClient.Name = client.Name;
+        }
+
+        if (client.Address != "")
+        {
+            existingClient.Address = client.Address;
+        }
+
+        if (client.PhoneNumber != "")
+        {
+            existingClient.PhoneNumber = client.PhoneNumber;
+        }
+
+        await _context.SaveChangesAsync();
+    }
+    public async Task DeleteClient(int clientId)
+    {
+        var client = await _context.Clients.FindAsync(clientId);
+
+        if (client == null)
+        {
+            throw new ArgumentException($"Client with ID {clientId} not found.");
+        }
+
+        _context.Clients.Remove(client);
+        await _context.SaveChangesAsync();
+    }
+    public async Task<List<ClientOtherList>> GetAllClientsList()
+    {
+        var clients = await _context.Clients
+            .Select(c => new ClientOtherList
+            {
+                Id = c.Id,
+                Name = c.Name
+            })
+            .ToListAsync();
 
         return clients;
     }
