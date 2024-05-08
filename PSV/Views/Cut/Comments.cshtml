@@ -1,0 +1,18 @@
+@model PSV.Models.DTOs.OrderControl
+
+<main>
+    <a class="action-button" href="@Url.Action("Menu", "Cut")">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+    </a>
+    <h2 class="page-title">Stanowisko cięcia - zlecenie nr. @Model.OrderNumber</h2>
+    <div class="control-buttons">
+        <form class="comments-form" asp-action="AddComment" asp-controller="Cut" method="post">
+            <input asp-for="Id" type="hidden" value="@Model.Id"/>
+            <textarea asp-for="Comments">@Model.Comments</textarea>
+            <button type="submit">Dodaj komentarz</button>
+            <a class="control-button-end" href="@Url.Action("All", "Cut")">Anuluj</a>
+        </form>
+    </div>
+</main>

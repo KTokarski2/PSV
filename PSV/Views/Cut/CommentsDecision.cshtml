@@ -1,0 +1,17 @@
+@model PSV.Models.DTOs.OrderControl
+
+<main>
+    <a class="action-button" href="@Url.Action("Menu", "Cut")">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+    </a>
+    <h2 class="page-title">Stanowisko cięcia - zlecenie nr. @Model.OrderNumber</h2>
+    <div class="control-buttons">
+        <h2>Czy chcesz dodać komentarz?</h2>
+        <div class="start-end">
+            <a class="control-button-start" href="@Url.Action("Menu", "Cut")">Nie</a>
+            <a class="control-button-end" href="@Url.Action("CommentsForm", "Cut", new {Model.Id})">Tak</a>
+        </div>
+    </div>
+</main>

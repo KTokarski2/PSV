@@ -14,7 +14,7 @@ public class Order
     public string? QrCode { get; set; }
     public string? BarCode { get; set; }
     public string Format { get; set; }
-    public string Comments { get; set; }
+    public string? Comments { get; set; }
     public string? Photos { get; set; }
     public int IdCut { get; set; }
     public virtual Cut Cut { get; set; }

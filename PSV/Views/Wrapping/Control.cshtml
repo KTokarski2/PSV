@@ -20,11 +20,6 @@
             <a class="control-button-start" href="@Url.Action("UpdateWrappingStartTime", "Wrapping", new { Model.Id })">Początek</a>
             <a class="control-button-end" href="@Url.Action("UpdateWrappingEndTime", "Wrapping", new { Model.Id })">Koniec</a>
         </div>
-        <form class="comments-form" asp-action="AddComment" asp-controller="Wrapping" method="post">
-            <input asp-for="Id" type="hidden" value="@Model.Id"/>
-            <textarea asp-for="Comments">@Model.Comments</textarea>
-            <button type="submit">Dodaj komentarz</button>
-        </form>
     </div>
     <script src="@Url.Content("~/js/timer.js")"></script>
 </main>

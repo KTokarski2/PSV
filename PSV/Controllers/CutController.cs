@@ -62,14 +62,28 @@ public class CutController : Controller
     public async Task<IActionResult> UpdateCutEndTime(int id)
     {
         await _service.UpdateCutEndTime(id);
-        return RedirectToAction("Order", new { id });
+        return RedirectToAction("Comment", new {id});
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Comment(int id)
+    {
+        var dto = await _service.GetCutControlData(id);
+        return View("CommentsDecision", dto);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> CommentsForm(int id)
+    {
+        var dto = await _service.GetCutControlData(id);
+        return View("Comments", dto);
     }
 
     [HttpPost]
     public async Task<IActionResult> AddComment(OrderControl dto)
     {
         await _service.CommentOrder(dto);
-        return RedirectToAction("Order", new { dto.Id });
+        return RedirectToAction("Menu");
     }
     
 }
