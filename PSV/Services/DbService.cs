@@ -259,11 +259,7 @@ public class DbService : IDbService
             Comments = order.Comments
 
         };
-        if (order.Cut is { IsPresent: false })
-        {
-            dto.TotalTime = "Cut is not present";
-        }
-        
+
         if (order.Cut is { IsPresent: true, From: not null, To: not null })
         {
             var timeDuration = order.Cut.To.Value - order.Cut.From.Value;
@@ -291,12 +287,7 @@ public class DbService : IDbService
             Comments = order.Comments
 
         };
-        
-        if (order.Milling is { IsPresent: false })
-        {
-            dto.TotalTime = "Milling is not present";
-        }
-        
+
         if (order.Milling is { IsPresent: true, From: not null, To: not null })
         {
             var timeDuration = order.Milling.To.Value - order.Milling.From.Value;
@@ -324,12 +315,7 @@ public class DbService : IDbService
             Comments = order.Comments
 
         };
-        
-        if (order.Wrapping is { IsPresent: false })
-        {
-            dto.TotalTime = "Wrapping is not present";
-        }
-        
+
         if (order.Wrapping is { IsPresent: true, From: not null, To: not null })
         {
             var timeDuration = order.Wrapping.To.Value - order.Wrapping.From.Value;
@@ -454,5 +440,26 @@ public class DbService : IDbService
         }).ToListAsync();
 
         return clients;
+    }
+
+    public async Task<bool> IsCutPresent(int? id)
+    {
+        var order = await _context.Orders.Include(o => o.Cut)
+            .FirstOrDefaultAsync(o => o.Id == id);
+        return order.Cut.IsPresent;
+    }
+
+    public async Task<bool> IsMillingPresent(int? id)
+    {
+        var order = await _context.Orders.Include(o => o.Milling)
+            .FirstOrDefaultAsync(o => o.Id == id);
+        return order.Milling.IsPresent;
+    }
+
+    public async Task<bool> IsWrappingPresent(int? id)
+    {
+        var order = await _context.Orders.Include(o => o.Wrapping)
+            .FirstOrDefaultAsync(o => o.Id == id);
+        return order.Wrapping.IsPresent;
     }
 }

@@ -29,5 +29,8 @@ namespace PSV.Services
         public Task<ClientDetails> GetClientDetails(int id);
         public Task EditClient(int clientId, ClientPost client);
         public Task DeleteClient(int clientId);
+        public Task<bool> IsCutPresent(int? id);
+        public Task<bool> IsMillingPresent(int? id);
+        public Task<bool> IsWrappingPresent(int? id);
     }
 }

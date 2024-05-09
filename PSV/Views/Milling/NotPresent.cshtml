@@ -1,0 +1,13 @@
+@model PSV.Models.DTOs.OrderControl
+
+<main>
+    <h2 class="page-title">Stanowisko frezowania - zlecenie nr. @Model.OrderNumber</h2>
+    <div class="control-buttons">
+        <h2>Wybrane zamówienie nie obejmuje frezowania</h2>
+        <div class="start-end">
+            <a class="control-button-start" href="@Url.Action("Menu", "Milling")">Wyszukaj zamówienie</a>
+            <a class="control-button-end" href="@Url.Action("All", "Milling")">Lista zamówień</a>
+        </div>
+    </div>
+    <script src="@Url.Content("~/js/timer.js")"></script>
+</main>

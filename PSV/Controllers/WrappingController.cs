@@ -34,20 +34,26 @@ public class WrappingController : Controller
         {
             return View("NotFound");
         }
-
         var dto = await _service.GetWrappingControlData(id);
-        if (dto.TotalTime == "Wrapping is not present")
+
+        if (await _service.IsWrappingPresent(id))
         {
-            return View("NotFound");
+            return View("Control", dto);
         }
-        return View("Control", dto);
+
+        return View("NotPresent", dto);
     }
     
     public async Task<IActionResult> Order(int id, bool startTimer)
     {
         var dto = await _service.GetWrappingControlData(id);
-        dto.StartTimer = startTimer;
-        return View("Control", dto);
+        if (await _service.IsWrappingPresent(id))
+        {
+            dto.StartTimer = startTimer;
+            return View("Control", dto);
+        }
+
+        return View("NotPresent", dto);
     }
     
     [HttpGet]

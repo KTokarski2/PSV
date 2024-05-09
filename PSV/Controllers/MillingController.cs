@@ -34,21 +34,25 @@ public class MillingController : Controller
         {
             return View("NotFound");
         }
-
         var dto = await _service.GetMillingControlData(id);
-        if (dto.TotalTime == "Milling is not present")
+        if (await _service.IsMillingPresent(id))
         {
-            return View("NotFound");
+            return View("Control", dto);
         }
-            
-        return View("Control", dto);
+
+        return View("NotPresent", dto);
     }
 
     public async Task<IActionResult> Order(int id, bool startTimer)
     {
         var dto = await _service.GetMillingControlData(id);
-        dto.StartTimer = startTimer;
-        return View("Control", dto);
+        if (await _service.IsMillingPresent(id))
+        {
+            dto.StartTimer = startTimer;
+            return View("Control", dto);
+        }
+
+        return View("NotPresent", dto);
     }
     
     [HttpGet]

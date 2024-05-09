@@ -35,21 +35,27 @@ public class CutController : Controller
         {
             return View("NotFound");
         }
-
         var dto = await _service.GetCutControlData(id);
-        if (dto.TotalTime == "Cut is not present")
+
+        if (await _service.IsCutPresent(id))
         {
-            return View("NotFound");
+            return View("Control", dto);
         }
 
-        return View("Control", dto);
+        return View("NotPresent", dto);
     }
 
     public async Task<IActionResult> Order(int id, bool startTimer)
     {
         var dto = await _service.GetCutControlData(id);
-        dto.StartTimer = startTimer;
-        return View("Control", dto);
+
+        if (await _service.IsCutPresent(id))
+        {
+            dto.StartTimer = startTimer;
+            return View("Control", dto);
+        }
+
+        return View("NotPresent", dto);
     }
     
     public async Task<IActionResult> UpdateCutStartTime(int id)
