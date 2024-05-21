@@ -1,1 +1,44 @@
-v 1.1
+v1.1 - ready to deploy
+- Dodać pole z wyborem listy klientów z opcją wyszukiwania, imię nazwisko nazwa firmy adres NIP numer telefonu adres mailowy+ możliwość dodawania do bazy. Obligatoryjne jest imię nazwisko oraz numer telefonu 
+- Wyskakuje biały ekran przy próbie dodania zamówienia 
+
+v1.2  (3.06.2024)
+- Przypisać operatorów do wykonanego zadania 
+- Zadania wykonywane z dwóch lokalizacji Przasnysz i jednorożec, pytanie jak możemy to podzielić żeby było w miarę logicznie i dać możliwość przesuwania zamówień pomiędzy lokalizacjami. Czasami jest tak że okazuje się iż dane zamówienie trzeba wykonać w innej lokalizacji.
+- Zamiast kod formatki ma byc kod obrzeża.
+- Kod obrzeża nie jest obligatoryjny przy wprowadzeniu zamówienia
+- Kod obrzeża podawany jest przy składaniu zlecenia czasami jest sytuacja że danego obrzeża nie ma i na oklejaniu używają innego obrzeża wtedy muszą wpisać jakie to obrzeże. 
+  Dlatego na oklejaniu dobrze gdyby pokazała się informacja jaki kod obrzeża jest w zamówieniu i przy zamknięciu zlecenia możliwość wpisania kodu obrzeża który faktycznie został zastosowany ale tylko w przypadku gdy jest inny niż w zleceniu.
+- kod obrzeża który podaje się w zleceniu ma być wyświetlany na etapie oklejania jako dodatkowa informacja dla osoby oklejającej. 
+- Komunikat w formie alertu. Jeżeli wprowadzi nowy kod formatki to ma być to nowy wpis ten narzucony przez biuro ma pozostać.
+- Kod obrzeża jako jedno pole a drugie pole od obrzeża zastosowany faktycznie 
+
+v1.3 (10.06.2024)
+- W polu komentarz zaznaczenie że dany komentarz pochodzi z cięcia oklejania lub frezowania 
+  Na każdym etapie niech będą widoczne komentarze czyli na frezowaniu komentarz widoczny z cięcia itd. oczywiście w panelu zleceń wyszczególnione wszystkie komentarze z podziałem na stanowiska. 
+
+v1.4 (17.06.2024)
+- Po kliknięciu pobierz kod QR niech pojawia się okno od razu z wydrukiem 
+- Zmienić nazwę przycisków z pobierz kod QR na wydrukuj kod QR
+
+
+----ZADANIA----
+
+1) Utworzenie tabeli operatorzy i połączenie relacją z zamówieniami -> (Id, Imię, Nazwisko) 
+2) Dodanie dodatkowej tabeli lokalizacja i połączenie relacją z zamówieniami -> (Id, Nazwa) -> zaseedować odrazu dwiema lokalizacjami (Przasnysz i Jednorożec) 
+3) Dodanie kolumny kod obrzeża podany i kod obrzeża zastosowany do tabeli zamówienia -> tworzenie zamówienia ma uwzględniać kod obrzeża podany, metoda do sprawdzania czy kod obrzeża zastosowany jest inny niż podany, metoda do edycji kodu obrzeża zastosowanego
+4) Dodanie kod obrzeża podany do tworzenia zamówień -> punkt 3
+5) Dodanie na froncie do widoku szczegółów obu kodów obrzeży -> metoda do pobrania kodu obrzeża podanego
+6) Na oklejaniu informacja odnośnie kodu obrzeża + możliwość wprowadzenia nowego (sprawdzenie czy jest inny niż poprzedni)
+
+------------------------------------------------------------------------------------------------------------------------- 
+7) Utworzenie tabeli komentarz (Id, Value) -> połączenie z operatorami wiele do wiele
+8) Zmiana formy wyświetlania komentarzy na tabelkę (komenarz, operator) 
+
+--Antoni--
+
+1) modyfikacja tworzenia zamówień -> uwzględnie kod obrzeża podany
+2) metoda do sprawdzenia czy string kod obrzeża zastosowany jest inny niż kod obrzeża podany
+3) podbranie z bazy danych obu kodów obrzeża po id zamówienia
+
+----------
