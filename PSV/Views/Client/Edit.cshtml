@@ -16,6 +16,16 @@
                 <span asp-validation-for="Address" class="errors-text"></span>
             </div>
             <div class="input-group">
+                <label asp-for="NIP">NIP: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="NIP" value="@Model.NIP">
+                <span asp-validation-for="NIP" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="Email">Email: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="Email" value="@Model.Email">
+                <span asp-validation-for="Email" class="errors-text"></span>
+            </div>
+            <div class="input-group">
                 <label asp-for="PhoneNumber">Numer telefonu: <span class="symbol-required">*</span></label>
                 <input type="text" asp-for="PhoneNumber" value="@Model.PhoneNumber">
                 <span asp-validation-for="PhoneNumber" class="errors-text"></span>

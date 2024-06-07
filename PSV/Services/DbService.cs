@@ -360,7 +360,9 @@ public class DbService : IDbService
         {
             Name = request.Name,
             Address = request.Address,
-            PhoneNumber = request.PhoneNumber
+            PhoneNumber = request.PhoneNumber,
+            NIP = request.NIP,
+            Email = request.Email
         };
 
         _context.Clients.Add(newClient);
@@ -374,7 +376,9 @@ public class DbService : IDbService
             Id = c.Id,
             Name = c.Name,
             Address = c.Address,
-            PhoneNumber = c.PhoneNumber
+            PhoneNumber = c.PhoneNumber,
+            Email = c.Email,
+            NIP = c.NIP
         }).ToListAsync();
 
         return clients;
@@ -403,6 +407,16 @@ public class DbService : IDbService
             existingClient.PhoneNumber = client.PhoneNumber;
         }
 
+        if (client.NIP != "")
+        {
+            existingClient.NIP = client.NIP;
+        }
+
+        if (client.Email != "")
+        {
+            existingClient.Email = client.Email;
+        }
+
         await _context.SaveChangesAsync();
     }
     public async Task DeleteClient(int clientId)
@@ -425,7 +439,9 @@ public class DbService : IDbService
             Id = c.Id,
             Name = c.Name,
             Address = c.Address,
-            PhoneNumber = c.PhoneNumber
+            PhoneNumber = c.PhoneNumber,
+            Email = c.Email,
+            NIP = c.NIP
         }).FirstOrDefaultAsync();
 
         return client;

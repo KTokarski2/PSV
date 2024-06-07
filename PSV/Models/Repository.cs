@@ -19,6 +19,8 @@ public class Repository : DbContext
     public virtual DbSet<Milling> Millings { get; set; }
     public virtual DbSet<Order> Orders { get; set; }
     public virtual DbSet<Wrapping> Wrappings { get; set; }
+    public virtual DbSet<Operator> Operators { get; set; }
+    public virtual DbSet<Location> Locations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,6 +31,28 @@ public class Repository : DbContext
             entity.Property(e => e.Name);
             entity.Property(e => e.Address);
             entity.Property(e => e.PhoneNumber);
+            entity.Property(e => e.NIP);
+            entity.Property(e => e.Email);
+        });
+
+        modelBuilder.Entity<Operator>(entity =>
+        {
+            entity.HasKey(e => new { e.Id }).HasName("Operator_pk");
+            entity.ToTable("Operator");
+            entity.Property(e => e.FirstName);
+            entity.Property(e => e.LastName);
+        });
+
+        modelBuilder.Entity<Location>(entity =>
+        {
+            entity.HasKey(e => new { e.Id }).HasName("Location_pk");
+            entity.ToTable("Location");
+            entity.Property(e => e.Name);
+
+            entity.HasData(
+                new Location {Id = 1, Name = "Przasnysz"},
+                new Location {Id = 2, Name = "Jednorożec"}
+            );
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -42,6 +66,8 @@ public class Repository : DbContext
             entity.Property(e => e.Format);
             entity.Property(e => e.Comments);
             entity.Property(e => e.Photos);
+            entity.Property(e => e.EdgeCodeProvided);
+            entity.Property(e => e.EdgeCodeUsed);
 
             entity
                 .HasOne(e => e.Client)
@@ -49,6 +75,13 @@ public class Repository : DbContext
                 .HasForeignKey(e => e.IdClient)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("Client_Orders");
+
+            entity
+                .HasOne(e => e.Location)
+                .WithMany(e => e.Orders)
+                .HasForeignKey(e => e.IdLocation)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("Order_Location");
         });
 
         modelBuilder.Entity<Cut>(entity =>
@@ -65,6 +98,13 @@ public class Repository : DbContext
                 .HasForeignKey<Order>(e => e.IdCut)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("Order_Cut");
+
+            entity
+                .HasOne(e => e.Operator)
+                .WithMany(e => e.Cuts)
+                .HasForeignKey(e => e.IdOperator)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("Operator_Cut");
         });
 
         modelBuilder.Entity<Milling>(entity =>
@@ -81,6 +121,13 @@ public class Repository : DbContext
                 .HasForeignKey<Order>(e => e.IdMilling)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("Order_Milling");
+
+            entity
+                .HasOne(e => e.Operator)
+                .WithMany(e => e.Millings)
+                .HasForeignKey(e => e.IdOperator)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("Operator_Milling");
         });
 
         modelBuilder.Entity<Wrapping>(entity =>
@@ -97,6 +144,13 @@ public class Repository : DbContext
                 .HasForeignKey<Order>(e => e.IdWrapping)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("Order_Wrapping");
+
+            entity
+                .HasOne(e => e.Operator)
+                .WithMany(e => e.Wrappings)
+                .HasForeignKey(e => e.IdOperator)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("Operator_Wrapping");
         });
     }
 }

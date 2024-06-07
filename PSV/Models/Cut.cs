@@ -10,4 +10,6 @@ public class Cut
     public DateTime? To { get; set; }
     public bool IsPresent { get; set; }
     public virtual Order Order { get; set; }
+    public int IdOperator { get; set; }
+    public virtual Operator Operator { get; set; }
 }

@@ -13,6 +13,8 @@ public class Order
     public virtual Client Client { get; set; }
     public string? QrCode { get; set; }
     public string? BarCode { get; set; }
+    public string? EdgeCodeProvided { get; set; }
+    public string? EdgeCodeUsed { get; set; }
     public string Format { get; set; }
     public string? Comments { get; set; }
     public string? Photos { get; set; }
@@ -22,4 +24,6 @@ public class Order
     public virtual Milling Milling { get; set; }
     public int IdWrapping { get; set; }
     public virtual Wrapping Wrapping { get; set; }
+    public int IdLocation { get; set; }
+    public virtual Location Location { get; set; }
 }

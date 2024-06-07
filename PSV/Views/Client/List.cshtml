@@ -19,6 +19,8 @@
             <th>Nazwa klienta</th>
             <th>Adres klienta</th>
             <th>Numer telefonu</th>
+            <th>Email</th>
+            <th>NIP</th>
         </tr>
         </thead>
         <tbody>
@@ -29,6 +31,8 @@
                     <td><a href="@Url.Action("Details", "Client", new {client.Id})">@client.Name</a></td>
                     <td>@client.Address</td>
                     <td>@client.PhoneNumber</td>
+                    <td>@client.Email</td>
+                    <td>@client.NIP</td>
                 </tr>
             }
         }

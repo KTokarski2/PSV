@@ -24,9 +24,9 @@ v1.4 (17.06.2024)
 
 ----ZADANIA----
 
-1) Utworzenie tabeli operatorzy i połączenie relacją z zamówieniami -> (Id, Imię, Nazwisko) 
-2) Dodanie dodatkowej tabeli lokalizacja i połączenie relacją z zamówieniami -> (Id, Nazwa) -> zaseedować odrazu dwiema lokalizacjami (Przasnysz i Jednorożec) 
-3) Dodanie kolumny kod obrzeża podany i kod obrzeża zastosowany do tabeli zamówienia -> tworzenie zamówienia ma uwzględniać kod obrzeża podany, metoda do sprawdzania czy kod obrzeża zastosowany jest inny niż podany, metoda do edycji kodu obrzeża zastosowanego
+1) Utworzenie tabeli operatorzy i połączenie relacją z zamówieniami -> (Id, Imię, Nazwisko) JEST
+2) Dodanie dodatkowej tabeli lokalizacja i połączenie relacją z zamówieniami -> (Id, Nazwa) -> zaseedować odrazu dwiema lokalizacjami (Przasnysz i Jednorożec) JEST
+3) Dodanie kolumny kod obrzeża podany i kod obrzeża zastosowany do tabeli zamówienia -> tworzenie zamówienia ma uwzględniać kod obrzeża podany, metoda do sprawdzania czy kod obrzeża zastosowany jest inny niż podany, metoda do edycji kodu obrzeża zastosowanego JEST
 4) Dodanie kod obrzeża podany do tworzenia zamówień -> punkt 3
 5) Dodanie na froncie do widoku szczegółów obu kodów obrzeży -> metoda do pobrania kodu obrzeża podanego
 6) Na oklejaniu informacja odnośnie kodu obrzeża + możliwość wprowadzenia nowego (sprawdzenie czy jest inny niż poprzedni)
@@ -37,8 +37,10 @@ v1.4 (17.06.2024)
 
 --Antoni--
 
-1) modyfikacja tworzenia zamówień -> uwzględnie kod obrzeża podany
+1) modyfikacja tworzenia zamówień -> uwzględnie kod obrzeża podany, tak samo modyfikacja pobrania szczegółów, edycji
 2) metoda do sprawdzenia czy string kod obrzeża zastosowany jest inny niż kod obrzeża podany
 3) podbranie z bazy danych obu kodów obrzeża po id zamówienia
+4) Dodanie metod: tworzenie operatorów, edycja danych operatora, pobranie listy operatorów
+
 
 ----------
