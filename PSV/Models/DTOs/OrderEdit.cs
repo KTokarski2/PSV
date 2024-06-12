@@ -9,4 +9,8 @@ public class OrderEdit
     public bool? Milling { get; set; }
     public bool? Wrapping { get; set; }
     public bool? Cut { get; set; }
+    public string? GivenCode { get; set; }
+    public string? UsedCode { get; set; }
+
+
 }

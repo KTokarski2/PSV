@@ -20,4 +20,6 @@ public class OrderDetails
     public string Client { get; set; }
     public string Comments { get; set; }
     public List<string> Photos { get; set; }
+    public string GivenCode { get; set; }
+    public string UsedCode { get; set; }
 }

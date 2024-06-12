@@ -105,4 +105,11 @@ public class OrderController : Controller
         await _service.DeleteOrder(id);
         return RedirectToAction("All");
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetCodeByID(int id)
+    {
+        await _service.GetCodeByID(id);
+        return RedirectToAction("All");
+    }
 }

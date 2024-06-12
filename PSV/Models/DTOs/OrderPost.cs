@@ -19,5 +19,8 @@ namespace PSV.Models.DTOs
        public string Comments { get; set; }
        
        public List<IFormFile> Photos { get; set; }
+       
+       public string GivenCode { get; set; }
+
     }
 }

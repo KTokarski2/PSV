@@ -29,7 +29,8 @@ public class DbService : IDbService
             Comments = request.Comments,
             Milling = new Milling { IsPresent = request.Milling },
             Wrapping = new Wrapping { IsPresent = request.Wrapping },
-            Cut = new Cut { IsPresent = request.Cut }
+            Cut = new Cut { IsPresent = request.Cut },
+            GivenCode = request.GivenCode,
         };
 
         await _context.AddAsync(order);
@@ -41,7 +42,7 @@ public class DbService : IDbService
 
         await _context.SaveChangesAsync();
     }
-
+            
     public async Task<List<OrderList>> GetAllOrders()
     {
         return await _context.Orders.Select(o => new OrderList
@@ -52,7 +53,8 @@ public class DbService : IDbService
             Client = o.Client.Name,
             Cut = o.Cut.IsPresent,
             Milling = o.Milling.IsPresent,
-            Wrapping = o.Wrapping.IsPresent
+            Wrapping = o.Wrapping.IsPresent,
+            GivenCode = o.GivenCode
         }).ToListAsync();
     }
 
@@ -78,7 +80,8 @@ public class DbService : IDbService
             FormatCode = order.Format,
             Client = order.Client.Name,
             Comments = order.Comments,
-            Photos = _dataService.GetPhotosFromDirectory(order.Photos)
+            Photos = _dataService.GetPhotosFromDirectory(order.Photos),
+            GivenCode = order.GivenCode
         };
 
         if (order.Cut is { IsPresent: true, From: not null, To: not null })
@@ -131,12 +134,18 @@ public class DbService : IDbService
 
         if (order != null)
         {
+            if (order.UsedCode == dto.GivenCode)
+            {
+                throw new InvalidOperationException("UsedCode cannot be the same as GivenCode.");
+            }
+
             order.OrderNumber = dto.OrderNumber;
             order.Format = dto.FormatCode;
             order.Comments = dto.Comments;
             order.Cut.IsPresent = dto.Cut;
             order.Milling.IsPresent = dto.Milling;
             order.Wrapping.IsPresent = dto.Wrapping;
+            order.UsedCode = dto.UsedCode;
         }
 
         await _context.SaveChangesAsync();
@@ -477,5 +486,57 @@ public class DbService : IDbService
         var order = await _context.Orders.Include(o => o.Wrapping)
             .FirstOrDefaultAsync(o => o.Id == id);
         return order.Wrapping.IsPresent;
+    }
+
+    public async Task<CodeRequest> GetCodeByID(int id)
+    {
+        var order = await _context.Orders
+            .FirstOrDefaultAsync(o => o.Id == id);
+
+        if (order == null)
+        {
+            throw new KeyNotFoundException("Order not found.");
+        }
+
+        var codeRequest = new CodeRequest
+        {
+            GivenCode = order.GivenCode,
+            UsedCode = order.UsedCode
+        };
+
+        return codeRequest;
+    }
+    public async Task AddOperator(Operator newOperator)
+    {
+        _context.Operators.Add(newOperator);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task EditOperator(Operator updatedOperator)
+    {
+        var operatorInDb = await _context.Operators
+            .FirstOrDefaultAsync(o => o.Id == updatedOperator.Id);
+
+        if (operatorInDb == null)
+        {
+            throw new KeyNotFoundException("Operator not found.");
+        }
+
+        operatorInDb.FirstName = updatedOperator.FirstName;
+        operatorInDb.LastName = updatedOperator.LastName;
+        operatorInDb.Cuts = updatedOperator.Cuts;
+        operatorInDb.Millings = updatedOperator.Millings;
+        operatorInDb.Wrappings = updatedOperator.Wrappings;
+
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<Operator>> GetOperators()
+    {
+        return await _context.Operators
+            .Include(o => o.Cuts)
+            .Include(o => o.Millings)
+            .Include(o => o.Wrappings)
+            .ToListAsync();
     }
 }
