@@ -9,4 +9,6 @@ public class OrderList
     public bool Cut { get; set; }
     public bool Milling { get; set; }
     public bool Wrapping { get; set; }
+    public string GivenCode { get; set; }
+
 }

@@ -26,4 +26,7 @@ public class Order
     public virtual Wrapping Wrapping { get; set; }
     public int IdLocation { get; set; }
     public virtual Location Location { get; set; }
+    public string GivenCode { get; set; }
+    public string UsedCode { get; set; }
+
 }
