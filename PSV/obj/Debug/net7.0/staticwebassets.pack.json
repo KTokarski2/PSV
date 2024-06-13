@@ -221,6 +221,14 @@
       "PackagePath": "staticwebassets/images/OrdersData/3047/images.jpeg"
     },
     {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/3049/BarCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/3049/BarCode.png"
+    },
+    {
+      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/3049/QRCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/3049/QRCode.png"
+    },
+    {
       "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

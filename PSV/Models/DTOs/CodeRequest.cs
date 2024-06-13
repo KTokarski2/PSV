@@ -2,6 +2,6 @@ namespace PSV.Models.DTOs;
 
 public class CodeRequest
 {
-    public string GivenCode { get; set; }
-    public string UsedCode { get; set; }
+    public string EdgeCodeProvided { get; set; }
+    public string EdgeCodeUsed { get; set; }
 }

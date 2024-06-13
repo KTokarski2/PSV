@@ -22,9 +22,21 @@
                 <label asp-for="Wrapping">Oklejanie</label>
             </div>
             <div class="input-group">
-                <label asp-for="FormatCode">Kod formatki: <span class="symbol-required">*</span></label>
-                <input type="text" asp-for="FormatCode" placeholder="">
-                <span asp-validation-for="FormatCode" class="errors-text"></span>
+                <label asp-for="EdgeCodeProvided">Kod obrzeża podany: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="EdgeCodeProvided" placeholder="">
+                <span asp-validation-for="EdgeCodeProvided" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="Location">Lokalizacja: <span class="symbol-required">*</span></label>
+                <select asp-for="Location">
+                    @{
+                    foreach (var location in Model.AllLocations)
+                    {
+                    <option value="@location.Id">@location.Name</option>
+                    }
+                    }
+                </select>
+                <span asp-validation-for="Location" class="errors-text"></span>
             </div>
             <div class="input-group">
                 <label asp-for="Client">Klient: <span class="symbol-required">*</span></label>

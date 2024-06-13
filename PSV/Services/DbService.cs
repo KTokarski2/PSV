@@ -19,18 +19,19 @@ public class DbService : IDbService
     public async Task AddOrder(OrderPost request)
     {
         var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == Int32.Parse(request.Client));
+        var location = await _context.Locations.FirstOrDefaultAsync(l => l.Id == Int32.Parse(request.Location)); 
 
         var order = new Order
         {
             OrderNumber = request.OrderNumber,
             CreatedAt = DateTime.Now,
             Client = client,
-            Format = request.FormatCode,
+            Location = location,
             Comments = request.Comments,
             Milling = new Milling { IsPresent = request.Milling },
             Wrapping = new Wrapping { IsPresent = request.Wrapping },
             Cut = new Cut { IsPresent = request.Cut },
-            GivenCode = request.GivenCode,
+            EdgeCodeProvided = request.EdgeCodeProvided,
         };
 
         await _context.AddAsync(order);
@@ -54,7 +55,7 @@ public class DbService : IDbService
             Cut = o.Cut.IsPresent,
             Milling = o.Milling.IsPresent,
             Wrapping = o.Wrapping.IsPresent,
-            GivenCode = o.GivenCode
+            EdgeCodeProvided = o.EdgeCodeProvided
         }).ToListAsync();
     }
 
@@ -66,6 +67,12 @@ public class DbService : IDbService
             .Include(o => o.Milling)
             .Include(o => o.Wrapping)
             .FirstOrDefaultAsync(o => o.Id == orderId);
+        
+        var allClients = await _context.Clients.Select(c => new ClientInfo
+        {
+            Id = c.Id,
+            Name = c.Name
+        }).ToListAsync();
 
         if (order == null)
             return null;
@@ -77,11 +84,12 @@ public class DbService : IDbService
             Cut = order.Cut?.IsPresent ?? false,
             Milling = order.Milling?.IsPresent ?? false,
             Wrapping = order.Wrapping?.IsPresent ?? false,
-            FormatCode = order.Format,
-            Client = order.Client.Name,
+            ClientId = order.Client.Id,
+            AllClients = allClients,
             Comments = order.Comments,
             Photos = _dataService.GetPhotosFromDirectory(order.Photos),
-            GivenCode = order.GivenCode
+            EdgeCodeProvided = order.EdgeCodeProvided,
+            EdgeCodeUsed = order.EdgeCodeUsed
         };
 
         if (order.Cut is { IsPresent: true, From: not null, To: not null })
@@ -132,20 +140,18 @@ public class DbService : IDbService
             .Include(o => o.Wrapping)
             .FirstOrDefaultAsync(o => o.Id == dto.Id);
 
+        var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == dto.ClientId);
+
         if (order != null)
         {
-            if (order.UsedCode == dto.GivenCode)
-            {
-                throw new InvalidOperationException("UsedCode cannot be the same as GivenCode.");
-            }
-
             order.OrderNumber = dto.OrderNumber;
-            order.Format = dto.FormatCode;
+            order.Client = client;
             order.Comments = dto.Comments;
             order.Cut.IsPresent = dto.Cut;
             order.Milling.IsPresent = dto.Milling;
             order.Wrapping.IsPresent = dto.Wrapping;
-            order.UsedCode = dto.UsedCode;
+            order.EdgeCodeProvided = dto.EdgeCodeProvided;
+            order.EdgeCodeUsed = dto.EdgeCodeUsed;
         }
 
         await _context.SaveChangesAsync();
@@ -392,6 +398,18 @@ public class DbService : IDbService
 
         return clients;
     }
+
+    public async Task<List<LocationInfo>> GetAllLocations()
+    {
+        var locations = await _context.Locations.Select(l => new LocationInfo
+        {
+            Id = l.Id,
+            Name = l.Name
+        }).ToListAsync();
+
+        return locations;
+    }
+    
     public async Task EditClient(int clientId, ClientPost client)
     {
         var existingClient = await _context.Clients.FindAsync(clientId);
@@ -500,8 +518,8 @@ public class DbService : IDbService
 
         var codeRequest = new CodeRequest
         {
-            GivenCode = order.GivenCode,
-            UsedCode = order.UsedCode
+            EdgeCodeProvided = order.EdgeCodeProvided,
+            EdgeCodeUsed = order.EdgeCodeUsed
         };
 
         return codeRequest;

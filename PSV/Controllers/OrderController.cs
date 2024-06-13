@@ -30,7 +30,9 @@ public class OrderController : Controller
     {
         OrderPost newOrder = new OrderPost();
         var allClients = await _service.GetClientsInfo();
+        var allLocations = await _service.GetAllLocations();
         newOrder.AllClients = allClients;
+        newOrder.AllLocations = allLocations;
         return View("Create", newOrder);
     }
     

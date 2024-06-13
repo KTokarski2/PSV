@@ -63,7 +63,6 @@ public class Repository : DbContext
             entity.Property(e => e.CreatedAt);
             entity.Property(e => e.QrCode);
             entity.Property(e => e.BarCode);
-            entity.Property(e => e.Format);
             entity.Property(e => e.Comments);
             entity.Property(e => e.Photos);
             entity.Property(e => e.EdgeCodeProvided);

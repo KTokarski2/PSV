@@ -331,12 +331,14 @@ main {
 }
 
 .order-details input[type="text"],
-textarea {
+.order-details textarea,
+.order-details select{
     width: calc(100% - 10px);
     padding: 10px;
     border: 1px solid black;
     border-radius: 5px;
     font-size: 16px;
+    box-sizing: border-box;
 }
 
 .order-details textarea {

@@ -10,17 +10,19 @@ namespace PSV.Models.DTOs
        
        public bool Wrapping { get; set; }
        
-       public string FormatCode { get; set; }
-       
        public List<ClientInfo> AllClients { get; set; }
        
+       public List<LocationInfo> AllLocations { get; set; }
+       
        public string Client { get; set; }
+       
+       public string Location { get; set; }
        
        public string Comments { get; set; }
        
        public List<IFormFile> Photos { get; set; }
        
-       public string GivenCode { get; set; }
+       public string EdgeCodeProvided { get; set; }
 
     }
 }

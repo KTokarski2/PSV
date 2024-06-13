@@ -11,9 +11,27 @@
                 <span asp-validation-for="OrderNumber" class="errors-text"></span>
             </div>
             <div class="input-group">
-                <label asp-for="Client">Klient: <span class="symbol-required">*</span></label>
-                <input type="text" asp-for="Client" value="@Model.Client">
-                <span asp-validation-for="Client" class="errors-text"></span>
+                <label asp-for="ClientId">Klient: <span class="symbol-required">*</span></label>
+                <select asp-for="ClientId">
+                    @{
+                        foreach (var client in Model.AllClients)
+                        {
+                            <option value="@client.Id" selected="@(Model.ClientId == client.Id)">
+                                @client.Name
+                            </option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="ClientId" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="EdgeCodeProvided">Kod obrzeża podany: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="EdgeCodeProvided" value="@Model.EdgeCodeProvided">
+                <span asp-validation-for="EdgeCodeProvided" class="errors-text"></span>
+            </div><div class="input-group">
+                <label asp-for="EdgeCodeUsed">Kod obrzeża zastosowany: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="EdgeCodeUsed" value="@Model.EdgeCodeUsed" disabled>
+                <span asp-validation-for="EdgeCodeUsed" class="errors-text"></span>
             </div>
             <div class="input-group-details-checkbox">
                 <input type="checkbox" asp-for="Cut" id="cutCheckbox">
@@ -22,11 +40,6 @@
                 <label asp-for="Milling">Frezowanie</label>
                 <input type="checkbox" asp-for="Wrapping" id="wrappingCheckbox">
                 <label asp-for="Wrapping">Oklejanie</label>
-            </div>
-            <div class="input-group">
-                <label asp-for="FormatCode">Kod formatki: <span class="symbol-required">*</span></label>
-                <input type="text" asp-for="FormatCode" value="@Model.FormatCode">
-                <span asp-validation-for="FormatCode" class="errors-text"></span>
             </div>
             <div class="input-group">
                 <label asp-for="Comments">Komentarz: </label>

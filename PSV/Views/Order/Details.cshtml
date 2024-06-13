@@ -36,8 +36,27 @@
                 <span id="errorOrderNumber" class="errors-text"></span>
             </div>
             <div class="input-group">
-                <label for="client">Klient: <span class="symbol-required">*</span></label>
-                <input type="text" name="client" id="client" value="@Model.Client" disabled>
+                <label asp-for="ClientId">Klient: <span class="symbol-required">*</span></label>
+                <select asp-for="ClientId" disabled>
+                    @{
+                    foreach (var client in Model.AllClients)
+                    {
+                    <option value="@client.Id" selected="@(Model.ClientId == client.Id)">
+                        @client.Name
+                    </option>
+                    }
+                    }
+                </select>
+                <span asp-validation-for="ClientId" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="client">Kod obrzeża podany: <span class="symbol-required">*</span></label>
+                <input type="text" name="client" id="client" value="@Model.EdgeCodeProvided" disabled>
+                <span id="errorClient" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="client">Kod obrzeża zastosowany: <span class="symbol-required">*</span></label>
+                <input type="text" name="client" id="client" value="@Model.EdgeCodeUsed" disabled>
                 <span id="errorClient" class="errors-text"></span>
             </div>
             <div class="input-group-details-checkbox">
@@ -47,11 +66,6 @@
                 <label for="millingCheckbox">Frezowanie</label>
                 <input type="checkbox" id="wrappingCheckbox" name="wrappingCheckbox" @(Model.Wrapping ? "checked" : "") disabled>
                 <label for="wrappingCheckbox">Oklejanie</label>
-            </div>
-            <div class="input-group">
-                <label for="formatCode">Kod formatki: <span class="symbol-required">*</span></label>
-                <input type="text" name="formatCode" id="formatCode" value="@Model.FormatCode" disabled>
-                <span id="errorFormatCode" class="errors-text"></span>
             </div>
             <div class="input-group">
                 <label for="comment">Komentarz: </label>

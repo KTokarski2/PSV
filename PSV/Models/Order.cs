@@ -15,7 +15,6 @@ public class Order
     public string? BarCode { get; set; }
     public string? EdgeCodeProvided { get; set; }
     public string? EdgeCodeUsed { get; set; }
-    public string Format { get; set; }
     public string? Comments { get; set; }
     public string? Photos { get; set; }
     public int IdCut { get; set; }
@@ -26,7 +25,5 @@ public class Order
     public virtual Wrapping Wrapping { get; set; }
     public int IdLocation { get; set; }
     public virtual Location Location { get; set; }
-    public string GivenCode { get; set; }
-    public string UsedCode { get; set; }
-
+    
 }

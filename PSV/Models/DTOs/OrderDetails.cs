@@ -16,10 +16,11 @@ public class OrderDetails
     public string WrappingStart { get; set; }
     public string WrappingEnd { get; set; }
     public string WrappingTime { get; set; }
-    public string FormatCode { get; set; }
-    public string Client { get; set; }
     public string Comments { get; set; }
     public List<string> Photos { get; set; }
-    public string GivenCode { get; set; }
-    public string UsedCode { get; set; }
+    public List<ClientInfo> AllClients { get; set; }
+    
+    public int ClientId { get; set; }
+    public string EdgeCodeProvided{ get; set; }
+    public string EdgeCodeUsed { get; set; }
 }
