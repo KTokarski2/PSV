@@ -1,7 +1,7 @@
 ﻿<main class="starting-page">
     <h2>Menu główne</h2>
     <div class="button-wrapper">
-        <a class="starting-page-button" href="@Url.Action("New", "Order")">Dodaj zamówienie</a>
+        <a class="starting-page-button" href="@Url.Action("New", "Order")">Nowe zamówienie</a>
     </div>
     <div class="button-wrapper">
         <a class="starting-page-button" href="@Url.Action("All", "Order")">Lista zamówień</a>
@@ -10,12 +10,15 @@
         <a class="starting-page-button" href="@Url.Action("Search", "Order")">Wyszukaj zamówienie</a>
     </div>
     <div class="button-wrapper">
-        <a class="starting-page-button" href="@Url.Action("All", "Client")">Lista klientów</a>
+        <a class="starting-page-button" href="@Url.Action("New", "Operator")">Nowy operator</a>
     </div>
     <div class="button-wrapper">
-        <a class="starting-page-button" href="@Url.Action("New", "Client")">Nowy klient</a>
+        <a class="starting-page-button" href="@Url.Action("New", "Client")">Lista operatorów</a>
     </div>
     <div class="button-wrapper">
-        <a class="logout-button" href="">Wyloguj się</a>
+        <a class="starting-page-button" href="@Url.Action("All", "Client")">Nowy klient</a>
+    </div>
+    <div class="button-wrapper">
+        <a class="starting-page-button" href="@Url.Action("New", "Client")">Lista operatorów</a>
     </div>
 </main>

@@ -524,9 +524,14 @@ public class DbService : IDbService
 
         return codeRequest;
     }
-    public async Task AddOperator(Operator newOperator)
+    public async Task AddOperator(OperatorPost newOperator)
     {
-        _context.Operators.Add(newOperator);
+        var op = new Operator
+        {
+            FirstName = newOperator.FirstName,
+            LastName = newOperator.LastName
+        };
+        await _context.AddAsync(op);
         await _context.SaveChangesAsync();
     }
 
@@ -549,12 +554,14 @@ public class DbService : IDbService
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<Operator>> GetOperators()
+    public async Task<List<OperatorDetails>> GetOperators()
     {
-        return await _context.Operators
-            .Include(o => o.Cuts)
-            .Include(o => o.Millings)
-            .Include(o => o.Wrappings)
-            .ToListAsync();
+        var dto = await _context.Operators.Select(op => new OperatorDetails
+        {
+            Id = op.Id,
+            FristName = op.FirstName,
+            LastName = op.LastName
+        }).ToListAsync();
+        return dto;
     }
 }

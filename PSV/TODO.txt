@@ -1,7 +1,3 @@
-v1.1 - ready to deploy
-- Dodać pole z wyborem listy klientów z opcją wyszukiwania, imię nazwisko nazwa firmy adres NIP numer telefonu adres mailowy+ możliwość dodawania do bazy. Obligatoryjne jest imię nazwisko oraz numer telefonu 
-- Wyskakuje biały ekran przy próbie dodania zamówienia 
-
 v1.2  (3.06.2024)
 - Przypisać operatorów do wykonanego zadania 
 - Zadania wykonywane z dwóch lokalizacji Przasnysz i jednorożec, pytanie jak możemy to podzielić żeby było w miarę logicznie i dać możliwość przesuwania zamówień pomiędzy lokalizacjami. Czasami jest tak że okazuje się iż dane zamówienie trzeba wykonać w innej lokalizacji.

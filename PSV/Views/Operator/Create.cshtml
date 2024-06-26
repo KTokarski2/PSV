@@ -1,0 +1,18 @@
+@model PSV.Models.DTOs.OperatorPost;
+
+<main>
+    <h2 class="page-title">Nowy klient</h2>
+    <form class="create-form" asp-action="Create" asp-controller="Operator" method="post">
+        <div class="input-group">
+            <label asp-for="FirstName">Imię: <span class="symbol-required">*</span></label>
+            <input type="text" asp-for="FirstName" placeholder="">
+            <span asp-validation-for="FirstName" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="LastName">Nazwisko: <span class="symbol-required">*</span></label>
+            <input type="text" asp-for="LastName" placeholder="">
+            <span asp-validation-for="LastName" class="errors-text"></span>
+        </div>
+        <input class="form-submit" type="submit" value="Dodaj operatora">
+    </form>
+</main>

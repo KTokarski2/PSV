@@ -1,0 +1,19 @@
+@model string
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Print Barcode</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body onload="window.print()">
+<img src="@Model" alt="Barcode" />
+</body>
+</html>

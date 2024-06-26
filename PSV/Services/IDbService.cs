@@ -34,9 +34,9 @@ namespace PSV.Services
         public Task<bool> IsMillingPresent(int? id);
         public Task<bool> IsWrappingPresent(int? id);
         public Task<CodeRequest> GetCodeByID(int id);
-        public Task AddOperator(Operator newOperator);
+        public Task AddOperator(OperatorPost newOperator);
         public Task EditOperator(Operator updatedOperator);
-        public Task<List<Operator>> GetOperators();
+        public Task<List<OperatorDetails>> GetOperators();
 
 
     }

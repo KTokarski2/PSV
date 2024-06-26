@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PSV.Models;
+using PSV.Models.DTOs;
 using PSV.Services;
 
 namespace PSV.Controllers;
@@ -12,32 +13,28 @@ public class OperatorController : Controller
     {
         _service = service;
     }
-    
-    [HttpPost]
-    public async Task<IActionResult> AddOperator([FromBody] Operator newOperator)
-    {
-        await _service.AddOperator(newOperator);
-        return Ok();
-    }
 
-    [HttpPut]
-    public async Task<IActionResult> EditOperator([FromBody] Operator updatedOperator)
-    {
-        try
-        {
-            await _service.EditOperator(updatedOperator);
-            return Ok();
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-    }
+    
 
     [HttpGet]
-    public async Task<IActionResult> GetOperators()
+    public async Task<IActionResult> New()
     {
-        var operators = await _service.GetOperators();
-        return Ok(operators);
+        return View("Create");
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(OperatorPost newOperator)
+    {
+        await _service.AddOperator(newOperator);
+        return RedirectToAction("All");
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> All()
+    {
+        var dto = await _service.GetOperators();
+        return View("List", dto);
+    }
+    
+    
 }
