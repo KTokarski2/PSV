@@ -71,7 +71,6 @@ public class Repository : DbContext
             entity.Property(e => e.CreatedAt);
             entity.Property(e => e.QrCode);
             entity.Property(e => e.BarCode);
-            entity.Property(e => e.Comments);
             entity.Property(e => e.Photos);
             entity.Property(e => e.EdgeCodeProvided);
             entity.Property(e => e.EdgeCodeUsed);
@@ -162,7 +161,24 @@ public class Repository : DbContext
 
         modelBuilder.Entity<Comment>(entity =>
         {
+            entity.HasKey(e => new { e.Id }).HasName("Comment_pk");
+            entity.ToTable("Comment");
+            entity.Property(e => e.Content);
+            entity.Property(e => e.Time);
 
+            entity
+                .HasOne(e => e.Operator)
+                .WithMany(e => e.Comments)
+                .HasForeignKey(e => e.IdOperator)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("Operator_Comment");
+            
+            entity
+                .HasOne(e => e.Order)
+                .WithMany(e => e.Comments)
+                .HasForeignKey(e => e.IdOrder)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("Order_Comment");
         });
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PSV.Migrations
 {
     /// <inheritdoc />
-    public partial class InitializeDatabase : Migration
+    public partial class Initialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -140,7 +140,6 @@ namespace PSV.Migrations
                     BarCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EdgeCodeProvided = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EdgeCodeUsed = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Photos = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdCut = table.Column<int>(type: "int", nullable: false),
                     IdMilling = table.Column<int>(type: "int", nullable: false),
@@ -181,6 +180,32 @@ namespace PSV.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Comment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Time = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IdOperator = table.Column<int>(type: "int", nullable: false),
+                    IdOrder = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("Comment_pk", x => x.Id);
+                    table.ForeignKey(
+                        name: "Operator_Comment",
+                        column: x => x.IdOperator,
+                        principalTable: "Operator",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "Order_Comment",
+                        column: x => x.IdOrder,
+                        principalTable: "Order",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Location",
                 columns: new[] { "Id", "Name" },
@@ -189,6 +214,16 @@ namespace PSV.Migrations
                     { 1, "Przasnysz" },
                     { 2, "Jednorożec" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_IdOperator",
+                table: "Comment",
+                column: "IdOperator");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_IdOrder",
+                table: "Comment",
+                column: "IdOrder");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cut_IdOperator",
@@ -242,6 +277,9 @@ namespace PSV.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Comment");
+
             migrationBuilder.DropTable(
                 name: "Order");
 

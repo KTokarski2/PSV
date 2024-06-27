@@ -37,6 +37,7 @@ public class MillingController : Controller
         var dto = await _service.GetMillingControlData(id);
         if (await _service.IsMillingPresent(id))
         {
+            dto.Operators = await _service.GetAllOperators();
             return View("Control", dto);
         }
 
@@ -49,6 +50,7 @@ public class MillingController : Controller
         if (await _service.IsMillingPresent(id))
         {
             dto.StartTimer = startTimer;
+            dto.Operators = await _service.GetAllOperators();
             return View("Control", dto);
         }
 
@@ -56,17 +58,17 @@ public class MillingController : Controller
     }
     
     [HttpGet]
-    public async Task<IActionResult> UpdateMillingStartTime(int id)
+    public async Task<IActionResult> UpdateMillingStartTime(int id, int operatorId)
     {
-        await _service.UpdateMillingStartTime(id);
+        await _service.UpdateMillingStartTime(id, operatorId);
         const bool startTimer = true;
         return RedirectToAction("Order", new {id, startTimer});
     }
 
     [HttpGet]
-    public async Task<IActionResult> UpdateMillingEndTime(int id)
+    public async Task<IActionResult> UpdateMillingEndTime(int id, int operatorId)
     {
-        await _service.UpdateMillingEndTime(id);
+        await _service.UpdateMillingEndTime(id, operatorId);
         return RedirectToAction("Comment", new {id});
     }
 

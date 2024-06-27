@@ -12,8 +12,8 @@ using PSV.Models;
 namespace PSV.Migrations
 {
     [DbContext(typeof(Repository))]
-    [Migration("20240627184030_InitializeDatabase")]
-    partial class InitializeDatabase
+    [Migration("20240627195847_Initialize")]
+    partial class Initialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,6 +53,37 @@ namespace PSV.Migrations
                         .HasName("Client_pk");
 
                     b.ToTable("Client", (string)null);
+                });
+
+            modelBuilder.Entity("PSV.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdOperator")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdOrder")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id")
+                        .HasName("Comment_pk");
+
+                    b.HasIndex("IdOperator");
+
+                    b.HasIndex("IdOrder");
+
+                    b.ToTable("Comment", (string)null);
                 });
 
             modelBuilder.Entity("PSV.Models.Cut", b =>
@@ -183,9 +214,6 @@ namespace PSV.Migrations
                     b.Property<string>("BarCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -265,6 +293,27 @@ namespace PSV.Migrations
                     b.HasIndex("IdOperator");
 
                     b.ToTable("Wrapping", (string)null);
+                });
+
+            modelBuilder.Entity("PSV.Models.Comment", b =>
+                {
+                    b.HasOne("PSV.Models.Operator", "Operator")
+                        .WithMany("Comments")
+                        .HasForeignKey("IdOperator")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("Operator_Comment");
+
+                    b.HasOne("PSV.Models.Order", "Order")
+                        .WithMany("Comments")
+                        .HasForeignKey("IdOrder")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("Order_Comment");
+
+                    b.Navigation("Operator");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("PSV.Models.Cut", b =>
@@ -386,11 +435,18 @@ namespace PSV.Migrations
 
             modelBuilder.Entity("PSV.Models.Operator", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Cuts");
 
                     b.Navigation("Millings");
 
                     b.Navigation("Wrappings");
+                });
+
+            modelBuilder.Entity("PSV.Models.Order", b =>
+                {
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("PSV.Models.Wrapping", b =>

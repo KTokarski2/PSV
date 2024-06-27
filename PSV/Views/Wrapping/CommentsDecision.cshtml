@@ -6,10 +6,10 @@
             arrow_back
         </span>
     </a>
-    <h2 class="page-title">Stanowisko oklejania - zlecenie nr. @Model.OrderNumber</h2>
-    <div class="control-buttons">
+    <h2 class="page-title">Stanowisko cięcia - zlecenie nr. @Model.OrderNumber</h2>
+    <div class="decision-buttons-space">
         <h2>Czy chcesz dodać komentarz?</h2>
-        <div class="start-end">
+        <div class="decision-buttons">
             <a class="control-button-start" href="@Url.Action("Menu", "Wrapping")">Nie</a>
             <a class="control-button-end" href="@Url.Action("CommentsForm", "Wrapping", new {Model.Id})">Tak</a>
         </div>

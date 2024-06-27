@@ -12,6 +12,7 @@ public class OrderControl
     public bool StartTimer { get; set; }
     
     public bool StopTimer { get; set; }
-    
     public string? TotalTime { get; set; }
+    public int OperatorId { get; set; }
+    public List<OperatorInfo> Operators { get; set; }
 }

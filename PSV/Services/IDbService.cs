@@ -10,12 +10,12 @@ namespace PSV.Services
         public Task<OrderDetails?> GetOrderDetails(int? orderId);
         public Task EditOrder(OrderDetails dto);
         public Task DeleteOrder(int orderId);
-        public Task UpdateCutStartTime(int orderId);
-        public Task UpdateCutEndTime(int orderId);
-        public Task UpdateMillingStartTime(int orderId);
-        public Task UpdateMillingEndTime(int orderId);
-        public Task UpdateWrappingStartTime(int orderId);
-        public Task UpdateWrappingEndTime(int orderId);
+        public Task UpdateCutStartTime(int orderId, int operatorId);
+        public Task UpdateCutEndTime(int orderId, int operatorId);
+        public Task UpdateMillingStartTime(int orderId, int operatorId);
+        public Task UpdateMillingEndTime(int orderId, int operatorId);
+        public Task UpdateWrappingStartTime(int orderId, int operatorId);
+        public Task UpdateWrappingEndTime(int orderId, int operatorId);
         public Task<OrderControl> GetCutControlData(int? orderId);
         public Task<OrderControl> GetMillingControlData(int? orderId);
         public Task<OrderControl> GetWrappingControlData(int? orderId);
@@ -39,6 +39,7 @@ namespace PSV.Services
         public Task<List<OperatorDetails>> GetOperators();
         public Task<OperatorDetails> GetOperatorDetails(int id);
         public Task DeleteOperator(int id);
+        public Task<List<OperatorInfo>> GetAllOperators();
 
 
     }

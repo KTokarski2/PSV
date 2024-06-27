@@ -39,6 +39,7 @@ public class CutController : Controller
 
         if (await _service.IsCutPresent(id))
         {
+            dto.Operators = await _service.GetAllOperators();
             return View("Control", dto);
         }
 
@@ -52,22 +53,23 @@ public class CutController : Controller
         if (await _service.IsCutPresent(id))
         {
             dto.StartTimer = startTimer;
+            dto.Operators = await _service.GetAllOperators();
             return View("Control", dto);
         }
 
         return View("NotPresent", dto);
     }
     
-    public async Task<IActionResult> UpdateCutStartTime(int id)
+    public async Task<IActionResult> UpdateCutStartTime(int id, int operatorId)
     {
-        await _service.UpdateCutStartTime(id);
+        await _service.UpdateCutStartTime(id, operatorId);
         const bool startTimer = true;
         return RedirectToAction("Order", new { id, startTimer });
     }
     
-    public async Task<IActionResult> UpdateCutEndTime(int id)
+    public async Task<IActionResult> UpdateCutEndTime(int id, int operatorId)
     {
-        await _service.UpdateCutEndTime(id);
+        await _service.UpdateCutEndTime(id, operatorId);
         return RedirectToAction("Comment", new {id});
     }
 

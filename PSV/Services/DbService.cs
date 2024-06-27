@@ -180,81 +180,98 @@ public class DbService : IDbService
         await _context.SaveChangesAsync();
     }
     
-    public async Task UpdateCutStartTime(int orderId)
+    public async Task UpdateCutStartTime(int orderId, int operatorId)
     {
         var order = await _context.Orders
             .Include(o => o.Cut)
             .FirstOrDefaultAsync(o => o.Id == orderId);
-        
+
+        var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
 
         if (order != null)
         { 
             order.Cut.From = DateTime.Now;
+            order.Cut.Operator = opr;
             await _context.SaveChangesAsync();
         }
     }
     
-    public async Task UpdateCutEndTime(int orderId)
+    public async Task UpdateCutEndTime(int orderId, int operatorId)
     {
         var order = await _context.Orders
             .Include(o => o.Cut)
             .FirstOrDefaultAsync(o => o.Id == orderId);
 
+        var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
+        
         if (order != null)
         { 
             order.Cut.To = DateTime.Now;
+            order.Cut.Operator = opr;
             await _context.SaveChangesAsync();
         }
     }
     
-    public async Task UpdateMillingStartTime(int orderId)
+    public async Task UpdateMillingStartTime(int orderId, int operatorId)
     {
         var order = await _context.Orders
             .Include(o => o.Milling)
             .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
 
         if (order != null)
         { 
             order.Milling.From = DateTime.Now;
+            order.Milling.Operator = opr;
             await _context.SaveChangesAsync();
         }
     }
     
-    public async Task UpdateMillingEndTime(int orderId)
+    public async Task UpdateMillingEndTime(int orderId, int operatorId)
     {
         var order = await _context.Orders
             .Include(o => o.Milling)
             .FirstOrDefaultAsync(o => o.Id == orderId);
 
+        var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
+        
         if (order != null)
         { 
             order.Milling.To = DateTime.Now;
+            order.Milling.Operator = opr;
             await _context.SaveChangesAsync();
         }
     }
     
-    public async Task UpdateWrappingStartTime(int orderId)
+    public async Task UpdateWrappingStartTime(int orderId, int operatorId)
     {
         var order = await _context.Orders
             .Include(o => o.Wrapping)
             .FirstOrDefaultAsync(o => o.Id == orderId);
+
+        var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
 
         if (order != null)
         { 
             order.Wrapping.From = DateTime.Now;
+            order.Wrapping.Operator = opr;
             await _context.SaveChangesAsync();
         }
     }
     
-    public async Task UpdateWrappingEndTime(int orderId)
+    public async Task UpdateWrappingEndTime(int orderId, int operatorId)
     {
         var order = await _context.Orders
             .Include(o => o.Wrapping)
             .FirstOrDefaultAsync(o => o.Id == orderId);
 
+        var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
+
         if (order != null)
         { 
             order.Wrapping.To = DateTime.Now;
+            order.Wrapping.Operator = opr;
             await _context.SaveChangesAsync();
         }
     }
@@ -586,5 +603,17 @@ public class DbService : IDbService
 
         _context.Operators.Remove(opr);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<OperatorInfo>> GetAllOperators()
+    {
+        var operators = await _context.Operators.Select(o => new OperatorInfo
+        {
+            Id = o.Id,
+            FirstName = o.FirstName,
+            LastName = o.LastName,
+            Location = o.Location.Name
+        }).ToListAsync();
+        return operators;
     }
 }

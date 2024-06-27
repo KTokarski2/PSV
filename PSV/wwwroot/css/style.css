@@ -246,6 +246,37 @@ main {
     background-color: white;
 }
 
+.decision-buttons-space {
+    margin-top: 3rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.decision-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.decision-buttons a {
+    width: 50%;
+}
+
+.control-buttons form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+}
+
 .comments-form {
     width: 50%;
     margin-top: 1rem;
@@ -279,9 +310,9 @@ main {
 }
 
 .start-end {
-    width: 50%;
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .control-button-start,
@@ -309,6 +340,18 @@ main {
 .control-button-end:hover{
     background-color: #e5383b;
     border: solid 2px black;
+}
+
+.operator-select select {
+    padding: 0.5rem;
+    border-radius: 3px;
+    font-size: 16px;
+    border: solid 2px #d8271f;
+    box-sizing: border-box;
+}
+
+.operator-select h3 {
+    text-align: center;
 }
 
 

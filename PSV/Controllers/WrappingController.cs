@@ -38,6 +38,7 @@ public class WrappingController : Controller
 
         if (await _service.IsWrappingPresent(id))
         {
+            dto.Operators = await _service.GetAllOperators();
             return View("Control", dto);
         }
 
@@ -50,6 +51,7 @@ public class WrappingController : Controller
         if (await _service.IsWrappingPresent(id))
         {
             dto.StartTimer = startTimer;
+            dto.Operators = await _service.GetAllOperators();
             return View("Control", dto);
         }
 
@@ -57,17 +59,17 @@ public class WrappingController : Controller
     }
     
     [HttpGet]
-    public async Task<IActionResult> UpdateWrappingStartTime(int id)
+    public async Task<IActionResult> UpdateWrappingStartTime(int id, int operatorId)
     {
-        await _service.UpdateWrappingStartTime(id);
+        await _service.UpdateWrappingStartTime(id, operatorId);
         const bool startTimer = true;
         return RedirectToAction("Order", new {id, startTimer});
     }
 
     [HttpGet]
-    public async Task<IActionResult> UpdateWrappingEndTime(int id)
+    public async Task<IActionResult> UpdateWrappingEndTime(int id, int operatorId)
     {
-        await _service.UpdateWrappingEndTime(id);
+        await _service.UpdateWrappingEndTime(id, operatorId);
         return RedirectToAction("Comment", new {id});
     }
 

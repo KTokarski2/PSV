@@ -2,24 +2,43 @@
 
 <main>
     <a class="action-button" href="@Url.Action("Menu", "Wrapping")">
-            <span class="material-symbols-outlined">
-                arrow_back
-            </span>
-        </a>
-    <h2 class="page-title">Stanowisko oklejania - zlecenie nr. @Model.OrderNumber</h2>
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+    </a>
+    <h2 class="page-title">Stanowisko cięcia - zlecenie nr. @Model.OrderNumber</h2>
     <div class="control-buttons">
-        <div id="timerOn" style="display: none">@Html.Raw(Json.Serialize(Model.StartTimer))</div>
-        @{
-            if (Model.TotalTime == null)
-            {
-                <h1 id="timer" class="timer">00:00:00</h1>
+        <form method="get" action="@Url.Action("UpdateWrappingStartTime")">
+            <div class="operator-select">
+                <h3>Operator:</h3>
+                <select name="operatorId">
+                    @{
+                        if (Model.Operators.Count == 0)
+                        {
+                            <option value="">Brak operatorów</option>
+                        }
+                        foreach (var opr in Model.Operators)
+                        {
+                            <option value="@opr.Id">@opr.FirstName @opr.LastName, @opr.Location</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div id="timerOn" style="display: none">@Html.Raw(Json.Serialize(Model.StartTimer))</div>
+            @{
+                if (Model.TotalTime == null)
+                {
+                    <h1 id="timer" class="timer">00:00:00</h1>
+                }
+
+                <h1 id="timer" class="timer">@Model.TotalTime</h1>
             }
-            <h1 id="timer" class="timer">@Model.TotalTime</h1>
-        }
-        <div class="start-end">
-            <a class="control-button-start" href="@Url.Action("UpdateWrappingStartTime", "Wrapping", new { Model.Id })">Początek</a>
-            <a class="control-button-end" href="@Url.Action("UpdateWrappingEndTime", "Wrapping", new { Model.Id })">Koniec</a>
-        </div>
+            <div class="start-end">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" formaction="@Url.Action("UpdateWrappingStartTime")" class="control-button-start">Początek</button>
+                <button type="submit" formaction="@Url.Action("UpdateWrappingEndTime")" class="control-button-end">Koniec</button>
+            </div>
+        </form>
     </div>
     <script src="@Url.Content("~/js/timer.js")"></script>
 </main>

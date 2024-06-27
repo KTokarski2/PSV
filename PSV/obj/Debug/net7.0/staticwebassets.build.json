@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6atFlP+r3XxuhY/azmSSrIYVzgW90MzvRacTZvUmVJs=",
+  "Hash": "8rawVGKgCEKLESNNaf9U0n7H01vulwyuT5MkwH2G328=",
   "Source": "PSV",
   "BasePath": "_content/PSV",
   "Mode": "Default",
@@ -83,6 +83,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/1/BarCode.png",
+      "SourceId": "PSV",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/",
+      "BasePath": "_content/PSV",
+      "RelativePath": "images/OrdersData/1/BarCode.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/OrdersData/1/BarCode.png"
+    },
+    {
+      "Identity": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/1/QRCode.png",
+      "SourceId": "PSV",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/",
+      "BasePath": "_content/PSV",
+      "RelativePath": "images/OrdersData/1/QRCode.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/OrdersData/1/QRCode.png"
     },
     {
       "Identity": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/3032/7b7ae6371c1adcee2ff88de3d51e09b6.png",
