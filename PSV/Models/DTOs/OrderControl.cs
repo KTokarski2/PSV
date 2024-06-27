@@ -6,6 +6,7 @@ public class OrderControl
 { 
     public int Id { get; set; }
     public string OrderNumber { get; set; }
+    public string EdgeCode { get; set; }
     public DateTime? From { get; set; }
     public DateTime? To { get; set; }
     public string? Comments { get; set; }

@@ -21,7 +21,7 @@
                 <span asp-validation-for="PhoneNumber" class="errors-text"></span>
             </div>
             <div class="input-group">
-                <label asp-for="Location">Klient: <span class="symbol-required">*</span></label>
+                <label asp-for="Location">Lokalizacja: <span class="symbol-required">*</span></label>
                 <select asp-for="Location">
                     @{
                     foreach (var loc in Model.AllLocations)

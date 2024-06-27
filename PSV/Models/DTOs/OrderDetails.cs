@@ -8,18 +8,22 @@ public class OrderDetails
     public string CutStart { get; set; }
     public string CutEnd { get; set; }
     public string CutTime { get; set; }
+    public string CutOperator { get; set; }
     public bool Milling { get; set; }
     public string MillingStart { get; set; }
     public string MillingEnd { get; set; }
     public string MillingTime { get; set; }
+    public string MillingOperator { get; set; }
     public bool Wrapping { get; set; }
     public string WrappingStart { get; set; }
     public string WrappingEnd { get; set; }
     public string WrappingTime { get; set; }
+    public string WrappingOperator { get; set; }
     public string Comments { get; set; }
     public List<string> Photos { get; set; }
     public List<ClientInfo> AllClients { get; set; }
-    
+    public string Location { get; set; }
+    public List<LocationInfo> AllLocations { get; set; }
     public int ClientId { get; set; }
     public string EdgeCodeProvided{ get; set; }
     public string EdgeCodeUsed { get; set; }

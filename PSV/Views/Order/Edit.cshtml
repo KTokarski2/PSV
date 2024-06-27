@@ -25,6 +25,20 @@
                 <span asp-validation-for="ClientId" class="errors-text"></span>
             </div>
             <div class="input-group">
+                <label asp-for="Location">Lokalizacja: <span class="symbol-required">*</span></label>
+                <select asp-for="Location">
+                    @{
+                    foreach (var loc in Model.AllLocations)
+                    {
+                    <option value="@loc.Name" selected="@(Model.Location == loc.Name)">
+                        @loc.Name
+                    </option>
+                    }
+                    }
+                </select>
+                <span asp-validation-for="Location" class="errors-text"></span>
+            </div>
+            <div class="input-group">
                 <label asp-for="EdgeCodeProvided">Kod obrzeża podany: <span class="symbol-required">*</span></label>
                 <input type="text" asp-for="EdgeCodeProvided" value="@Model.EdgeCodeProvided">
                 <span asp-validation-for="EdgeCodeProvided" class="errors-text"></span>

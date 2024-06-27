@@ -348,13 +348,29 @@ main {
     font-size: 16px;
     border: solid 2px #d8271f;
     box-sizing: border-box;
+    width: 400px;
 }
 
 .operator-select h3 {
     text-align: center;
 }
 
+.edge-code-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+}
 
+.wrapping-edge-code-input {
+    padding: 0.5rem;
+    border-radius: 3px;
+    font-size: 16px;
+    width: 400px;
+    border: solid 2px #d8271f;
+    box-sizing: border-box;
+}
 
 /* Details */
 

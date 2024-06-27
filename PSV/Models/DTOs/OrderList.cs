@@ -10,5 +10,7 @@ public class OrderList
     public bool Milling { get; set; }
     public bool Wrapping { get; set; }
     public string EdgeCodeProvided { get; set; }
+    
+    public string Location { get; set; }
 
 }

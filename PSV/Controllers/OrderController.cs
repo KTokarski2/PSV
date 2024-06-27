@@ -55,6 +55,7 @@ public class OrderController : Controller
     public async Task<IActionResult> EditForm(int id)
     {
         var dto = await _service.GetOrderDetails(id);
+        dto.AllLocations = await _service.GetAllLocations();
         return View("Edit", dto);
     }
 
@@ -105,13 +106,6 @@ public class OrderController : Controller
     public async Task<IActionResult> Delete(int id)
     {
         await _service.DeleteOrder(id);
-        return RedirectToAction("All");
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> GetCodeByID(int id)
-    {
-        await _service.GetCodeByID(id);
         return RedirectToAction("All");
     }
 }

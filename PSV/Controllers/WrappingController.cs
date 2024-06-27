@@ -59,17 +59,25 @@ public class WrappingController : Controller
     }
     
     [HttpGet]
-    public async Task<IActionResult> UpdateWrappingStartTime(int id, int operatorId)
+    public async Task<IActionResult> UpdateWrappingStartTime(int id, int operatorId, string edgeCode)
     {
         await _service.UpdateWrappingStartTime(id, operatorId);
         const bool startTimer = true;
+        if (await _service.CheckIfUsedDifferentProvided(id, edgeCode))
+        {
+            await _service.SetUsedEdgeCode(id, edgeCode);
+        }
         return RedirectToAction("Order", new {id, startTimer});
     }
 
     [HttpGet]
-    public async Task<IActionResult> UpdateWrappingEndTime(int id, int operatorId)
+    public async Task<IActionResult> UpdateWrappingEndTime(int id, int operatorId, string edgeCode)
     {
         await _service.UpdateWrappingEndTime(id, operatorId);
+        if (await _service.CheckIfUsedDifferentProvided(id, edgeCode))
+        {
+            await _service.SetUsedEdgeCode(id, edgeCode);
+        }
         return RedirectToAction("Comment", new {id});
     }
 

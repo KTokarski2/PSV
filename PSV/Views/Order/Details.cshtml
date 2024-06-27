@@ -11,6 +11,7 @@
                         <span class="time-info-label">Od: @Model.CutStart</span>
                         <span class="time-info-label">Do: @Model.CutEnd</span>
                         <span class="time-info-label">Czas: @Model.CutTime</span>
+                        <span class="time-info-label">Operator: @Model.CutOperator</span>
                     </div>
                 </div>
                 <div class="time-info-group">
@@ -19,6 +20,7 @@
                         <span class="time-info-label">Od:@Model.MillingStart</span>
                         <span class="time-info-label">Do:@Model.MillingEnd</span>
                         <span class="time-info-label">Czas:@Model.MillingTime</span>
+                        <span class="time-info-label">Operator: @Model.MillingOperator</span>
                     </div>
                 </div>
                 <div class="time-info-group">
@@ -27,6 +29,7 @@
                         <span class="time-info-label">Od: @Model.WrappingStart</span>
                         <span class="time-info-label">Do: @Model.WrappingEnd</span>
                         <span class="time-info-label">Czas: @Model.WrappingTime</span>
+                        <span class="time-info-label">Operator: @Model.WrappingOperator</span>
                     </div>
                 </div>
             </div>
@@ -39,25 +42,30 @@
                 <label asp-for="ClientId">Klient: <span class="symbol-required">*</span></label>
                 <select asp-for="ClientId" disabled>
                     @{
-                    foreach (var client in Model.AllClients)
-                    {
-                    <option value="@client.Id" selected="@(Model.ClientId == client.Id)">
-                        @client.Name
-                    </option>
-                    }
+                        foreach (var client in Model.AllClients)
+                        {
+                            <option value="@client.Id" selected="@(Model.ClientId == client.Id)">
+                                @client.Name
+                            </option>
+                        }
                     }
                 </select>
                 <span asp-validation-for="ClientId" class="errors-text"></span>
             </div>
             <div class="input-group">
-                <label for="client">Kod obrzeża podany: <span class="symbol-required">*</span></label>
-                <input type="text" name="client" id="client" value="@Model.EdgeCodeProvided" disabled>
-                <span id="errorClient" class="errors-text"></span>
+                <label for="location">Lokalizacja: <span class="symbol-required">*</span></label>
+                <input type="text" name="location" id="location" value="@Model.Location" disabled>
+                <span id="errorLocation" class="errors-text"></span>
             </div>
             <div class="input-group">
-                <label for="client">Kod obrzeża zastosowany: <span class="symbol-required">*</span></label>
-                <input type="text" name="client" id="client" value="@Model.EdgeCodeUsed" disabled>
-                <span id="errorClient" class="errors-text"></span>
+                <label for="edgeCodeProvided">Kod obrzeża podany: <span class="symbol-required">*</span></label>
+                <input type="text" name="edgeCodeProvided" id="edgeCodeProvided" value="@Model.EdgeCodeProvided" disabled>
+                <span id="errorEdgeCodeProvided" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="edgeCodeUsed">Kod obrzeża zastosowany: <span class="symbol-required">*</span></label>
+                <input type="text" name="edgeCodeUsed" id="edgeCodeUsed" value="@Model.EdgeCodeUsed" disabled>
+                <span id="errorEdgeCodeUsed" class="errors-text"></span>
             </div>
             <div class="input-group-details-checkbox">
                 <input type="checkbox" id="cutCheckbox" name="cutCheckbox" @(Model.Cut ? "checked" : "") disabled>

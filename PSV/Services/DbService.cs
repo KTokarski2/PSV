@@ -52,6 +52,7 @@ public class DbService : IDbService
             OrderNumber = o.OrderNumber,
             CreatedAt = o.CreatedAt,
             Client = o.Client.Name,
+            Location = o.Location.Name,
             Cut = o.Cut.IsPresent,
             Milling = o.Milling.IsPresent,
             Wrapping = o.Wrapping.IsPresent,
@@ -64,8 +65,12 @@ public class DbService : IDbService
         var order = await _context.Orders
             .Include(o => o.Client)
             .Include(o => o.Cut)
+                .ThenInclude(c => c.Operator)
             .Include(o => o.Milling)
+                .ThenInclude(m => m.Operator)
             .Include(o => o.Wrapping)
+                .ThenInclude(w => w.Operator)
+            .Include(o => o.Location)
             .FirstOrDefaultAsync(o => o.Id == orderId);
         
         var allClients = await _context.Clients.Select(c => new ClientInfo
@@ -76,6 +81,10 @@ public class DbService : IDbService
 
         if (order == null)
             return null;
+
+        var cutOperator = order.Cut?.Operator != null ? order.Cut.Operator.FirstName + " " + order.Cut.Operator.LastName : "";
+        var millingOperator = order.Milling?.Operator != null ? order.Milling.Operator.FirstName + " " + order.Milling.Operator.LastName : "";
+        var wrappingOperator = order.Wrapping?.Operator != null ? order.Wrapping.Operator.FirstName + " " + order.Wrapping.Operator.LastName : "";
 
         var orderDetails = new OrderDetails
         {
@@ -89,7 +98,11 @@ public class DbService : IDbService
             //Comments = order.Comments,
             Photos = _dataService.GetPhotosFromDirectory(order.Photos),
             EdgeCodeProvided = order.EdgeCodeProvided,
-            EdgeCodeUsed = order.EdgeCodeUsed
+            EdgeCodeUsed = order.EdgeCodeUsed,
+            Location = order.Location.Name,
+            CutOperator = cutOperator,
+            MillingOperator = millingOperator,
+            WrappingOperator = wrappingOperator
         };
 
         if (order.Cut is { IsPresent: true, From: not null, To: not null })
@@ -141,6 +154,7 @@ public class DbService : IDbService
             .FirstOrDefaultAsync(o => o.Id == dto.Id);
 
         var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == dto.ClientId);
+        var location = await _context.Locations.FirstOrDefaultAsync(l => l.Name == dto.Location);
 
         if (order != null)
         {
@@ -152,6 +166,7 @@ public class DbService : IDbService
             order.Wrapping.IsPresent = dto.Wrapping;
             order.EdgeCodeProvided = dto.EdgeCodeProvided;
             order.EdgeCodeUsed = dto.EdgeCodeUsed;
+            order.Location = location;
         }
 
         await _context.SaveChangesAsync();
@@ -344,6 +359,7 @@ public class DbService : IDbService
             OrderNumber = order.OrderNumber,
             From = order.Wrapping.From,
             To = order.Wrapping.To,
+            EdgeCode = order.EdgeCodeProvided
             //Comments = order.Comments
 
         };
@@ -522,25 +538,6 @@ public class DbService : IDbService
             .FirstOrDefaultAsync(o => o.Id == id);
         return order.Wrapping.IsPresent;
     }
-
-    public async Task<CodeRequest> GetCodeByID(int id)
-    {
-        var order = await _context.Orders
-            .FirstOrDefaultAsync(o => o.Id == id);
-
-        if (order == null)
-        {
-            throw new KeyNotFoundException("Order not found.");
-        }
-
-        var codeRequest = new CodeRequest
-        {
-            EdgeCodeProvided = order.EdgeCodeProvided,
-            EdgeCodeUsed = order.EdgeCodeUsed
-        };
-
-        return codeRequest;
-    }
     public async Task AddOperator(OperatorPost newOperator)
     {
         var location = await _context.Locations.FirstOrDefaultAsync(l => l.Id == Int32.Parse(newOperator.Location));
@@ -615,5 +612,20 @@ public class DbService : IDbService
             Location = o.Location.Name
         }).ToListAsync();
         return operators;
+    }
+
+    public async Task<bool> CheckIfUsedDifferentProvided(int orderId, string edgeCode)
+    {
+        var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+        if (order.EdgeCodeProvided == edgeCode)
+            return false;
+        return true;
+    }
+
+    public async Task SetUsedEdgeCode(int orderId, string edgeCode)
+    {
+        var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+        order.EdgeCodeUsed = edgeCode;
+        await _context.SaveChangesAsync();
     }
 }
