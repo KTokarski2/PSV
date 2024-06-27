@@ -1,0 +1,44 @@
+@model PSV.Models.DTOs.OperatorDetails
+
+<main>
+    <h2 class="page-title"></h2>
+    <div class="details-container">
+        <form class="order-details" method="post" action="@Url.Action("Edit", "Operator")">
+            <input type="hidden" asp-for="Id" value="@Model.Id"/>
+            <div class="input-group">
+                <label asp-for="FristName">Imię: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="FristName" value="@Model.FristName">
+                <span asp-validation-for="FristName" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="LastName">Nazwisko: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="LastName" value="@Model.LastName">
+                <span asp-validation-for="LastName" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="PhoneNumber">NIP: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="PhoneNumber" value="@Model.PhoneNumber">
+                <span asp-validation-for="PhoneNumber" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="Location">Klient: <span class="symbol-required">*</span></label>
+                <select asp-for="Location">
+                    @{
+                    foreach (var loc in Model.AllLocations)
+                    {
+                    <option value="@loc.Name" selected="@(Model.Location == loc.Name)">
+                        @loc.Name
+                    </option>
+                    }
+                    }
+                </select>
+                <span asp-validation-for="Location" class="errors-text"></span>
+            </div>
+            
+        </form>
+        <div class="actions-container">
+            <a href="@Url.Action("Details", "Operator", new {Model.Id})" class="details-action">Powrót</a>
+            <a href="#" class="details-action" onclick="document.querySelector('.order-details').submit(); return false;">Zapisz</a>
+        </div>
+    </div>
+</main>

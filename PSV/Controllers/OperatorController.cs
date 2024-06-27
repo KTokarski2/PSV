@@ -19,7 +19,10 @@ public class OperatorController : Controller
     [HttpGet]
     public async Task<IActionResult> New()
     {
-        return View("Create");
+        OperatorPost newOperator = new OperatorPost();
+        var allLocations = await _service.GetAllLocations();
+        newOperator.AllLocations = allLocations;
+        return View("Create", newOperator);
     }
 
     [HttpPost]
@@ -34,6 +37,42 @@ public class OperatorController : Controller
     {
         var dto = await _service.GetOperators();
         return View("List", dto);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Details(int id)
+    {
+        var dto = await _service.GetOperatorDetails(id);
+        return View("Details", dto);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> EditForm(int id)
+    {
+        var dto = await _service.GetOperatorDetails(id);
+        var allLocations = await _service.GetAllLocations();
+        dto.AllLocations = allLocations;
+        return View("Edit", dto);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(int id, OperatorDetails opr)
+    {
+        await _service.EditOperator(id, opr);
+        return RedirectToAction("All");
+    }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+            await _service.DeleteOperator(id);
+            return RedirectToAction("All");
+        }
+        catch (ArgumentException ex)
+        {
+            return NotFound(ex.Message);
+        }
     }
     
     

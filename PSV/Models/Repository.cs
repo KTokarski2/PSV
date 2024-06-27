@@ -41,6 +41,14 @@ public class Repository : DbContext
             entity.ToTable("Operator");
             entity.Property(e => e.FirstName);
             entity.Property(e => e.LastName);
+            entity.Property(e => e.PhoneNumber);
+
+            entity
+                .HasOne(e => e.Location)
+                .WithMany(e => e.Operators)
+                .HasForeignKey(e => e.IdLocation)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("Operator_Locations");
         });
 
         modelBuilder.Entity<Location>(entity =>
@@ -150,6 +158,11 @@ public class Repository : DbContext
                 .HasForeignKey(e => e.IdOperator)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasConstraintName("Operator_Wrapping");
+        });
+
+        modelBuilder.Entity<Comment>(entity =>
+        {
+
         });
     }
 }

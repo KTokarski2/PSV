@@ -35,8 +35,10 @@ namespace PSV.Services
         public Task<bool> IsWrappingPresent(int? id);
         public Task<CodeRequest> GetCodeByID(int id);
         public Task AddOperator(OperatorPost newOperator);
-        public Task EditOperator(Operator updatedOperator);
+        public Task EditOperator(int id, OperatorDetails opr);
         public Task<List<OperatorDetails>> GetOperators();
+        public Task<OperatorDetails> GetOperatorDetails(int id);
+        public Task DeleteOperator(int id);
 
 
     }

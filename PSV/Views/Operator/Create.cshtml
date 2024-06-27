@@ -13,6 +13,23 @@
             <input type="text" asp-for="LastName" placeholder="">
             <span asp-validation-for="LastName" class="errors-text"></span>
         </div>
+        <div class="input-group">
+            <label asp-for="PhoneNumber">Numer telefonu: <span class="symbol-required">*</span></label>
+            <input type="text" asp-for="PhoneNumber" placeholder="">
+            <span asp-validation-for="PhoneNumber" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="Location">Lokalizacja: <span class="symbol-required">*</span></label>
+            <select asp-for="Location">
+                @{
+                foreach (var location in Model.AllLocations)
+                {
+                <option value="@location.Id">@location.Name</option>
+                }
+                }
+            </select>
+            <span asp-validation-for="Location" class="errors-text"></span>
+        </div>
         <input class="form-submit" type="submit" value="Dodaj operatora">
     </form>
 </main>

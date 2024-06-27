@@ -27,7 +27,7 @@ public class DbService : IDbService
             CreatedAt = DateTime.Now,
             Client = client,
             Location = location,
-            Comments = request.Comments,
+            //Comments = request.Comments,
             Milling = new Milling { IsPresent = request.Milling },
             Wrapping = new Wrapping { IsPresent = request.Wrapping },
             Cut = new Cut { IsPresent = request.Cut },
@@ -86,7 +86,7 @@ public class DbService : IDbService
             Wrapping = order.Wrapping?.IsPresent ?? false,
             ClientId = order.Client.Id,
             AllClients = allClients,
-            Comments = order.Comments,
+            //Comments = order.Comments,
             Photos = _dataService.GetPhotosFromDirectory(order.Photos),
             EdgeCodeProvided = order.EdgeCodeProvided,
             EdgeCodeUsed = order.EdgeCodeUsed
@@ -146,7 +146,7 @@ public class DbService : IDbService
         {
             order.OrderNumber = dto.OrderNumber;
             order.Client = client;
-            order.Comments = dto.Comments;
+            //order.Comments = dto.Comments;
             order.Cut.IsPresent = dto.Cut;
             order.Milling.IsPresent = dto.Milling;
             order.Wrapping.IsPresent = dto.Wrapping;
@@ -271,7 +271,7 @@ public class DbService : IDbService
             OrderNumber = order.OrderNumber,
             From = order.Cut.From,
             To = order.Cut.To,
-            Comments = order.Comments
+            //Comments = order.Comments
 
         };
 
@@ -299,7 +299,7 @@ public class DbService : IDbService
             OrderNumber = order.OrderNumber,
             From = order.Milling.From,
             To = order.Milling.To,
-            Comments = order.Comments
+            //Comments = order.Comments
 
         };
 
@@ -327,7 +327,7 @@ public class DbService : IDbService
             OrderNumber = order.OrderNumber,
             From = order.Wrapping.From,
             To = order.Wrapping.To,
-            Comments = order.Comments
+            //Comments = order.Comments
 
         };
 
@@ -347,7 +347,7 @@ public class DbService : IDbService
     public async Task CommentOrder(OrderControl dto)
     {
         var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == dto.Id);
-        order.Comments = dto.Comments;
+        //order.Comments = dto.Comments;
         await _context.SaveChangesAsync();
     }
 
@@ -526,31 +526,26 @@ public class DbService : IDbService
     }
     public async Task AddOperator(OperatorPost newOperator)
     {
+        var location = await _context.Locations.FirstOrDefaultAsync(l => l.Id == Int32.Parse(newOperator.Location));
         var op = new Operator
         {
             FirstName = newOperator.FirstName,
-            LastName = newOperator.LastName
+            LastName = newOperator.LastName,
+            PhoneNumber = newOperator.PhoneNumber,
+            Location = location
         };
         await _context.AddAsync(op);
         await _context.SaveChangesAsync();
     }
 
-    public async Task EditOperator(Operator updatedOperator)
+    public async Task EditOperator(int id, OperatorDetails opr)
     {
-        var operatorInDb = await _context.Operators
-            .FirstOrDefaultAsync(o => o.Id == updatedOperator.Id);
-
-        if (operatorInDb == null)
-        {
-            throw new KeyNotFoundException("Operator not found.");
-        }
-
-        operatorInDb.FirstName = updatedOperator.FirstName;
-        operatorInDb.LastName = updatedOperator.LastName;
-        operatorInDb.Cuts = updatedOperator.Cuts;
-        operatorInDb.Millings = updatedOperator.Millings;
-        operatorInDb.Wrappings = updatedOperator.Wrappings;
-
+        var oprDb = await _context.Operators.FirstOrDefaultAsync(o => o.Id == id);
+        var loc = await _context.Locations.FirstOrDefaultAsync(l => l.Name == opr.Location);
+        oprDb.FirstName = opr.FristName;
+        oprDb.LastName = opr.LastName;
+        oprDb.PhoneNumber = opr.PhoneNumber;
+        oprDb.Location = loc;
         await _context.SaveChangesAsync();
     }
 
@@ -560,8 +555,36 @@ public class DbService : IDbService
         {
             Id = op.Id,
             FristName = op.FirstName,
-            LastName = op.LastName
+            LastName = op.LastName,
+            PhoneNumber = op.PhoneNumber,
+            Location = op.Location.Name
         }).ToListAsync();
         return dto;
+    }
+
+    public async Task<OperatorDetails> GetOperatorDetails(int id)
+    {
+        var dto = await _context.Operators.Where(o => o.Id == id).Select(o => new OperatorDetails
+        {
+            Id = o.Id,
+            FristName = o.FirstName,
+            LastName = o.LastName,
+            PhoneNumber = o.PhoneNumber,
+            Location = o.Location.Name
+        }).FirstOrDefaultAsync();
+        return dto;
+    }
+
+    public async Task DeleteOperator(int id)
+    {
+        var opr = await _context.Operators.FindAsync(id);
+
+        if (opr == null)
+        {
+            throw new ArgumentException($"Client with ID {opr} not found.");
+        }
+
+        _context.Operators.Remove(opr);
+        await _context.SaveChangesAsync();
     }
 }

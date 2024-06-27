@@ -18,6 +18,8 @@
                 <tr>
                     <th>Imię</th>
                     <th>Nazwisko</th>
+                    <th>Numer telefonu</th>
+                    <th>Lokalizacja</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,8 +27,10 @@
                     foreach (var opr in Model)
                     {
                         <tr class="orders-list-row">
-                            <td><a href="@Url.Action("", "", new {opr.Id})">@opr.LastName</a></td>
+                            <td><a href="@Url.Action("Details", "Operator", new {opr.Id})">@opr.LastName</a></td>
                             <td>@opr.FristName</td>
+                            <td>@opr.PhoneNumber</td>
+                            <td>@opr.Location</td>
                         </tr>
                     }
                 }

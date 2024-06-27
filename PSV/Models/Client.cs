@@ -12,5 +12,5 @@ public class Client
     public string? PhoneNumber { get; set; }
     public string? NIP { get; set; }
     public string? Email { get; set; }
-    public List<Order> Orders { get; set; } = new List<Order>();
+    public virtual List<Order> Orders { get; set; } = new List<Order>();
 }

@@ -150,12 +150,21 @@ namespace PSV.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IdLocation")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id")
                         .HasName("Operator_pk");
+
+                    b.HasIndex("IdLocation");
 
                     b.ToTable("Operator", (string)null);
                 });
@@ -277,6 +286,18 @@ namespace PSV.Migrations
                     b.Navigation("Operator");
                 });
 
+            modelBuilder.Entity("PSV.Models.Operator", b =>
+                {
+                    b.HasOne("PSV.Models.Location", "Location")
+                        .WithMany("Operators")
+                        .HasForeignKey("IdLocation")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("Operator_Locations");
+
+                    b.Navigation("Location");
+                });
+
             modelBuilder.Entity("PSV.Models.Order", b =>
                 {
                     b.HasOne("PSV.Models.Client", "Client")
@@ -349,6 +370,8 @@ namespace PSV.Migrations
 
             modelBuilder.Entity("PSV.Models.Location", b =>
                 {
+                    b.Navigation("Operators");
+
                     b.Navigation("Orders");
                 });
 
