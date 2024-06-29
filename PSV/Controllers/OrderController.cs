@@ -102,10 +102,44 @@ public class OrderController : Controller
         var fileContent = await System.IO.File.ReadAllBytesAsync(path);
         return File(fileContent, "application/octet-stream", fileName);
     }
+    
+    public async Task<IActionResult> PrintBarcode(int id)
+    {
+        var path = await _service.GetBarcodePath(id);
+        if (!System.IO.File.Exists(path))
+        {
+            return NotFound();
+        }
+
+        var fileName = Path.GetFileName(path);
+        var mimeType = "image/png";
+        var fileContent = await System.IO.File.ReadAllBytesAsync(path);
+        var base64Image = Convert.ToBase64String(fileContent);
+        var imageSrc = $"data:{mimeType};base64,{base64Image}";
+
+        var viewModel = new BarCodeViewModel
+        {
+            Id = id,
+            ImageSrc = imageSrc
+        };
+
+        return View("PrintBarcode", viewModel);
+    }
 
     public async Task<IActionResult> Delete(int id)
     {
         await _service.DeleteOrder(id);
         return RedirectToAction("All");
+    }
+
+    public async Task<IActionResult> ViewComments(int id)
+    {
+        var dto = new CommentsDto();
+        var order = await _service.GetOrderDetails(id);
+        dto.Id = order.Id;
+        dto.OrderNumber = order.OrderNumber;
+        var comments = await _service.GetOrderComments(id);
+        dto.Comments = comments;
+        return View("Comments", dto);
     }
 }

@@ -1,29 +1,2 @@
-v1.2  (3.06.2024)
-- Przypisać operatorów do wykonanego zadania 
-- Zadania wykonywane z dwóch lokalizacji Przasnysz i jednorożec, pytanie jak możemy to podzielić żeby było w miarę logicznie i dać możliwość przesuwania zamówień pomiędzy lokalizacjami. Czasami jest tak że okazuje się iż dane zamówienie trzeba wykonać w innej lokalizacji.
-- Zamiast kod formatki ma byc kod obrzeża.
-- Kod obrzeża nie jest obligatoryjny przy wprowadzeniu zamówienia
-- Kod obrzeża podawany jest przy składaniu zlecenia czasami jest sytuacja że danego obrzeża nie ma i na oklejaniu używają innego obrzeża wtedy muszą wpisać jakie to obrzeże. 
-  Dlatego na oklejaniu dobrze gdyby pokazała się informacja jaki kod obrzeża jest w zamówieniu i przy zamknięciu zlecenia możliwość wpisania kodu obrzeża który faktycznie został zastosowany ale tylko w przypadku gdy jest inny niż w zleceniu.
-- kod obrzeża który podaje się w zleceniu ma być wyświetlany na etapie oklejania jako dodatkowa informacja dla osoby oklejającej. 
-- Komunikat w formie alertu. Jeżeli wprowadzi nowy kod formatki to ma być to nowy wpis ten narzucony przez biuro ma pozostać.
-- Kod obrzeża jako jedno pole a drugie pole od obrzeża zastosowany faktycznie 
 
-v1.3 (10.06.2024)
-- W polu komentarz zaznaczenie że dany komentarz pochodzi z cięcia oklejania lub frezowania 
-  Na każdym etapie niech będą widoczne komentarze czyli na frezowaniu komentarz widoczny z cięcia itd. oczywiście w panelu zleceń wyszczególnione wszystkie komentarze z podziałem na stanowiska. 
-
-v1.4 (17.06.2024)
-- Po kliknięciu pobierz kod QR niech pojawia się okno od razu z wydrukiem 
-- Zmienić nazwę przycisków z pobierz kod QR na wydrukuj kod QR
-
-
-----ZADANIA----
-
-
-
-
-------------------------------------------------------------------------------------------------------------------------- 
-
-8) Zmiana formy wyświetlania komentarzy na tabelkę (komenarz, operator) 
 

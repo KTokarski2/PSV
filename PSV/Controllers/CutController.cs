@@ -46,7 +46,7 @@ public class CutController : Controller
         return View("NotPresent", dto);
     }
 
-    public async Task<IActionResult> Order(int id, bool startTimer)
+    public async Task<IActionResult> Order(int id, bool startTimer, int operatorId)
     {
         var dto = await _service.GetCutControlData(id);
 
@@ -54,6 +54,7 @@ public class CutController : Controller
         {
             dto.StartTimer = startTimer;
             dto.Operators = await _service.GetAllOperators();
+            dto.OperatorId = operatorId;
             return View("Control", dto);
         }
 
@@ -64,7 +65,7 @@ public class CutController : Controller
     {
         await _service.UpdateCutStartTime(id, operatorId);
         const bool startTimer = true;
-        return RedirectToAction("Order", new { id, startTimer });
+        return RedirectToAction("Order", new { id, startTimer, operatorId });
     }
     
     public async Task<IActionResult> UpdateCutEndTime(int id, int operatorId)
@@ -84,13 +85,14 @@ public class CutController : Controller
     public async Task<IActionResult> CommentsForm(int id)
     {
         var dto = await _service.GetCutControlData(id);
+        dto.OperatorId = await _service.GetCutOperatorId(id);
         return View("Comments", dto);
     }
 
     [HttpPost]
     public async Task<IActionResult> AddComment(OrderControl dto)
     {
-        await _service.CommentOrder(dto);
+        await _service.CommentOrder(dto, "cięcie");
         return RedirectToAction("Menu");
     }
     

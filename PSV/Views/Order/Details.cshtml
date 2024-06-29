@@ -8,28 +8,55 @@
                 <div class="time-info-group">
                     <h3 class="time-info-heading">Cięcie</h3>
                     <div class="time-info-details">
-                        <span class="time-info-label">Od: @Model.CutStart</span>
-                        <span class="time-info-label">Do: @Model.CutEnd</span>
-                        <span class="time-info-label">Czas: @Model.CutTime</span>
-                        <span class="time-info-label">Operator: @Model.CutOperator</span>
+                        @{
+                            if (Model.CutTime == null)
+                            {
+                                <span class="time-info-label">Nie wykonano</span>
+                            }
+                            else
+                            {
+                                <span class="time-info-label">Od: @Model.CutStart</span>
+                                <span class="time-info-label">Do: @Model.CutEnd</span>
+                                <span class="time-info-label">Czas: @Model.CutTime</span>
+                                <span class="time-info-label">Operator: @Model.CutOperator</span>
+                            }
+                        }
                     </div>
                 </div>
                 <div class="time-info-group">
                     <h3 class="time-info-heading">Frezowanie</h3>
                     <div class="time-info-details">
-                        <span class="time-info-label">Od:@Model.MillingStart</span>
-                        <span class="time-info-label">Do:@Model.MillingEnd</span>
-                        <span class="time-info-label">Czas:@Model.MillingTime</span>
-                        <span class="time-info-label">Operator: @Model.MillingOperator</span>
+                        @{
+                            if (Model.MillingTime == null)
+                            {
+                                <span class="time-info-label">Nie wykonano</span>
+                            }
+                            else
+                            {
+                                <span class="time-info-label">Od:@Model.MillingStart</span>
+                                <span class="time-info-label">Do:@Model.MillingEnd</span>
+                                <span class="time-info-label">Czas:@Model.MillingTime</span>
+                                <span class="time-info-label">Operator: @Model.MillingOperator</span>
+                            }
+                        }
                     </div>
                 </div>
                 <div class="time-info-group">
                     <h3 class="time-info-heading">Oklejanie</h3>
                     <div class="time-info-details">
-                        <span class="time-info-label">Od: @Model.WrappingStart</span>
-                        <span class="time-info-label">Do: @Model.WrappingEnd</span>
-                        <span class="time-info-label">Czas: @Model.WrappingTime</span>
-                        <span class="time-info-label">Operator: @Model.WrappingOperator</span>
+                        @{
+                            if (Model.WrappingTime == null)
+                            {
+                                <span class="time-info-label">Nie wykonano</span>
+                            }
+                            else
+                            {
+                                <span class="time-info-label">Od: @Model.WrappingStart</span>
+                                <span class="time-info-label">Do: @Model.WrappingEnd</span>
+                                <span class="time-info-label">Czas: @Model.WrappingTime</span>
+                                <span class="time-info-label">Operator: @Model.WrappingOperator</span>
+                            }
+                        }
                     </div>
                 </div>
             </div>
@@ -75,11 +102,6 @@
                 <input type="checkbox" id="wrappingCheckbox" name="wrappingCheckbox" @(Model.Wrapping ? "checked" : "") disabled>
                 <label for="wrappingCheckbox">Oklejanie</label>
             </div>
-            <div class="input-group">
-                <label for="comment">Komentarz: </label>
-                <textarea name="comment" id="comment" disabled>@Model.Comments</textarea>
-                <span id="errorComment" class="errors-text"></span>
-            </div>
         </form>
         <div class="photos-container">
             @{
@@ -95,8 +117,9 @@
         <div class="actions-container">
             <a href="@Url.Action("EditForm", new {Model.Id})" class="details-action">Edytuj</a>
             <a href="@Url.Action("Delete", new {Model.Id})" class="details-action">Usuń</a>
-            <a href="@Url.Action("GetQrCode", new {Model.Id})" class="details-action">Pobierz kod QR</a>
+            <a href="@Url.Action("ViewComments", new {Model.Id})" class="details-action">Komentarze</a>
             <a href="@Url.Action("GetBarcode", new {Model.Id})" class="details-action">Pobierz kod kreskowy</a>
+            <a href="@Url.Action("PrintBarcode", new {Model.Id})" class="details-action" target="_blank">Drukuj kod kreskowy</a>
         </div>
     </div>
 </main>

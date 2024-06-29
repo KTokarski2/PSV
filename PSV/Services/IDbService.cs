@@ -19,7 +19,7 @@ namespace PSV.Services
         public Task<OrderControl> GetCutControlData(int? orderId);
         public Task<OrderControl> GetMillingControlData(int? orderId);
         public Task<OrderControl> GetWrappingControlData(int? orderId);
-        public Task CommentOrder(OrderControl dto);
+        public Task CommentOrder(OrderControl dto, string source);
         public Task<string> GetQrCodePath(int id);
         public Task<string> GetBarcodePath(int id);
         public Task<int?> GetIdByOrderNumber(string orderNumber);
@@ -41,6 +41,10 @@ namespace PSV.Services
         public Task<List<OperatorInfo>> GetAllOperators();
         public Task<bool> CheckIfUsedDifferentProvided(int orderId, string edgeCode);
         public Task SetUsedEdgeCode(int orderId, string edgeCode);
+        public Task<int> GetCutOperatorId(int? orderId);
+        public Task<int> GetMillingOperatorId(int? orderId);
+        public Task<int> GetWrappingOperatorId(int? orderId);
+        public Task<List<CommentDto>> GetOrderComments(int orderId);
 
 
     }

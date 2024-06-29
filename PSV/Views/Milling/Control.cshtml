@@ -19,7 +19,9 @@
                         }
                         foreach (var opr in Model.Operators)
                         {
-                            <option value="@opr.Id">@opr.FirstName @opr.LastName, @opr.Location</option>
+                            <option value="@opr.Id" selected="@(Model.OperatorId == opr.Id)">
+                                @opr.FirstName @opr.LastName, @opr.Location
+                            </option>
                         }
                     }
                 </select>

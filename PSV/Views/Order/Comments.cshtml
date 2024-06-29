@@ -1,0 +1,42 @@
+@model PSV.Models.DTOs.CommentsDto
+
+<main>
+    <h1 style="text-align: center">Zamówienie nr. @Model.OrderNumber - komentarze</h1>
+    <a class="action-button" href="@Url.Action("Details", "Order", new { Model.Id })">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+    </a>
+    @{
+        if (Model.Comments.Count == 0)
+        {
+            <h1>Brak komentarzy dla tego zamówienia</h1>
+        }
+        else
+        {
+            <table class="orders-list">
+                <thead>
+                <tr>
+                    <th>Stanowisko</th>
+                    <th>Treść</th>
+                    <th>Czas</th>
+                    <th>Operator</th>
+                </tr>
+                </thead>
+                <tbody>
+                @{
+                    foreach (var comment in Model.Comments)
+                    {
+                        <tr class="orders-list-row">
+                            <td>@comment.Source</td>
+                            <td style="text-align: left">@comment.Content</td>
+                            <td>@comment.Time</td>
+                            <td>@comment.Operator</td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+        }
+    }
+</main>

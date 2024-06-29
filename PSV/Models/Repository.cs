@@ -165,6 +165,7 @@ public class Repository : DbContext
             entity.ToTable("Comment");
             entity.Property(e => e.Content);
             entity.Property(e => e.Time);
+            entity.Property(e => e.Source);
 
             entity
                 .HasOne(e => e.Operator)

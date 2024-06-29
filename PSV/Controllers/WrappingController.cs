@@ -45,13 +45,15 @@ public class WrappingController : Controller
         return View("NotPresent", dto);
     }
     
-    public async Task<IActionResult> Order(int id, bool startTimer)
+    public async Task<IActionResult> Order(int id, bool startTimer, int operatorId, string edgeCode)
     {
         var dto = await _service.GetWrappingControlData(id);
         if (await _service.IsWrappingPresent(id))
         {
             dto.StartTimer = startTimer;
             dto.Operators = await _service.GetAllOperators();
+            dto.OperatorId = operatorId;
+            dto.EdgeCode = edgeCode;
             return View("Control", dto);
         }
 
@@ -67,7 +69,7 @@ public class WrappingController : Controller
         {
             await _service.SetUsedEdgeCode(id, edgeCode);
         }
-        return RedirectToAction("Order", new {id, startTimer});
+        return RedirectToAction("Order", new {id, startTimer, operatorId, edgeCode});
     }
 
     [HttpGet]
@@ -85,6 +87,7 @@ public class WrappingController : Controller
     public async Task<IActionResult> Comment(int id)
     {
         var dto = await _service.GetWrappingControlData(id);
+        dto.OperatorId = await _service.GetWrappingOperatorId(id);
         return View("CommentsDecision", dto);
     }
 
@@ -92,13 +95,14 @@ public class WrappingController : Controller
     public async Task<IActionResult> CommentsForm(int id)
     {
         var dto = await _service.GetWrappingControlData(id);
+        dto.OperatorId = await _service.GetWrappingOperatorId(id);
         return View("Comments", dto);
     }
 
     [HttpPost]
     public async Task<IActionResult> AddComment(OrderControl dto)
     {
-        await _service.CommentOrder(dto);
+        await _service.CommentOrder(dto, "oklejanie");
         return RedirectToAction("Menu");
     }
 }

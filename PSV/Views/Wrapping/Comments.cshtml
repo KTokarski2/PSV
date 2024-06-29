@@ -10,6 +10,7 @@
     <div class="control-buttons">
         <form class="comments-form" asp-action="AddComment" asp-controller="Wrapping" method="post">
             <input asp-for="Id" type="hidden" value="@Model.Id"/>
+            <input asp-for="OperatorId" type="hidden" value="@Model.OperatorId"/>
             <textarea asp-for="Comments">@Model.Comments</textarea>
             <button type="submit">Dodaj komentarz</button>
             <a class="control-button-end" href="@Url.Action("All","Wrapping")">Anuluj</a>

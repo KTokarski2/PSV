@@ -44,13 +44,14 @@ public class MillingController : Controller
         return View("NotPresent", dto);
     }
 
-    public async Task<IActionResult> Order(int id, bool startTimer)
+    public async Task<IActionResult> Order(int id, bool startTimer, int operatorId)
     {
         var dto = await _service.GetMillingControlData(id);
         if (await _service.IsMillingPresent(id))
         {
             dto.StartTimer = startTimer;
             dto.Operators = await _service.GetAllOperators();
+            dto.OperatorId = operatorId;
             return View("Control", dto);
         }
 
@@ -62,7 +63,7 @@ public class MillingController : Controller
     {
         await _service.UpdateMillingStartTime(id, operatorId);
         const bool startTimer = true;
-        return RedirectToAction("Order", new {id, startTimer});
+        return RedirectToAction("Order", new {id, startTimer, operatorId});
     }
 
     [HttpGet]
@@ -83,13 +84,14 @@ public class MillingController : Controller
     public async Task<IActionResult> CommentsForm(int id)
     {
         var dto = await _service.GetMillingControlData(id);
+        dto.OperatorId = await _service.GetMillingOperatorId(id);
         return View("Comments", dto);
     }
 
     [HttpPost]
     public async Task<IActionResult> AddComment(OrderControl dto)
     {
-        await _service.CommentOrder(dto);
+        await _service.CommentOrder(dto, "frezowanie");
         return RedirectToAction("Menu");
     }
 }

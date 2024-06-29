@@ -19,15 +19,14 @@ public class DbService : IDbService
     public async Task AddOrder(OrderPost request)
     {
         var client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == Int32.Parse(request.Client));
-        var location = await _context.Locations.FirstOrDefaultAsync(l => l.Id == Int32.Parse(request.Location)); 
-
+        var location = await _context.Locations.FirstOrDefaultAsync(l => l.Id == Int32.Parse(request.Location));
+    
         var order = new Order
         {
             OrderNumber = request.OrderNumber,
             CreatedAt = DateTime.Now,
             Client = client,
             Location = location,
-            //Comments = request.Comments,
             Milling = new Milling { IsPresent = request.Milling },
             Wrapping = new Wrapping { IsPresent = request.Wrapping },
             Cut = new Cut { IsPresent = request.Cut },
@@ -36,6 +35,20 @@ public class DbService : IDbService
 
         await _context.AddAsync(order);
         await _context.SaveChangesAsync();
+        
+        if (!string.IsNullOrEmpty(request.Comments))
+        {
+            var comments = new Comment
+            {
+                Content = request.Comments,
+                Source = "Wprowadzenie",
+                Time = DateTime.Now,
+                Order = order
+            };
+
+            await _context.AddAsync(comments);
+            await _context.SaveChangesAsync();
+        }
 
         order.Photos = await _dataService.SavePhotos(request, order.Id);
         order.QrCode = await _dataService.GenerateQrCode(order.Id);
@@ -295,6 +308,7 @@ public class DbService : IDbService
     {
         var order = await _context.Orders
             .Include(o => o.Cut)
+            .ThenInclude(c => c.Operator)
             .FirstOrDefaultAsync(o => o.Id == orderId);
         
         var dto = new OrderControl
@@ -302,9 +316,7 @@ public class DbService : IDbService
             Id = order.Id,
             OrderNumber = order.OrderNumber,
             From = order.Cut.From,
-            To = order.Cut.To,
-            //Comments = order.Comments
-
+            To = order.Cut.To
         };
 
         if (order.Cut is { IsPresent: true, From: not null, To: not null })
@@ -377,10 +389,19 @@ public class DbService : IDbService
         return dto;
     }
 
-    public async Task CommentOrder(OrderControl dto)
+    public async Task CommentOrder(OrderControl dto, string source)
     {
         var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == dto.Id);
-        //order.Comments = dto.Comments;
+        var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == dto.OperatorId);
+        var comment = new Comment
+        {
+            Content = dto.Comments,
+            Operator = opr,
+            Order = order,
+            Source = source,
+            Time = DateTime.Now
+        };
+        await _context.AddAsync(comment);
         await _context.SaveChangesAsync();
     }
 
@@ -627,5 +648,52 @@ public class DbService : IDbService
         var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
         order.EdgeCodeUsed = edgeCode;
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<int> GetCutOperatorId(int? orderId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.Cut)
+            .ThenInclude(c => c.Operator)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+        return order.Cut.Operator.Id;
+    }
+
+    public async Task<int> GetMillingOperatorId(int? orderId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.Milling)
+            .ThenInclude(m => m.Operator)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+        return order.Milling.Operator.Id;
+    }
+
+    public async Task<int> GetWrappingOperatorId(int? orderId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.Wrapping)
+            .ThenInclude(w => w.Operator)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+        return order.Wrapping.Operator.Id;
+    }
+
+    public async Task<List<CommentDto>> GetOrderComments(int orderId)
+    {
+        var comments = await _context.Orders
+            .Include(o => o.Comments)
+            .ThenInclude(c => c.Operator)
+            .Where(o => o.Id == orderId)
+            .SelectMany(o => o.Comments)
+            .Select(c => new CommentDto
+            {
+                Content = c.Content,
+                Source = c.Source,
+                Time = c.Time.ToString("dd.MM.yyyy HH:mm"),
+                Operator = c.Operator != null
+                    ? c.Operator.FirstName + " " + c.Operator.LastName
+                    : "-"
+            }).ToListAsync();
+
+        return comments;
     }
 }
