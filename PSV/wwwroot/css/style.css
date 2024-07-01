@@ -194,6 +194,10 @@ main {
     margin-bottom: 1rem; /* Adjust margin for upload form label */
 }
 
+.errors-text {
+    color: red;
+}
+
 /* TABLE */
 
 .orders-list {

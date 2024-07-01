@@ -22,8 +22,13 @@ public class ClientController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(ClientPost request)
     {
-        await _service.AddClient(request);
-        return RedirectToAction("All");
+        if (ModelState.IsValid)
+        {
+            await _service.AddClient(request);
+            return RedirectToAction("All");
+        }
+
+        return View("Create", request);
     }
 
     [HttpGet]
@@ -48,12 +53,17 @@ public class ClientController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(int id, ClientPost client)
+    public async Task<IActionResult> Edit(int id, ClientDetails client)
     {
         try
         {
-            await _service.EditClient(id, client);
-            return RedirectToAction("All");
+            if (ModelState.IsValid)
+            {
+                await _service.EditClient(id, client);
+                return RedirectToAction("All");
+            }
+            
+            return View("Edit", client);
         }
         catch (ArgumentException ex)
         {

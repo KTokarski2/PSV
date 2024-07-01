@@ -28,7 +28,7 @@ namespace PSV.Services
         public Task<List<LocationInfo>> GetAllLocations();
         public Task<List<ClientInfo>> GetClientsInfo();
         public Task<ClientDetails> GetClientDetails(int id);
-        public Task EditClient(int clientId, ClientPost client);
+        public Task EditClient(int clientId, ClientDetails client);
         public Task DeleteClient(int clientId);
         public Task<bool> IsCutPresent(int? id);
         public Task<bool> IsMillingPresent(int? id);

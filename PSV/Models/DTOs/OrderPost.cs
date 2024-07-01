@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
 namespace PSV.Models.DTOs
 {
     public class OrderPost
     {
+       [Required(ErrorMessage = "Pole jest wymagane")] 
        public string OrderNumber { get; set; }
        
        public bool Cut { get; set; }
@@ -18,11 +22,11 @@ namespace PSV.Models.DTOs
        
        public string Location { get; set; }
        
-       public string Comments { get; set; }
+       public string? Comments { get; set; }
        
        public List<IFormFile> Photos { get; set; }
        
-       public string EdgeCodeProvided { get; set; }
+       public string? EdgeCodeProvided { get; set; }
 
     }
 }

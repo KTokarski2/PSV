@@ -41,7 +41,7 @@ public class DbService : IDbService
             var comments = new Comment
             {
                 Content = request.Comments,
-                Source = "Wprowadzenie",
+                Source = "Biuro",
                 Time = DateTime.Now,
                 Order = order
             };
@@ -173,13 +173,25 @@ public class DbService : IDbService
         {
             order.OrderNumber = dto.OrderNumber;
             order.Client = client;
-            //order.Comments = dto.Comments;
             order.Cut.IsPresent = dto.Cut;
             order.Milling.IsPresent = dto.Milling;
             order.Wrapping.IsPresent = dto.Wrapping;
             order.EdgeCodeProvided = dto.EdgeCodeProvided;
             order.EdgeCodeUsed = dto.EdgeCodeUsed;
             order.Location = location;
+        }
+
+        if (!string.IsNullOrEmpty(dto.Comments))
+        {
+            var comments = new Comment
+            {
+                Content = dto.Comments,
+                Source = "Biuro",
+                Time = DateTime.Now,
+                Order = order
+            };
+            await _context.AddAsync(comments);
+            await _context.SaveChangesAsync();
         }
 
         await _context.SaveChangesAsync();
@@ -464,7 +476,7 @@ public class DbService : IDbService
         return locations;
     }
     
-    public async Task EditClient(int clientId, ClientPost client)
+    public async Task EditClient(int clientId, ClientDetails client)
     {
         var existingClient = await _context.Clients.FindAsync(clientId);
 
@@ -577,7 +589,7 @@ public class DbService : IDbService
     {
         var oprDb = await _context.Operators.FirstOrDefaultAsync(o => o.Id == id);
         var loc = await _context.Locations.FirstOrDefaultAsync(l => l.Name == opr.Location);
-        oprDb.FirstName = opr.FristName;
+        oprDb.FirstName = opr.FirstName;
         oprDb.LastName = opr.LastName;
         oprDb.PhoneNumber = opr.PhoneNumber;
         oprDb.Location = loc;
@@ -589,7 +601,7 @@ public class DbService : IDbService
         var dto = await _context.Operators.Select(op => new OperatorDetails
         {
             Id = op.Id,
-            FristName = op.FirstName,
+            FirstName = op.FirstName,
             LastName = op.LastName,
             PhoneNumber = op.PhoneNumber,
             Location = op.Location.Name
@@ -602,7 +614,7 @@ public class DbService : IDbService
         var dto = await _context.Operators.Where(o => o.Id == id).Select(o => new OperatorDetails
         {
             Id = o.Id,
-            FristName = o.FirstName,
+            FirstName = o.FirstName,
             LastName = o.LastName,
             PhoneNumber = o.PhoneNumber,
             Location = o.Location.Name

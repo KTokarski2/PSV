@@ -39,9 +39,17 @@ public class OrderController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(OrderPost request)
     {
-        await _service.AddOrder(request);
-        return RedirectToAction("All");
-        
+        if (ModelState.IsValid)
+        {
+            await _service.AddOrder(request);
+            return RedirectToAction("All");
+        }
+
+        var allClients = await _service.GetClientsInfo();
+        var allLocations = await _service.GetAllLocations();
+        request.AllClients = allClients;
+        request.AllLocations = allLocations;
+        return View("Create", request);
     }
 
     [HttpGet]
@@ -62,8 +70,15 @@ public class OrderController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(OrderDetails dto)
     {
-        await _service.EditOrder(dto);
-        return RedirectToAction("Details", new { dto.Id });
+        if (ModelState.IsValid)
+        {
+            await _service.EditOrder(dto);
+            return RedirectToAction("Details", new { dto.Id });
+        }
+
+        dto.AllLocations = await _service.GetAllLocations();
+        dto.AllClients = await _service.GetClientsInfo();
+        return View("Edit", dto);
     }
 
     [HttpGet]

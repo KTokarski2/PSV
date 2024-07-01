@@ -28,8 +28,15 @@ public class OperatorController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(OperatorPost newOperator)
     {
-        await _service.AddOperator(newOperator);
-        return RedirectToAction("All");
+        if (ModelState.IsValid)
+        {
+            await _service.AddOperator(newOperator);
+            return RedirectToAction("All");
+        }
+
+        var allLocations = await _service.GetAllLocations();
+        newOperator.AllLocations = allLocations;
+        return View("Create", newOperator);
     }
     
     [HttpGet]
@@ -58,8 +65,14 @@ public class OperatorController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(int id, OperatorDetails opr)
     {
-        await _service.EditOperator(id, opr);
-        return RedirectToAction("All");
+        if (ModelState.IsValid)
+        {
+            await _service.EditOperator(id, opr);
+            return RedirectToAction("Details", new {id});
+        }
+
+        opr.AllLocations = await _service.GetAllLocations();
+        return View("Edit", opr);
     }
 
     public async Task<IActionResult> Delete(int id)
