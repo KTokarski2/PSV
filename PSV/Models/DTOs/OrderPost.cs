@@ -14,9 +14,9 @@ namespace PSV.Models.DTOs
        
        public bool Wrapping { get; set; }
        
-       public List<ClientInfo> AllClients { get; set; }
+       public List<ClientInfo>? AllClients { get; set; }
        
-       public List<LocationInfo> AllLocations { get; set; }
+       public List<LocationInfo>? AllLocations { get; set; }
        
        public string Client { get; set; }
        
@@ -24,7 +24,7 @@ namespace PSV.Models.DTOs
        
        public string? Comments { get; set; }
        
-       public List<IFormFile> Photos { get; set; }
+       public List<IFormFile>? Photos { get; set; }
        
        public string? EdgeCodeProvided { get; set; }
 

@@ -6,7 +6,6 @@ html {
 }
 
 body {
-    min-width: 600px;
     font-family: sans-serif;
     background: linear-gradient(to bottom, white, #ced4da);
     margin: 0;
@@ -28,7 +27,7 @@ h1,
 h2,
 h3 {
     color: black;
-    margin-bottom: 0.5rem; /* Reduce margins for cleaner look */
+    margin-bottom: 0.5rem; 
 }
 
 header,
@@ -108,11 +107,12 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid ; /* Subtle border for separation */
-    padding: 2rem; /* Maintain sufficient padding */
-    border-radius: 5px; /* Add a slight border radius for softness */
+    border: 1px solid ; 
+    padding: 2rem; 
+    border-radius: 5px; 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 2);
-    width: 40%;
+    width: 80%;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -154,7 +154,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
 }
 
 .input-group-checkbox label {
@@ -163,7 +164,7 @@ main {
 
 .form-submit {
     margin: 2rem;
-    width: 25%;
+    width: 50%;
     padding: 0.5rem 1rem;
     background-color: #ba181b;
     border: solid 1px black;
@@ -184,14 +185,14 @@ main {
 }
 
 .upload-form-border {
-    border: 1px solid ; /* Subtle border for separation */
-    padding: 2rem; /* Maintain sufficient padding */
-    border-radius: 5px; /* Add a slight border radius for softness */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 2); /* Subtle shadow for depth */
+    border: 1px solid ; 
+    padding: 2rem; 
+    border-radius: 5px; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 2); 
 }
 
 .upload-form label {
-    margin-bottom: 1rem; /* Adjust margin for upload form label */
+    margin-bottom: 1rem; 
 }
 
 .errors-text {
@@ -334,6 +335,22 @@ main {
     text-decoration: none;
 }
 
+.control-button-cancel {
+    padding: 1rem 1rem;
+    background-color: #ba181b;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.2s ease-in-out;
+    margin: 1rem;
+    text-align: center;
+    text-decoration: none;
+    width: 50%;
+    height: 100%;
+}
+
 .control-button-start,
 .control-button-end {
     width: 100%;
@@ -341,7 +358,8 @@ main {
 }
 
 .control-button-start:hover,
-.control-button-end:hover{
+.control-button-end:hover,
+.control-button-cancel:hover{
     background-color: #e5383b;
     border: solid 2px black;
 }

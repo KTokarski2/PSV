@@ -8,8 +8,8 @@ public class Order
     public int Id { get; set; }
     public string OrderNumber { get; set; }
     public DateTime CreatedAt { get; set; }
-    public int IdClient { get; set; }
-    public virtual Client Client { get; set; }
+    public int? IdClient { get; set; }
+    public virtual Client? Client { get; set; }
     public string? QrCode { get; set; }
     public string? BarCode { get; set; }
     public string? EdgeCodeProvided { get; set; }

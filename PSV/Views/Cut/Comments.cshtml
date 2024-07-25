@@ -13,7 +13,7 @@
             <input asp-for="OperatorId" type="hidden" value="@Model.OperatorId"/>
             <textarea asp-for="Comments">@Model.Comments</textarea>
             <button type="submit">Dodaj komentarz</button>
-            <a class="control-button-end" href="@Url.Action("All", "Cut")">Anuluj</a>
+            <a class="control-button-cancel" href="@Url.Action("All", "Cut")">Anuluj</a>
         </form>
     </div>
 </main>

@@ -63,7 +63,7 @@ public class DbService : IDbService
         {
             Id = o.Id,
             OrderNumber = o.OrderNumber,
-            CreatedAt = o.CreatedAt,
+            CreatedAt = o.CreatedAt.ToString("dd.MM.yyyy HH:mm"),
             Client = o.Client.Name,
             Location = o.Location.Name,
             Cut = o.Cut.IsPresent,
@@ -108,7 +108,6 @@ public class DbService : IDbService
             Wrapping = order.Wrapping?.IsPresent ?? false,
             ClientId = order.Client.Id,
             AllClients = allClients,
-            //Comments = order.Comments,
             Photos = _dataService.GetPhotosFromDirectory(order.Photos),
             EdgeCodeProvided = order.EdgeCodeProvided,
             EdgeCodeUsed = order.EdgeCodeUsed,

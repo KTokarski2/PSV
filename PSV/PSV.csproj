@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Migrations\" />
       <Folder Include="wwwroot\images\" />
       <Folder Include="wwwroot\images\OrdersData\" />
     </ItemGroup>
@@ -47,6 +48,33 @@
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\0104202402\QRCode.png" />
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\TIMER_TEST\BarCode.png" />
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\TIMER_TEST\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\7\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\7\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\1\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\1\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\8\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\8\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3032\7b7ae6371c1adcee2ff88de3d51e09b6.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3032\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3032\chairpng.parspng.com-4.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3032\images.jpeg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3032\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\11\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\11\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3033\7b7ae6371c1adcee2ff88de3d51e09b6.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3033\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3033\chairpng.parspng.com-4.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3033\images.jpeg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3033\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\5\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\5\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3037\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3037\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3041\7b7ae6371c1adcee2ff88de3d51e09b6.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3041\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3041\chairpng.parspng.com-4.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3041\images.jpeg" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3041\QRCode.png" />
     </ItemGroup>
 
 </Project>

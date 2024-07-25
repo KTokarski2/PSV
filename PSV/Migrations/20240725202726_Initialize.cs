@@ -51,7 +51,7 @@ namespace PSV.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IdLocation = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -82,7 +82,8 @@ namespace PSV.Migrations
                         name: "Operator_Cut",
                         column: x => x.IdOperator,
                         principalTable: "Operator",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,7 +104,8 @@ namespace PSV.Migrations
                         name: "Operator_Milling",
                         column: x => x.IdOperator,
                         principalTable: "Operator",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,7 +126,8 @@ namespace PSV.Migrations
                         name: "Operator_Wrapping",
                         column: x => x.IdOperator,
                         principalTable: "Operator",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,7 +138,7 @@ namespace PSV.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdClient = table.Column<int>(type: "int", nullable: false),
+                    IdClient = table.Column<int>(type: "int", nullable: true),
                     QrCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BarCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EdgeCodeProvided = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -188,7 +191,8 @@ namespace PSV.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Time = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdOperator = table.Column<int>(type: "int", nullable: false),
+                    Source = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdOperator = table.Column<int>(type: "int", nullable: true),
                     IdOrder = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -198,12 +202,14 @@ namespace PSV.Migrations
                         name: "Operator_Comment",
                         column: x => x.IdOperator,
                         principalTable: "Operator",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "Order_Comment",
                         column: x => x.IdOrder,
                         principalTable: "Order",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(

@@ -223,7 +223,7 @@ namespace PSV.Migrations
                     b.Property<string>("EdgeCodeUsed")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdClient")
+                    b.Property<int?>("IdClient")
                         .HasColumnType("int");
 
                     b.Property<int>("IdCut")
@@ -300,13 +300,13 @@ namespace PSV.Migrations
                     b.HasOne("PSV.Models.Operator", "Operator")
                         .WithMany("Comments")
                         .HasForeignKey("IdOperator")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .HasConstraintName("Operator_Comment");
 
                     b.HasOne("PSV.Models.Order", "Order")
                         .WithMany("Comments")
                         .HasForeignKey("IdOrder")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("Order_Comment");
 
@@ -320,7 +320,7 @@ namespace PSV.Migrations
                     b.HasOne("PSV.Models.Operator", "Operator")
                         .WithMany("Cuts")
                         .HasForeignKey("IdOperator")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .HasConstraintName("Operator_Cut");
 
                     b.Navigation("Operator");
@@ -331,7 +331,7 @@ namespace PSV.Migrations
                     b.HasOne("PSV.Models.Operator", "Operator")
                         .WithMany("Millings")
                         .HasForeignKey("IdOperator")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .HasConstraintName("Operator_Milling");
 
                     b.Navigation("Operator");
@@ -355,7 +355,6 @@ namespace PSV.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("IdClient")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("Client_Orders");
 
                     b.HasOne("PSV.Models.Cut", "Cut")
@@ -402,7 +401,7 @@ namespace PSV.Migrations
                     b.HasOne("PSV.Models.Operator", "Operator")
                         .WithMany("Wrappings")
                         .HasForeignKey("IdOperator")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .HasConstraintName("Operator_Wrapping");
 
                     b.Navigation("Operator");

@@ -109,7 +109,7 @@ public class Repository : DbContext
                 .HasOne(e => e.Operator)
                 .WithMany(e => e.Cuts)
                 .HasForeignKey(e => e.IdOperator)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("Operator_Cut");
         });
 
@@ -132,7 +132,7 @@ public class Repository : DbContext
                 .HasOne(e => e.Operator)
                 .WithMany(e => e.Millings)
                 .HasForeignKey(e => e.IdOperator)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("Operator_Milling");
         });
 
@@ -155,7 +155,7 @@ public class Repository : DbContext
                 .HasOne(e => e.Operator)
                 .WithMany(e => e.Wrappings)
                 .HasForeignKey(e => e.IdOperator)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("Operator_Wrapping");
         });
 
@@ -171,14 +171,14 @@ public class Repository : DbContext
                 .HasOne(e => e.Operator)
                 .WithMany(e => e.Comments)
                 .HasForeignKey(e => e.IdOperator)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("Operator_Comment");
             
             entity
                 .HasOne(e => e.Order)
                 .WithMany(e => e.Comments)
                 .HasForeignKey(e => e.IdOrder)
-                .OnDelete(DeleteBehavior.NoAction)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("Order_Comment");
         });
     }
