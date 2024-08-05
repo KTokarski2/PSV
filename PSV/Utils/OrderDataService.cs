@@ -82,4 +82,9 @@ public class OrderDataService
         string orderDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), DataDir, id.ToString());
         Directory.Delete(orderDirectoryPath, true);
     }
+
+    public string ExtractOrderNumber(IFormFile file)
+    {
+        return file.FileName.Split(".")[0];
+    }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using PSV.Models;
 using PSV.Models.DTOs;
 using PSV.Services;
+using PSV.Utils;
 
 namespace PSV.Controllers;
 
@@ -23,6 +24,20 @@ public class OrderController : Controller
     {
         var dto = await _service.GetAllOrders();
         return View("List", dto);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadOrderFile(OrderPost request)
+    {
+        OrderPost newOrder = new OrderPost();
+        OrderDataService dataService = new OrderDataService();
+        var allClients = await _service.GetClientsInfo();
+        var allLocations = await _service.GetAllLocations();
+        newOrder.AllLocations = allLocations;
+        newOrder.AllClients = allClients;
+        newOrder.OrderNumber = dataService.ExtractOrderNumber(request.OrderFile);
+        ModelState.Remove("OrderNumber");
+        return View("Create", newOrder);
     }
 
     [HttpGet]

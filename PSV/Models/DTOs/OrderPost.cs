@@ -18,11 +18,13 @@ namespace PSV.Models.DTOs
        
        public List<LocationInfo>? AllLocations { get; set; }
        
-       public string Client { get; set; }
+       public string? Client { get; set; }
        
-       public string Location { get; set; }
+       public string? Location { get; set; }
        
        public string? Comments { get; set; }
+       
+       public IFormFile? OrderFile { get; set; }
        
        public List<IFormFile>? Photos { get; set; }
        
