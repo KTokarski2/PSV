@@ -4,7 +4,7 @@
         <h2 class="page-title">Nowe zamówienie</h2>
         <form novalidate onsubmit="" class="upload-form" asp-action="UploadOrderFile" asp-controller="Order" method="post" enctype="multipart/form-data">
             <label asp-for="OrderFile">Wczytaj plik zamówienia</label>
-            <input type="file" asp-for="OrderFile">
+            <input type="file" asp-for="OrderFile" value="@Model.OrderFile">
             <input class="form-submit" type="submit" value="Prześlij">
         </form>
         <form class="create-form" asp-action="Create" asp-controller="Order" method="post" enctype="multipart/form-data">

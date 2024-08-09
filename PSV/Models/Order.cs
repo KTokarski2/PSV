@@ -12,6 +12,7 @@ public class Order
     public virtual Client? Client { get; set; }
     public string? QrCode { get; set; }
     public string? BarCode { get; set; }
+    public string? OrderFile { get; set; }
     public string? EdgeCodeProvided { get; set; }
     public string? EdgeCodeUsed { get; set; }
     public string? Photos { get; set; }

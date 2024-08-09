@@ -12,6 +12,8 @@ namespace PSV.Utils;
 public class OrderDataService
 {
     private const string DataDir = "wwwroot/images/OrdersData";
+    private const string TempDir = "wwwroot/temp";
+    private const string OrdersFiles = "wwwroot/ordersFiles";
 
     public async Task<string> SavePhotos(OrderPost request, int id)
     {
@@ -35,6 +37,42 @@ public class OrderDataService
             
         }
         return orderDirectoryPath;
+    }
+
+    public async Task SaveTemporaryFile(IFormFile? file)
+    {
+        if (file != null)
+        {
+            string filePath = Path.Combine(TempDir, file.FileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+        }
+    }
+
+    public async Task<string?> GetTemporaryFile(string orderNumber)
+    {
+        string[] files = Directory.GetFiles(TempDir, $"{orderNumber}.*");
+
+        if (files.Length == 0)
+        {
+            return null;
+        }
+
+        string tempFilePath = files[0];
+
+        string destinationFilePath = Path.Combine(OrdersFiles, Path.GetFileName(tempFilePath));
+
+        using (var sourceStream = new FileStream(tempFilePath, FileMode.Open, FileAccess.Read))
+        using (var destinationStream = new FileStream(destinationFilePath, FileMode.Create, FileAccess.Write))
+        {
+            await sourceStream.CopyToAsync(destinationStream);
+        }
+
+        await Task.Run(() => File.Delete(tempFilePath));
+
+        return destinationFilePath;
     }
     
     public List<string> GetPhotosFromDirectory(string path)

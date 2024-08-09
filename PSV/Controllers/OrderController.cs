@@ -36,6 +36,7 @@ public class OrderController : Controller
         newOrder.AllLocations = allLocations;
         newOrder.AllClients = allClients;
         newOrder.OrderNumber = dataService.ExtractOrderNumber(request.OrderFile);
+        await dataService.SaveTemporaryFile(request.OrderFile);
         ModelState.Remove("OrderNumber");
         return View("Create", newOrder);
     }

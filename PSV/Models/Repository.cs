@@ -71,6 +71,7 @@ public class Repository : DbContext
             entity.Property(e => e.CreatedAt);
             entity.Property(e => e.QrCode);
             entity.Property(e => e.BarCode);
+            entity.Property(e => e.OrderFile);
             entity.Property(e => e.Photos);
             entity.Property(e => e.EdgeCodeProvided);
             entity.Property(e => e.EdgeCodeUsed);

@@ -53,6 +53,7 @@ public class DbService : IDbService
         order.Photos = await _dataService.SavePhotos(request, order.Id);
         order.QrCode = await _dataService.GenerateQrCode(order.Id);
         order.BarCode = await _dataService.GenerateBarcode(order.Id, order.OrderNumber);
+        order.OrderFile = await _dataService.GetTemporaryFile(order.OrderNumber);
 
         await _context.SaveChangesAsync();
     }
