@@ -8,12 +8,12 @@ namespace PSV.Services;
 public class DbService : IDbService
 {
     private readonly Repository _context;
-    private readonly OrderDataService _dataService;
+    private readonly OrderFileService _fileService;
 
     public DbService(Repository context)
     {
         _context = context;
-        _dataService = new OrderDataService();
+        _fileService = new OrderFileService();
     }
     
     public async Task AddOrder(OrderPost request)
@@ -50,10 +50,10 @@ public class DbService : IDbService
             await _context.SaveChangesAsync();
         }
 
-        order.Photos = await _dataService.SavePhotos(request, order.Id);
-        order.QrCode = await _dataService.GenerateQrCode(order.Id);
-        order.BarCode = await _dataService.GenerateBarcode(order.Id, order.OrderNumber);
-        order.OrderFile = await _dataService.GetTemporaryFile(order.OrderNumber);
+        order.Photos = await _fileService.SavePhotos(request, order.Id);
+        order.QrCode = await _fileService.GenerateQrCode(order.Id);
+        order.BarCode = await _fileService.GenerateBarcode(order.Id, order.OrderNumber);
+        order.OrderFile = await _fileService.GetTemporaryFile(order.OrderNumber);
 
         await _context.SaveChangesAsync();
     }
@@ -109,7 +109,7 @@ public class DbService : IDbService
             Wrapping = order.Wrapping?.IsPresent ?? false,
             ClientId = order.Client.Id,
             AllClients = allClients,
-            Photos = _dataService.GetPhotosFromDirectory(order.Photos),
+            Photos = _fileService.GetPhotosFromDirectory(order.Photos),
             EdgeCodeProvided = order.EdgeCodeProvided,
             EdgeCodeUsed = order.EdgeCodeUsed,
             Location = order.Location.Name,
@@ -205,7 +205,8 @@ public class DbService : IDbService
         {
             throw new ArgumentException("Order not found");
         }
-        _dataService.DeleteOrderDirectory(order.Id);
+        _fileService.DeleteOrderDirectory(order.Id);
+        _fileService.DeleteOrderFile(order.OrderFile);
         var cut = await _context.Cuts.FirstOrDefaultAsync(c => c.Id == order.IdCut);
         var milling = await _context.Millings.FirstOrDefaultAsync(m => m.Id == order.IdMilling);
         var wrapping = await _context.Wrappings.FirstOrDefaultAsync(w => w.Id == order.IdWrapping);
@@ -707,5 +708,17 @@ public class DbService : IDbService
             }).ToListAsync();
 
         return comments;
+    }
+
+    public async Task<string> GetOrderFilePath(int id)
+    {
+        var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+        return order.OrderFile;
+    }
+
+    public async Task<string> GetOrderPhotosPath(int id)
+    {
+        var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+        return order.Photos;
     }
 }

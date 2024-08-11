@@ -22,6 +22,7 @@ namespace PSV.Services
         public Task CommentOrder(OrderControl dto, string source);
         public Task<string> GetQrCodePath(int id);
         public Task<string> GetBarcodePath(int id);
+        public Task<string> GetOrderFilePath(int id);
         public Task<int?> GetIdByOrderNumber(string orderNumber);
         public Task AddClient(ClientPost request);
         public Task<List<ClientDetails>> GetAllClients();
@@ -45,6 +46,8 @@ namespace PSV.Services
         public Task<int> GetMillingOperatorId(int? orderId);
         public Task<int> GetWrappingOperatorId(int? orderId);
         public Task<List<CommentDto>> GetOrderComments(int orderId);
+
+        public Task<string> GetOrderPhotosPath(int id);
 
 
     }

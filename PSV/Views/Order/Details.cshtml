@@ -103,23 +103,40 @@
                 <label for="wrappingCheckbox">Oklejanie</label>
             </div>
         </form>
+        <div class="upload-photo-container">
+            <button type="button" class="details-action" onclick="document.getElementById('fileInput').click();">Dodaj zdjęcie</button>
+            <form id="uploadForm" action="@Url.Action("UploadPhoto", "Order")" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="orderId" value="@Model.Id">
+                <input type="file" id="fileInput" name="photo" style="display:none;" onchange="submitUploadPhotoForm()"/>
+            </form>
+        </div>
         <div class="photos-container">
             @{
                 if (Model.Photos.Count > 0)
                 {
                     foreach (var photo in Model.Photos)
                     {
-                        <img src="@Url.Content(photo)" alt="order-photo" class="order-photo"> 
+                        <img src="@Url.Content(photo)" alt="order-photo" class="order-photo" onclick="submitDeletePhotoForm(this)">
+                        <form action="@Url.Action("DeletePhoto", "Order")" method="post" class="delete-photo-form">
+                            <input type="hidden" name="photoPath" value="@photo" />
+                            <input type="hidden" name="orderId" value="@Model.Id" />
+                        </form>
                     }
                 }
             }
         </div>
         <div class="actions-container">
-            <a href="@Url.Action("EditForm", new {Model.Id})" class="details-action">Edytuj</a>
-            <a href="@Url.Action("Delete", new {Model.Id})" class="details-action">Usuń</a>
-            <a href="@Url.Action("ViewComments", new {Model.Id})" class="details-action">Komentarze</a>
-            <a href="@Url.Action("GetBarcode", new {Model.Id})" class="details-action">Pobierz kod kreskowy</a>
-            <a href="@Url.Action("PrintBarcode", new {Model.Id})" class="details-action" target="_blank">Drukuj kod kreskowy</a>
+            <div class="actions-container-col">
+                <a href="@Url.Action("EditForm", new { Model.Id })" class="details-action">Edytuj</a>
+                <a href="@Url.Action("Delete", new { Model.Id })" class="details-action">Usuń</a>
+                <a href="@Url.Action("ViewComments", new { Model.Id })" class="details-action">Komentarze</a>
+            </div>
+            <div class="actions-container-col">
+                <a href="@Url.Action("GetBarcode", new { Model.Id })" class="details-action">Pobierz kod kreskowy</a>
+                <a href="@Url.Action("PrintBarcode", new { Model.Id })" class="details-action" target="_blank">Drukuj kod kreskowy</a>
+                <a href="@Url.Action("GetOrderFile", new {Model.Id })" class="details-action" target="_blank">Pobierz plik zamówienia</a>
+            </div>
         </div>
     </div>
+    <script src="@Url.Content("~/js/photo.js")"></script>
 </main>

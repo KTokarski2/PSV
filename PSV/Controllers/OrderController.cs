@@ -13,6 +13,7 @@ public class OrderController : Controller
 {
 
     private readonly IDbService _service;
+    private readonly string _wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
     public OrderController(IDbService service)
     {
@@ -30,13 +31,13 @@ public class OrderController : Controller
     public async Task<IActionResult> UploadOrderFile(OrderPost request)
     {
         OrderPost newOrder = new OrderPost();
-        OrderDataService dataService = new OrderDataService();
+        OrderFileService fileService = new OrderFileService();
         var allClients = await _service.GetClientsInfo();
         var allLocations = await _service.GetAllLocations();
         newOrder.AllLocations = allLocations;
         newOrder.AllClients = allClients;
-        newOrder.OrderNumber = dataService.ExtractOrderNumber(request.OrderFile);
-        await dataService.SaveTemporaryFile(request.OrderFile);
+        newOrder.OrderNumber = fileService.ExtractOrderNumber(request.OrderFile);
+        await fileService.SaveTemporaryFile(request.OrderFile);
         ModelState.Remove("OrderNumber");
         return View("Create", newOrder);
     }
@@ -133,6 +134,14 @@ public class OrderController : Controller
         var fileContent = await System.IO.File.ReadAllBytesAsync(path);
         return File(fileContent, "application/octet-stream", fileName);
     }
+
+    public async Task<IActionResult> GetOrderFile(int id)
+    {
+        var path = await _service.GetOrderFilePath(id);
+        var fileName = Path.GetFileName(path);
+        var fileContent = await System.IO.File.ReadAllBytesAsync(path);
+        return File(fileContent, "application/octet-stream", fileName);
+    }
     
     public async Task<IActionResult> PrintBarcode(int id)
     {
@@ -172,5 +181,31 @@ public class OrderController : Controller
         var comments = await _service.GetOrderComments(id);
         dto.Comments = comments;
         return View("Comments", dto);
+    }
+
+    public async Task<IActionResult> DeletePhoto(string? photoPath, int orderId)
+    {
+        if (photoPath != null)
+        {
+            
+            var filePath = Path.Combine(_wwwRootPath, photoPath.TrimStart('~', '/'));
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+        }
+        return RedirectToAction("Details", new {id = orderId});
+    }
+
+    public async Task<IActionResult> UploadPhoto(IFormFile photo, int orderId)
+    {
+        var uploads = await _service.GetOrderPhotosPath(orderId);
+        var filePath = Path.Combine(uploads, Path.GetFileName(photo.FileName));
+        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        {
+            await photo.CopyToAsync(fileStream);
+        }
+        return RedirectToAction("Details", new { id = orderId });
     }
 }

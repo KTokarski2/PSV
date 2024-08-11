@@ -9,7 +9,7 @@ using Type = System.Type;
 
 namespace PSV.Utils;
 
-public class OrderDataService
+public class OrderFileService
 {
     private const string DataDir = "wwwroot/images/OrdersData";
     private const string TempDir = "wwwroot/temp";
@@ -121,8 +121,17 @@ public class OrderDataService
         Directory.Delete(orderDirectoryPath, true);
     }
 
+    public void DeleteOrderFile(string? path)
+    {
+        if (path != null)
+        {
+            File.Delete(path);
+        }
+    }
+
     public string ExtractOrderNumber(IFormFile file)
     {
         return file.FileName.Split(".")[0];
     }
+    
 }
