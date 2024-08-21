@@ -6,6 +6,11 @@
         <form class="order-details" method="post" action="@Url.Action("Edit", "Order")">
             <input type="hidden" asp-for="Id" value="@Model.Id"/>
             <div class="input-group">
+                <label asp-for="OrderName">Nazwa zamówienia: <span class="symbol-required">*</span></label>
+                <input type="text" asp-for="OrderName" value="@Model.OrderName">
+                <span asp-validation-for="OrderName" class="errors-text"></span>
+            </div>
+            <div class="input-group">
                 <label asp-for="OrderNumber">Numer zamówienia: <span class="symbol-required">*</span></label>
                 <input type="text" asp-for="OrderNumber" value="@Model.OrderNumber">
                 <span asp-validation-for="OrderNumber" class="errors-text"></span>

@@ -24,6 +24,7 @@ public class DbService : IDbService
         var order = new Order
         {
             OrderNumber = request.OrderNumber,
+            OrderName = request.OrderName,
             CreatedAt = DateTime.Now,
             Client = client,
             Location = location,
@@ -53,7 +54,7 @@ public class DbService : IDbService
         order.Photos = await _fileService.SavePhotos(request, order.Id);
         order.QrCode = await _fileService.GenerateQrCode(order.Id);
         order.BarCode = await _fileService.GenerateBarcode(order.Id, order.OrderNumber);
-        order.OrderFile = await _fileService.GetTemporaryFile(order.OrderNumber);
+        order.OrderFile = await _fileService.GetTemporaryFile(order.OrderName);
 
         await _context.SaveChangesAsync();
     }
@@ -64,6 +65,7 @@ public class DbService : IDbService
         {
             Id = o.Id,
             OrderNumber = o.OrderNumber,
+            OrderName = o.OrderName,
             CreatedAt = o.CreatedAt.ToString("dd.MM.yyyy HH:mm"),
             Client = o.Client.Name,
             Location = o.Location.Name,
@@ -104,6 +106,7 @@ public class DbService : IDbService
         {
             Id = order.Id,
             OrderNumber = order.OrderNumber,
+            OrderName = order.OrderName,
             Cut = order.Cut?.IsPresent ?? false,
             Milling = order.Milling?.IsPresent ?? false,
             Wrapping = order.Wrapping?.IsPresent ?? false,
@@ -115,7 +118,8 @@ public class DbService : IDbService
             Location = order.Location.Name,
             CutOperator = cutOperator,
             MillingOperator = millingOperator,
-            WrappingOperator = wrappingOperator
+            WrappingOperator = wrappingOperator,
+            CreatedAt = order.CreatedAt.ToString("dd.MM.yyyy HH:mm")
         };
 
         if (order.Cut is { IsPresent: true, From: not null, To: not null })
@@ -172,6 +176,7 @@ public class DbService : IDbService
         if (order != null)
         {
             order.OrderNumber = dto.OrderNumber;
+            order.OrderName = dto.OrderName;
             order.Client = client;
             order.Cut.IsPresent = dto.Cut;
             order.Milling.IsPresent = dto.Milling;
@@ -720,5 +725,15 @@ public class DbService : IDbService
     {
         var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
         return order.Photos;
+    }
+
+    public async Task<string> GenerateOrderNumber()
+    {
+        var datePrefix = DateTime.Now.ToString("yyyyMMdd");
+        var todayOrdersCount = await _context.Orders
+            .Where(o => o.CreatedAt.Date == DateTime.Now.Date)
+            .CountAsync();
+        var orderNumber = $"{datePrefix}{todayOrdersCount + 1:D4}";
+        return orderNumber;
     }
 }

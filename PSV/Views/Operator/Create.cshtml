@@ -1,6 +1,14 @@
 @model PSV.Models.DTOs.OperatorPost;
 
 <main>
+    <div class="back-buttons-div">
+        <a class="back-button" href="@Url.Action("Index", "Home")">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+            Strona główna
+        </a>
+    </div>
     <h2 class="page-title">Nowy operator</h2>
     <form class="create-form" asp-action="Create" asp-controller="Operator" method="post">
         <div class="input-group">
@@ -22,10 +30,10 @@
             <label asp-for="Location">Lokalizacja: <span class="symbol-required">*</span></label>
             <select asp-for="Location">
                 @{
-                foreach (var location in Model.AllLocations)
-                {
-                <option value="@location.Id">@location.Name</option>
-                }
+                    foreach (var location in Model.AllLocations)
+                    {
+                        <option value="@location.Id">@location.Name</option>
+                    }
                 }
             </select>
             <span asp-validation-for="Location" class="errors-text"></span>

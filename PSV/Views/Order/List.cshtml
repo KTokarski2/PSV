@@ -17,6 +17,7 @@
         <thead>
         <tr>
             <th>Numer zlecenia</th>
+            <th>Nazwa zlecenia</th>
             <th>Data wprowadzenia</th>
             <th>Lokalizacja</th>
             <th>Klient</th>
@@ -31,6 +32,7 @@
             {
                 <tr class="orders-list-row">
                     <td><a href="@Url.Action("Details", "Order", new { id = order.Id })">@order.OrderNumber</a></td>
+                    <td>@order.OrderName</td>
                     <td>@order.CreatedAt</td>
                     <td>@order.Location</td>
                     <td>@order.Client</td>

@@ -1,33 +1,41 @@
 @model PSV.Models.DTOs.ClientPost;
 
 <main>
-        <h2 class="page-title">Nowy klient</h2>
-        <form class="create-form" asp-action="Create" asp-controller="Client" method="post">
-            <div class="input-group">
-                <label asp-for="Name">Nazwa klienta: <span class="symbol-required">*</span></label>
-                <input type="text" asp-for="Name" placeholder="">
-                <span asp-validation-for="Name" class="errors-text"></span>
-            </div>
-            <div class="input-group">
-                <label asp-for="Address">Adres klienta: <span class="symbol-required">*</span></label>
-                <input type="text" asp-for="Address" placeholder="">
-                <span asp-validation-for="Address" class="errors-text"></span>
-            </div>
-            <div class="input-group">
-                <label asp-for="NIP">NIP: <span class="symbol-required">*</span></label>
-                <input type="text" asp-for="NIP" placeholder="">
-                <span asp-validation-for="NIP" class="errors-text"></span>
-            </div>
-            <div class="input-group">
-                <label asp-for="Email">Email: <span class="symbol-required">*</span></label>
-                <input type="text" asp-for="Email" placeholder="">
-                <span asp-validation-for="Email" class="errors-text"></span>
-            </div>
-            <div class="input-group">
-                <label asp-for="PhoneNumber">Numer telefonu: <span class="symbol-required">*</span></label>
-                <input type="text" asp-for="PhoneNumber" placeholder="">
-                <span asp-validation-for="PhoneNumber" class="errors-text"></span>
-            </div>
-            <input class="form-submit" type="submit" value="Dodaj klienta">
-        </form>
+    <div class="back-buttons-div">
+        <a class="back-button" href="@Url.Action("Index", "Home")">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+            Strona główna
+        </a>
+    </div>
+    <h2 class="page-title">Nowy klient</h2>
+    <form class="create-form" asp-action="Create" asp-controller="Client" method="post">
+        <div class="input-group">
+            <label asp-for="Name">Nazwa klienta: <span class="symbol-required">*</span></label>
+            <input type="text" asp-for="Name" placeholder="">
+            <span asp-validation-for="Name" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="Address">Adres klienta: <span class="symbol-required">*</span></label>
+            <input type="text" asp-for="Address" placeholder="">
+            <span asp-validation-for="Address" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="NIP">NIP: <span class="symbol-required">*</span></label>
+            <input type="text" asp-for="NIP" placeholder="">
+            <span asp-validation-for="NIP" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="Email">Email: <span class="symbol-required">*</span></label>
+            <input type="text" asp-for="Email" placeholder="">
+            <span asp-validation-for="Email" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="PhoneNumber">Numer telefonu: <span class="symbol-required">*</span></label>
+            <input type="text" asp-for="PhoneNumber" placeholder="">
+            <span asp-validation-for="PhoneNumber" class="errors-text"></span>
+        </div>
+        <input class="form-submit" type="submit" value="Dodaj klienta">
+    </form>
 </main>

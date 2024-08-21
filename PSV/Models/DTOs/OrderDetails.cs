@@ -8,12 +8,16 @@ public class OrderDetails
     
     [Required(ErrorMessage = "Pole jest wymagane")]
     public string OrderNumber { get; set; }
+    
+    [Required(ErrorMessage = "Pole jest wymagane")]
+    public string OrderName { get; set; }
     public bool Cut { get; set; }
     public string? CutStart { get; set; }
     public string? CutEnd { get; set; }
     public string? CutTime { get; set; }
     public string? CutOperator { get; set; }
     public bool Milling { get; set; }
+    public string? CreatedAt { get; set; }
     public string? MillingStart { get; set; }
     public string? MillingEnd { get; set; }
     public string? MillingTime { get; set; }

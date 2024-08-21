@@ -3,6 +3,20 @@
 <main>
     <h2 class="page-title">Zamówienie nr. @Model.OrderNumber</h2>
     <div class="details-container">
+        <div class="back-buttons-div">
+            <a class="back-button" href="@Url.Action("Index", "Home")">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+                Strona główna
+            </a>
+            <a class="back-button" href="@Url.Action("All", "Order")">
+                <span class="material-symbols-outlined">
+                    list
+                </span>
+                Lista zamówień
+            </a>
+        </div>
         <form class="order-details">
             <div class="time-info-container">
                 <div class="time-info-group">
@@ -61,12 +75,22 @@
                 </div>
             </div>
             <div class="input-group">
-                <label for="orderNumber">Numer zamówienia: <span class="symbol-required">*</span></label>
+                <label for="orderNumber">Nazwa zamówienia: </label>
+                <input type="text" name="orderNumber" id="orderNumber" value="@Model.OrderName" disabled>
+                <span id="errorOrderNumber" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="orderNumber">Numer zamówienia: </label>
                 <input type="text" name="orderNumber" id="orderNumber" value="@Model.OrderNumber" disabled>
                 <span id="errorOrderNumber" class="errors-text"></span>
             </div>
             <div class="input-group">
-                <label asp-for="ClientId">Klient: <span class="symbol-required">*</span></label>
+                <label for="createdAt">Data wprowadzenia: </label>
+                <input type="text" name="createdAt" id="createdAt" value="@Model.CreatedAt" disabled>
+                <span id="errorCreatedAt" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="ClientId">Klient: </label>
                 <select asp-for="ClientId" disabled>
                     @{
                         foreach (var client in Model.AllClients)
@@ -80,7 +104,7 @@
                 <span asp-validation-for="ClientId" class="errors-text"></span>
             </div>
             <div class="input-group">
-                <label for="location">Lokalizacja: <span class="symbol-required">*</span></label>
+                <label for="location">Lokalizacja: </label>
                 <input type="text" name="location" id="location" value="@Model.Location" disabled>
                 <span id="errorLocation" class="errors-text"></span>
             </div>
@@ -110,21 +134,29 @@
                 <input type="file" id="fileInput" name="photo" style="display:none;" onchange="submitUploadPhotoForm()"/>
             </form>
         </div>
-        <div class="photos-container">
-            @{
-                if (Model.Photos.Count > 0)
-                {
-                    foreach (var photo in Model.Photos)
-                    {
-                        <img src="@Url.Content(photo)" alt="order-photo" class="order-photo" onclick="submitDeletePhotoForm(this)">
-                        <form action="@Url.Action("DeletePhoto", "Order")" method="post" class="delete-photo-form">
-                            <input type="hidden" name="photoPath" value="@photo" />
-                            <input type="hidden" name="orderId" value="@Model.Id" />
-                        </form>
+        @{
+            if (Model.Photos.Count > 0)
+            {
+                <div class="photos-container">
+                    @{
+                        foreach (var photo in Model.Photos)
+                        {
+                            <img src="@Url.Content(photo)" alt="order-photo" class="order-photo" onclick="submitDeletePhotoForm(this)">
+                            <form action="@Url.Action("DeletePhoto", "Order")" method="post" class="delete-photo-form">
+                                <input type="hidden" name="photoPath" value="@photo"/>
+                                <input type="hidden" name="orderId" value="@Model.Id"/>
+                            </form>
+                        }
                     }
-                }
+                </div>
             }
-        </div>
+            else if (Model.Photos.Count == 0)
+            {
+                <div class="no-photos">
+                    <h3>Brak zdjęć</h3>
+                </div>
+            }
+        }
         <div class="actions-container">
             <div class="actions-container-col">
                 <a href="@Url.Action("EditForm", new { Model.Id })" class="details-action">Edytuj</a>
@@ -134,9 +166,15 @@
             <div class="actions-container-col">
                 <a href="@Url.Action("GetBarcode", new { Model.Id })" class="details-action">Pobierz kod kreskowy</a>
                 <a href="@Url.Action("PrintBarcode", new { Model.Id })" class="details-action" target="_blank">Drukuj kod kreskowy</a>
-                <a href="@Url.Action("GetOrderFile", new {Model.Id })" class="details-action" target="_blank">Pobierz plik zamówienia</a>
+                <a href="@Url.Action("GetOrderFile", new { Model.Id })" class="details-action" target="_blank">Pobierz plik zamówienia</a>
             </div>
         </div>
     </div>
+    @if (TempData["FileError"] != null)
+    {
+    <script>
+        alert("Plik dla tego zamówienia nie istnieje");
+    </script>
+    }
     <script src="@Url.Content("~/js/photo.js")"></script>
 </main>

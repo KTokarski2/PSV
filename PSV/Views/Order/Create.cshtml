@@ -1,64 +1,77 @@
 @model PSV.Models.DTOs.OrderPost;
 
 <main>
-        <h2 class="page-title">Nowe zamówienie</h2>
-        <form novalidate onsubmit="" class="upload-form" asp-action="UploadOrderFile" asp-controller="Order" method="post" enctype="multipart/form-data">
-            <label asp-for="OrderFile">Wczytaj plik zamówienia</label>
-            <input type="file" asp-for="OrderFile" value="@Model.OrderFile">
-            <input class="form-submit" type="submit" value="Prześlij">
-        </form>
-        <form class="create-form" asp-action="Create" asp-controller="Order" method="post" enctype="multipart/form-data">
-            <div class="input-group">
-                <label asp-for="OrderNumber">Numer zamówienia: <span class="symbol-required">*</span></label>
-                <input type="text" asp-for="OrderNumber" placeholder="">
-                <span asp-validation-for="OrderNumber" class="errors-text"></span>
-            </div>
-            <div class="input-group-checkbox">
-                <input type="checkbox" asp-for="Cut">
-                <label asp-for="Cut">Cięcie</label>
-                <input type="checkbox" asp-for="Milling">
-                <label asp-for="Milling">Frezowanie</label>
-                <input type="checkbox" asp-for="Wrapping">
-                <label asp-for="Wrapping">Oklejanie</label>
-            </div>
-            <div class="input-group">
-                <label asp-for="EdgeCodeProvided">Kod obrzeża podany: </label>
-                <input type="text" asp-for="EdgeCodeProvided" placeholder="">
-                <span asp-validation-for="EdgeCodeProvided" class="errors-text"></span>
-            </div>
-            <div class="input-group">
-                <label asp-for="Location">Lokalizacja: <span class="symbol-required">*</span></label>
-                <select asp-for="Location">
-                    @{
+    <div class="back-buttons-div">
+        <a class="back-button" href="@Url.Action("Index", "Home")">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+            Strona główna
+        </a>
+    </div>
+    <h2 class="page-title">Nowe zamówienie</h2>
+    <form novalidate onsubmit="" class="upload-form" asp-action="UploadOrderFile" asp-controller="Order" method="post" enctype="multipart/form-data">
+        <label asp-for="OrderFile">Wczytaj plik zamówienia</label>
+        <input type="file" asp-for="OrderFile" value="@Model.OrderFile">
+        <input class="form-submit" type="submit" value="Prześlij">
+    </form>
+    <form class="create-form" asp-action="Create" asp-controller="Order" method="post" enctype="multipart/form-data">
+        <div class="input-group">
+            <label asp-for="OrderName">Nazwa zamówienia: <span class="symbol-required">*</span></label>
+            <input type="text" asp-for="OrderName" placeholder="">
+            <span asp-validation-for="OrderName" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="OrderNumber">Numer zamówienia: <span class="symbol-required">*</span></label>
+            <input type="text" asp-for="OrderNumber" placeholder="">
+            <span asp-validation-for="OrderNumber" class="errors-text"></span>
+        </div>
+        <div class="input-group-checkbox">
+            <input type="checkbox" asp-for="Cut">
+            <label asp-for="Cut">Cięcie</label>
+            <input type="checkbox" asp-for="Milling">
+            <label asp-for="Milling">Frezowanie</label>
+            <input type="checkbox" asp-for="Wrapping">
+            <label asp-for="Wrapping">Oklejanie</label>
+        </div>
+        <div class="input-group">
+            <label asp-for="EdgeCodeProvided">Kod obrzeża podany: </label>
+            <input type="text" asp-for="EdgeCodeProvided" placeholder="">
+            <span asp-validation-for="EdgeCodeProvided" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="Location">Lokalizacja: <span class="symbol-required">*</span></label>
+            <select asp-for="Location">
+                @{
                     foreach (var location in Model.AllLocations)
                     {
-                    <option value="@location.Id">@location.Name</option>
+                        <option value="@location.Id">@location.Name</option>
                     }
+                }
+            </select>
+            <span asp-validation-for="Location" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="Client">Klient: <span class="symbol-required">*</span></label>
+            <select asp-for="Client">
+                @{
+                    foreach (var client in Model.AllClients)
+                    {
+                        <option value="@client.Id">@client.Name</option>
                     }
-                </select>
-                <span asp-validation-for="Location" class="errors-text"></span>
-            </div>
-            <div class="input-group">
-                <label asp-for="Client">Klient: <span class="symbol-required">*</span></label>
-                <select asp-for="Client">
-                    @{
-                        foreach (var client in Model.AllClients)
-                        {
-                            <option value="@client.Id">@client.Name</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="Client" class="errors-text"></span>
-            </div>
-            <div class="input-group">
-                <label asp-for="Comments">Komentarz: </label>
-                <textarea asp-for="Comments"></textarea>
-                <span asp-validation-for="Comments" class="errors-text"></span>
-            </div>
-            <div class="input-group">
-                <label asp-for="Photos">Zdjęcia: </label>
-                <input type="file" asp-for="Photos" multiple="multiple">
-            </div>
-            <input class="form-submit" type="submit" value="Dodaj zamówienie">
-        </form>
+                }
+            </select>
+            <span asp-validation-for="Client" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="Comments">Komentarz: </label>
+            <textarea asp-for="Comments"></textarea>
+            <span asp-validation-for="Comments" class="errors-text"></span>
+        </div>
+        <div class="input-group">
+            <label asp-for="Photos">Zdjęcia: </label>
+            <input type="file" asp-for="Photos" multiple="multiple">
+        </div>
+        <input class="form-submit" type="submit" value="Dodaj zamówienie">
+    </form>
 </main>

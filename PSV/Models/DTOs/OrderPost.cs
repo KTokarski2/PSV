@@ -8,6 +8,9 @@ namespace PSV.Models.DTOs
        [Required(ErrorMessage = "Pole jest wymagane")] 
        public string OrderNumber { get; set; }
        
+       [Required(ErrorMessage = "Pole jest wymagane")]
+       public string OrderName { get; set; }
+       
        public bool Cut { get; set; }
        
        public bool Milling { get; set; }

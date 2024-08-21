@@ -3,6 +3,20 @@
 <main>
     <h2 class="page-title">@Model.Name - szczegółowe dane</h2>
     <div class="details-container">
+        <div class="back-buttons-div">
+            <a class="back-button" href="@Url.Action("Index", "Home")">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+                Strona główna
+            </a>
+            <a class="back-button" href="@Url.Action("All", "Client")">
+                <span class="material-symbols-outlined">
+                    list
+                </span>
+                Lista klientów
+            </a>
+        </div>
         <form class="order-details">
             <div class="input-group">
                 <label for="orderNumber">Nazwa klienta: <span class="symbol-required">*</span></label>
@@ -31,8 +45,8 @@
             </div>
         </form>
         <div class="actions-container">
-            <a href="@Url.Action("EditForm", "Client", new {Model.Id})" class="details-action">Edytuj</a>
-            <a href="@Url.Action("Delete", "Client", new {Model.Id})" class="details-action">Usuń</a>
+            <a href="@Url.Action("EditForm", "Client", new { Model.Id })" class="details-action">Edytuj</a>
+            <a href="@Url.Action("Delete", "Client", new { Model.Id })" class="details-action">Usuń</a>
         </div>
     </div>
 </main>

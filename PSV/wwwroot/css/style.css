@@ -455,6 +455,13 @@ main {
     margin-bottom: 30px;
 }
 
+.no-photos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
 .order-photo {
     width: calc(33.33% - 20px);
     margin-bottom: 10px;
@@ -589,5 +596,31 @@ main {
 }
 
 .action-button:hover {
+    background-color: #e5383b;
+}
+
+.back-buttons-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #ba181b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    border: solid 1px black;
+}
+
+.back-button:hover {
     background-color: #e5383b;
 }

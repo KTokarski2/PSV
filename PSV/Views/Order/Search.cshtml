@@ -1,6 +1,14 @@
 <main>
     <h2 class="page-title">Wyszukaj zamówienie</h2>
     <div class="search-container">
+        <div class="back-buttons-div">
+            <a class="back-button" href="@Url.Action("Index", "Home")">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+                Strona główna
+            </a>
+        </div>
         <form class="search-form" method="get" action="@Url.Action("Find", "Order")">
             <div class="input-group-search">
                 <label for="orderNumber">Numer zamówienia: <span class="symbol-required">*</span></label>

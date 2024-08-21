@@ -51,9 +51,9 @@ public class OrderFileService
         }
     }
 
-    public async Task<string?> GetTemporaryFile(string orderNumber)
+    public async Task<string?> GetTemporaryFile(string orderName)
     {
-        string[] files = Directory.GetFiles(TempDir, $"{orderNumber}.*");
+        string[] files = Directory.GetFiles(TempDir, $"{orderName}.*");
 
         if (files.Length == 0)
         {

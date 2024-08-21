@@ -1,8 +1,4 @@
-using System.Net;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
-using PSV.Models;
 using PSV.Models.DTOs;
 using PSV.Services;
 using PSV.Utils;
@@ -36,9 +32,11 @@ public class OrderController : Controller
         var allLocations = await _service.GetAllLocations();
         newOrder.AllLocations = allLocations;
         newOrder.AllClients = allClients;
-        newOrder.OrderNumber = fileService.ExtractOrderNumber(request.OrderFile);
+        newOrder.OrderName = fileService.ExtractOrderNumber(request.OrderFile);
+        newOrder.OrderNumber = await _service.GenerateOrderNumber();
         await fileService.SaveTemporaryFile(request.OrderFile);
         ModelState.Remove("OrderNumber");
+        ModelState.Remove("OrderName");
         return View("Create", newOrder);
     }
 
@@ -50,6 +48,7 @@ public class OrderController : Controller
         var allLocations = await _service.GetAllLocations();
         newOrder.AllClients = allClients;
         newOrder.AllLocations = allLocations;
+        newOrder.OrderNumber = await _service.GenerateOrderNumber();
         return View("Create", newOrder);
     }
     
@@ -138,6 +137,13 @@ public class OrderController : Controller
     public async Task<IActionResult> GetOrderFile(int id)
     {
         var path = await _service.GetOrderFilePath(id);
+
+        if (string.IsNullOrEmpty(path) || !System.IO.File.Exists(path))
+        {
+            TempData["FileError"] = "";
+            return RedirectToAction("Details", "Order", new { id });
+        }
+        
         var fileName = Path.GetFileName(path);
         var fileContent = await System.IO.File.ReadAllBytesAsync(path);
         return File(fileContent, "application/octet-stream", fileName);
