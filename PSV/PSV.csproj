@@ -77,6 +77,26 @@
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3041\chairpng.parspng.com-4.png" />
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3041\images.jpeg" />
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3041\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\27\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\27\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\24\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\24\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\28\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\28\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\38\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\38\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\23\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\23\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\32\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\32\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\25\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\25\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\29\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\29\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\36\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\36\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\34\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\34\QRCode.png" />
     </ItemGroup>
 
 </Project>

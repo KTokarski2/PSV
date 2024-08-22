@@ -320,6 +320,12 @@ main {
     width: 100%;
 }
 
+.not-present-decision {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
 .control-button-start,
 .control-button-end{
     padding: 1rem 1rem;

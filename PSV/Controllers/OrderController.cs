@@ -17,10 +17,17 @@ public class OrderController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> All()
+    public async Task<IActionResult> All(int pageNumber = 1, int pageSize = 20)
     {
-        var dto = await _service.GetAllOrders();
-        return View("List", dto);
+        var orders = await _service.GetAllOrders();
+        var totalItems = orders.Count;
+        var ordersOnPage = orders
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var paginatedOrders = new PaginationViewModel<OrderList>(ordersOnPage, totalItems, pageNumber, pageSize);
+        return View("List", paginatedOrders);
     }
 
     [HttpPost]
@@ -32,9 +39,14 @@ public class OrderController : Controller
         var allLocations = await _service.GetAllLocations();
         newOrder.AllLocations = allLocations;
         newOrder.AllClients = allClients;
-        newOrder.OrderName = fileService.ExtractOrderNumber(request.OrderFile);
         newOrder.OrderNumber = await _service.GenerateOrderNumber();
-        await fileService.SaveTemporaryFile(request.OrderFile);
+
+        if (request.OrderFile != null)
+        {
+            newOrder.OrderName = fileService.ExtractOrderNumber(request.OrderFile);
+            await fileService.SaveTemporaryFile(request.OrderFile);
+        }
+        
         ModelState.Remove("OrderNumber");
         ModelState.Remove("OrderName");
         return View("Create", newOrder);

@@ -32,10 +32,18 @@ public class ClientController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> All()
+    public async Task<IActionResult> All(int pageNumber = 1, int pageSize = 20)
     {
         var clients = await _service.GetAllClients();
-        return View("List", clients);
+        var totalItems = clients.Count;
+        var clientsOnPage = clients
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var paginatedClients = new PaginationViewModel<ClientDetails>(clientsOnPage, totalItems, pageNumber, pageSize);
+        
+        return View("List", paginatedClients);
     }
 
     [HttpGet]

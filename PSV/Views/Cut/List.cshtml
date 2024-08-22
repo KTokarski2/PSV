@@ -1,4 +1,4 @@
-@model List<PSV.Models.DTOs.OrderList>;
+@model PSV.Models.DTOs.PaginationViewModel<PSV.Models.DTOs.OrderList>
 
 <main>
     <a class="action-button" href="@Url.Action("Menu", "Cut")">
@@ -19,7 +19,7 @@
         </thead>
         <tbody>
         @{
-            foreach (var order in Model)
+            foreach (var order in Model.Items)
             {
                 <tr class="orders-list-row">
                     <td><a href="@Url.Action("Order", "Cut", new { id = order.Id })">@order.OrderNumber</a></td>
@@ -72,4 +72,19 @@
         }
         </tbody>
     </table>
+
+    <div class="paging">
+        @if (Model.PageNumber > 1)
+        {
+        <a href="@Url.Action("All", "Cut", new { pageNumber = Model.PageNumber - 1, pageSize = Model.PageSize })">Poprzednia</a>
+        }
+
+        <span>Strona @Model.PageNumber z @Model.TotalPages</span>
+
+        @if (Model.PageNumber < Model.TotalPages)
+        {
+        <a href="@Url.Action("All", "Cut", new { pageNumber = Model.PageNumber + 1, pageSize = Model.PageSize })">Następna</a>
+        }
+    </div>
+    
 </main>

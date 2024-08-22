@@ -3,7 +3,7 @@ namespace PSV.Utils;
 public class TempFolderCleanerService : BackgroundService
 {
     private readonly string _tempFolderPath;
-    private readonly TimeSpan _interval = TimeSpan.FromHours(8);
+    private readonly TimeSpan _interval = TimeSpan.FromHours(6);
 
     public TempFolderCleanerService(IWebHostEnvironment env)
     {

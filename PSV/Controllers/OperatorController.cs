@@ -40,10 +40,18 @@ public class OperatorController : Controller
     }
     
     [HttpGet]
-    public async Task<IActionResult> All()
+    public async Task<IActionResult> All(int pageNumber = 1, int pageSize = 20)
     {
-        var dto = await _service.GetOperators();
-        return View("List", dto);
+        var operators = await _service.GetOperators();
+        var totalItems = operators.Count;
+        var operatorsOnPage = operators
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var paginatedOperatos = new PaginationViewModel<OperatorDetails>(operatorsOnPage, totalItems, pageNumber, pageSize);
+        
+        return View("List", paginatedOperatos);
     }
 
     [HttpGet]

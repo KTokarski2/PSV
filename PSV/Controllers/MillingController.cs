@@ -20,10 +20,19 @@ public class MillingController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> All()
+    public async Task<IActionResult> All(int pageNumber = 1, int pageSize = 20)
     {
-        var dto = await _service.GetAllOrders();
-        return View("List", dto);
+        var orders = await _service.GetAllOrders();
+        var totalItems = orders.Count;
+        var ordersOnPage = orders
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var paginatedOrders = new PaginationViewModel<OrderList>(ordersOnPage, totalItems, pageNumber, pageSize);
+        
+        
+        return View("List", paginatedOrders);
     }
     
     [HttpGet]

@@ -13,30 +13,6 @@
       "PackagePath": "staticwebassets/css/style.css"
     },
     {
-      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/22/BarCode.png",
-      "PackagePath": "staticwebassets/images/OrdersData/22/BarCode.png"
-    },
-    {
-      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/22/QRCode.png",
-      "PackagePath": "staticwebassets/images/OrdersData/22/QRCode.png"
-    },
-    {
-      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/23/BarCode.png",
-      "PackagePath": "staticwebassets/images/OrdersData/23/BarCode.png"
-    },
-    {
-      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/23/QRCode.png",
-      "PackagePath": "staticwebassets/images/OrdersData/23/QRCode.png"
-    },
-    {
-      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/24/BarCode.png",
-      "PackagePath": "staticwebassets/images/OrdersData/24/BarCode.png"
-    },
-    {
-      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/images/OrdersData/24/QRCode.png",
-      "PackagePath": "staticwebassets/images/OrdersData/24/QRCode.png"
-    },
-    {
       "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/js/photo.js",
       "PackagePath": "staticwebassets/js/photo.js"
     },
@@ -275,10 +251,6 @@
     {
       "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
-    },
-    {
-      "Id": "/home/fedora/RiderProjects/PSV/PSV/wwwroot/ordersFiles/Agatameble.txt",
-      "PackagePath": "staticwebassets/ordersFiles/Agatameble.txt"
     },
     {
       "Id": "obj/Debug/net7.0/staticwebassets/msbuild.PSV.Microsoft.AspNetCore.StaticWebAssets.props",
