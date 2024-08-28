@@ -6,6 +6,7 @@ namespace PSV.Models.DTOs
     public class OrderPost
     {
        [Required(ErrorMessage = "Pole jest wymagane")] 
+       [UniqueOrderNumberValidator(ErrorMessage = "Numer zamówienia musi być unikalny")]
        public string OrderNumber { get; set; }
        
        [Required(ErrorMessage = "Pole jest wymagane")]

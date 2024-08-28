@@ -97,6 +97,8 @@
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\36\QRCode.png" />
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\34\BarCode.png" />
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\34\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3\QRCode.png" />
     </ItemGroup>
 
 </Project>
