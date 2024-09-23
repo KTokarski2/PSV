@@ -95,6 +95,9 @@ namespace PSV.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("ClientNotified")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("From")
                         .HasColumnType("datetime2");
 
@@ -152,6 +155,9 @@ namespace PSV.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("ClientNotified")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("From")
                         .HasColumnType("datetime2");
@@ -255,6 +261,12 @@ namespace PSV.Migrations
                     b.Property<string>("QrCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("StagesCompleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StagesTotal")
+                        .HasColumnType("int");
+
                     b.HasKey("Id")
                         .HasName("Order_pk");
 
@@ -281,6 +293,9 @@ namespace PSV.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("ClientNotified")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("From")
                         .HasColumnType("datetime2");

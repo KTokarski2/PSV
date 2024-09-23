@@ -45,6 +45,7 @@ CREATE TABLE [Cut] (
     [From] datetime2 NULL,
     [To] datetime2 NULL,
     [IsPresent] bit NOT NULL,
+    [ClientNotified] bit NOT NULL,
     [IdOperator] int NULL,
     CONSTRAINT [Cut_pk] PRIMARY KEY ([Id]),
     CONSTRAINT [Operator_Cut] FOREIGN KEY ([IdOperator]) REFERENCES [Operator] ([Id]) ON DELETE SET NULL
@@ -56,6 +57,7 @@ CREATE TABLE [Milling] (
     [From] datetime2 NULL,
     [To] datetime2 NULL,
     [IsPresent] bit NOT NULL,
+    [ClientNotified] bit NOT NULL,
     [IdOperator] int NULL,
     CONSTRAINT [Milling_pk] PRIMARY KEY ([Id]),
     CONSTRAINT [Operator_Milling] FOREIGN KEY ([IdOperator]) REFERENCES [Operator] ([Id]) ON DELETE SET NULL
@@ -67,6 +69,7 @@ CREATE TABLE [Wrapping] (
     [From] datetime2 NULL,
     [To] datetime2 NULL,
     [IsPresent] bit NOT NULL,
+    [ClientNotified] bit NOT NULL,
     [IdOperator] int NULL,
     CONSTRAINT [Wrapping_pk] PRIMARY KEY ([Id]),
     CONSTRAINT [Operator_Wrapping] FOREIGN KEY ([IdOperator]) REFERENCES [Operator] ([Id]) ON DELETE SET NULL
@@ -76,10 +79,14 @@ GO
 CREATE TABLE [Order] (
     [Id] int NOT NULL IDENTITY,
     [OrderNumber] nvarchar(max) NOT NULL,
+    [OrderName] nvarchar(max) NOT NULL,
     [CreatedAt] datetime2 NOT NULL,
     [IdClient] int NULL,
     [QrCode] nvarchar(max) NULL,
     [BarCode] nvarchar(max) NULL,
+    [OrderFile] nvarchar(max) NULL,
+    [StagesCompleted] int NOT NULL,
+    [StagesTotal] int NOT NULL,
     [EdgeCodeProvided] nvarchar(max) NULL,
     [EdgeCodeUsed] nvarchar(max) NULL,
     [Photos] nvarchar(max) NULL,
@@ -152,35 +159,8 @@ CREATE INDEX [IX_Wrapping_IdOperator] ON [Wrapping] ([IdOperator]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20240725202726_Initialize', N'7.0.5');
+VALUES (N'20240923094331_InitializeFinishedProject', N'7.0.5');
 GO
 
 COMMIT;
 GO
-
-BEGIN TRANSACTION;
-GO
-
-ALTER TABLE [Order] ADD [OrderFile] nvarchar(max) NULL;
-GO
-
-INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20240807181305_OrderFileField', N'7.0.5');
-GO
-
-COMMIT;
-GO
-
-BEGIN TRANSACTION;
-GO
-
-ALTER TABLE [Order] ADD [OrderName] nvarchar(max) NOT NULL DEFAULT N'';
-GO
-
-INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20240818164217_AddOrderNameColumn', N'7.0.5');
-GO
-
-COMMIT;
-GO
-

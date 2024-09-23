@@ -14,6 +14,8 @@ public class Order
     public string? QrCode { get; set; }
     public string? BarCode { get; set; }
     public string? OrderFile { get; set; }
+    public int StagesCompleted { get; set; }
+    public int StagesTotal {get; set;}
     public string? EdgeCodeProvided { get; set; }
     public string? EdgeCodeUsed { get; set; }
     public string? Photos { get; set; }

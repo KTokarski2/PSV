@@ -9,6 +9,7 @@ public class Wrapping
     public DateTime? From { get; set; }
     public DateTime? To { get; set; }
     public bool IsPresent { get; set; }
+    public bool ClientNotified {get; set;}
     public virtual Order Order { get; set; }
     public int? IdOperator { get; set; }
     public virtual Operator? Operator { get; set; }

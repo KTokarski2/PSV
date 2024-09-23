@@ -9,11 +9,13 @@ public class DbService : IDbService
 {
     private readonly Repository _context;
     private readonly OrderFileService _fileService;
+    private readonly ISmsService _smsservice;
 
-    public DbService(Repository context)
+    public DbService(Repository context, ISmsService smsservice)
     {
         _context = context;
         _fileService = new OrderFileService();
+        _smsservice = smsservice;
     }
     
     public async Task AddOrder(OrderPost request)
@@ -28,6 +30,7 @@ public class DbService : IDbService
             CreatedAt = DateTime.Now,
             Client = client,
             Location = location,
+            StagesTotal = CountTotalStages(request),
             Milling = new Milling { IsPresent = request.Milling },
             Wrapping = new Wrapping { IsPresent = request.Wrapping },
             Cut = new Cut { IsPresent = request.Cut },
@@ -57,6 +60,7 @@ public class DbService : IDbService
         order.OrderFile = await _fileService.GetTemporaryFile(order.OrderName);
 
         await _context.SaveChangesAsync();
+        await _smsservice.SendMessage(client.PhoneNumber, "OrderCreated", order.OrderNumber);
     }
             
     public async Task<List<OrderList>> GetAllOrders()
@@ -246,6 +250,7 @@ public class DbService : IDbService
     {
         var order = await _context.Orders
             .Include(o => o.Cut)
+            .Include(o => o.Client)
             .FirstOrDefaultAsync(o => o.Id == orderId);
 
         var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
@@ -256,6 +261,31 @@ public class DbService : IDbService
             order.Cut.Operator = opr;
             await _context.SaveChangesAsync();
         }
+
+        if (!order.Cut.ClientNotified && order.Client.PhoneNumber != null)
+        {
+            if (order.StagesCompleted != order.StagesTotal)
+            {
+                order.StagesCompleted += 1;
+                await _context.SaveChangesAsync();
+            }
+
+            if (order.StagesCompleted < order.StagesTotal)
+            {
+                await _smsservice.SendMessage(order.Client.PhoneNumber, "StageFinished", order.OrderNumber, order.StagesCompleted.ToString(),order.StagesTotal.ToString());
+                order.Cut.ClientNotified = true;
+                await _context.SaveChangesAsync();
+            }
+
+            if (order.StagesCompleted == order.StagesTotal)
+            {
+                await _smsservice.SendMessage(order.Client.PhoneNumber, "OrderFinished", order.OrderNumber);
+                order.Cut.ClientNotified = true;
+                await _context.SaveChangesAsync();
+            }
+            
+        }
+        
     }
     
     public async Task UpdateMillingStartTime(int orderId, int operatorId)
@@ -278,6 +308,7 @@ public class DbService : IDbService
     {
         var order = await _context.Orders
             .Include(o => o.Milling)
+            .Include(o => o.Client)
             .FirstOrDefaultAsync(o => o.Id == orderId);
 
         var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
@@ -287,6 +318,29 @@ public class DbService : IDbService
             order.Milling.To = DateTime.Now;
             order.Milling.Operator = opr;
             await _context.SaveChangesAsync();
+        }
+
+        if (!order.Milling.ClientNotified && order.Client.PhoneNumber != null)
+        {
+            if (order.StagesTotal != order.StagesCompleted)
+            {
+                order.StagesCompleted += 1;
+                await _context.SaveChangesAsync();
+            }
+
+            if (order.StagesCompleted < order.StagesTotal)
+            {
+                await _smsservice.SendMessage(order.Client.PhoneNumber, "StageFinished",order.OrderNumber, order.StagesCompleted.ToString(), order.StagesTotal.ToString());
+                order.Milling.ClientNotified = true;
+                await _context.SaveChangesAsync();
+            }
+
+            if (order.StagesCompleted == order.StagesTotal)
+            {
+                await _smsservice.SendMessage(order.Client.PhoneNumber, "OrderFinished", order.OrderNumber);
+                order.Milling.ClientNotified = true;
+                await _context.SaveChangesAsync();
+            }
         }
     }
     
@@ -310,6 +364,7 @@ public class DbService : IDbService
     {
         var order = await _context.Orders
             .Include(o => o.Wrapping)
+            .Include(o => o.Client)
             .FirstOrDefaultAsync(o => o.Id == orderId);
 
         var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
@@ -319,6 +374,29 @@ public class DbService : IDbService
             order.Wrapping.To = DateTime.Now;
             order.Wrapping.Operator = opr;
             await _context.SaveChangesAsync();
+        }
+
+        if (!order.Wrapping.ClientNotified && order.Client.PhoneNumber != null)
+        {
+            if (order.StagesCompleted != order.StagesTotal)
+            {
+                order.StagesCompleted += 1;
+                await _context.SaveChangesAsync();
+            }
+
+            if (order.StagesCompleted < order.StagesTotal)
+            {
+                await _smsservice.SendMessage(order.Client.PhoneNumber, "StageFinished",order.OrderNumber, order.StagesCompleted.ToString(), order.StagesTotal.ToString());
+                order.Wrapping.ClientNotified = true;
+                await _context.SaveChangesAsync();
+            }
+
+            if (order.StagesCompleted == order.StagesTotal)
+            {
+                await _smsservice.SendMessage(order.Client.PhoneNumber, "OrderFinished", order.OrderNumber);
+                order.Wrapping.ClientNotified = true;
+                await _context.SaveChangesAsync();
+            }
         }
     }
 
@@ -704,6 +782,7 @@ public class DbService : IDbService
             .SelectMany(o => o.Comments)
             .Select(c => new CommentDto
             {
+                Id = c.Id,
                 Content = c.Content,
                 Source = c.Source,
                 Time = c.Time.ToString("dd.MM.yyyy HH:mm"),
@@ -735,5 +814,18 @@ public class DbService : IDbService
             .CountAsync();
         var orderNumber = $"{datePrefix}{todayOrdersCount + 1:D4}";
         return orderNumber;
+    }
+    private int CountTotalStages(OrderPost request)
+    {
+        int stages = 0;
+
+        if (request.Cut == true)
+            stages += 1;
+        if (request.Milling == true)
+            stages += 1;
+        if (request.Wrapping == true)
+            stages += 1;
+        
+        return stages;
     }
 }

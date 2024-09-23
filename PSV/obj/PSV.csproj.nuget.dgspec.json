@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/home/fedora/RiderProjects/PSV/PSV/PSV.csproj": {}
+    "/home/fedora/Projects/PSV/PSV/PSV.csproj": {}
   },
   "projects": {
-    "/home/fedora/RiderProjects/PSV/PSV/PSV.csproj": {
+    "/home/fedora/Projects/PSV/PSV/PSV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/fedora/RiderProjects/PSV/PSV/PSV.csproj",
+        "projectUniqueName": "/home/fedora/Projects/PSV/PSV/PSV.csproj",
         "projectName": "PSV",
-        "projectPath": "/home/fedora/RiderProjects/PSV/PSV/PSV.csproj",
+        "projectPath": "/home/fedora/Projects/PSV/PSV/PSV.csproj",
         "packagesPath": "/home/fedora/.nuget/packages/",
-        "outputPath": "/home/fedora/RiderProjects/PSV/PSV/obj/",
+        "outputPath": "/home/fedora/Projects/PSV/PSV/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/fedora/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -35,8 +35,8 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "BarcodeLib": {
               "target": "Package",
@@ -55,6 +55,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             },
             "QRCoder": {
               "target": "Package",
@@ -84,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/7.0.118/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

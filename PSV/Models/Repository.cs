@@ -21,6 +21,7 @@ public class Repository : DbContext
     public virtual DbSet<Wrapping> Wrappings { get; set; }
     public virtual DbSet<Operator> Operators { get; set; }
     public virtual DbSet<Location> Locations { get; set; }
+    public virtual DbSet<Comment> Comments {get; set;}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -76,6 +77,8 @@ public class Repository : DbContext
             entity.Property(e => e.Photos);
             entity.Property(e => e.EdgeCodeProvided);
             entity.Property(e => e.EdgeCodeUsed);
+            entity.Property(e => e.StagesCompleted);
+            entity.Property(e => e.StagesTotal);
 
             entity
                 .HasOne(e => e.Client)
@@ -99,6 +102,7 @@ public class Repository : DbContext
             entity.Property(e => e.From);
             entity.Property(e => e.To);
             entity.Property(e => e.IsPresent);
+            entity.Property(e => e.ClientNotified);
 
             entity
                 .HasOne(e => e.Order)
@@ -122,6 +126,7 @@ public class Repository : DbContext
             entity.Property(e => e.From);
             entity.Property(e => e.To);
             entity.Property(e => e.IsPresent);
+            entity.Property(e => e.ClientNotified);
 
             entity
                 .HasOne(e => e.Order)
@@ -145,6 +150,7 @@ public class Repository : DbContext
             entity.Property(e => e.From);
             entity.Property(e => e.To);
             entity.Property(e => e.IsPresent);
+            entity.Property(e => e.ClientNotified);
 
             entity
                 .HasOne(e => e.Order)

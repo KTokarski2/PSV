@@ -22,8 +22,10 @@ namespace PSV.Models.DTOs
        
        public List<LocationInfo>? AllLocations { get; set; }
        
+       [Required(ErrorMessage = "Należy wybrać klienta")]
        public string? Client { get; set; }
        
+       [Required(ErrorMessage = "Należy wybrać lokalizację")]
        public string? Location { get; set; }
        
        public string? Comments { get; set; }

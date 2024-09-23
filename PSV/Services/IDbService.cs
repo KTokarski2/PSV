@@ -47,7 +47,6 @@ namespace PSV.Services
         public Task<int> GetWrappingOperatorId(int? orderId);
         public Task<List<CommentDto>> GetOrderComments(int orderId);
         public Task<string> GetOrderPhotosPath(int id);
-
         public Task<string> GenerateOrderNumber();
     }
 }
