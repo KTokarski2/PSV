@@ -142,6 +142,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXIvU2VhcmNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/fedora/Projects/PSV/PSV/Views/OrderRelease/CreateReleaser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJSZWxlYXNlL0NyZWF0ZVJlbGVhc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/Projects/PSV/PSV/Views/OrderRelease/DetailsReleaser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJSZWxlYXNlL0RldGFpbHNSZWxlYXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/Projects/PSV/PSV/Views/OrderRelease/EditReleaser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJSZWxlYXNlL0VkaXRSZWxlYXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/fedora/Projects/PSV/PSV/Views/OrderRelease/ListReleaser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZXJSZWxlYXNlL0xpc3RSZWxlYXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/fedora/Projects/PSV/PSV/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

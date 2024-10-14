@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PSV")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b01d1b3c0da0cd9ad602dedbb2e8fb4fe153ccd5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19cc00c4e8169d2f1e170f46363ff2f409eaef0c")]
 [assembly: System.Reflection.AssemblyProductAttribute("PSV")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PSV")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

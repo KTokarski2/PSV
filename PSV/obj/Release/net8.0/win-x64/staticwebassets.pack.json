@@ -13,14 +13,6 @@
       "PackagePath": "staticwebassets/css/style.css"
     },
     {
-      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/1/BarCode.png",
-      "PackagePath": "staticwebassets/images/OrdersData/1/BarCode.png"
-    },
-    {
-      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/1/QRCode.png",
-      "PackagePath": "staticwebassets/images/OrdersData/1/QRCode.png"
-    },
-    {
       "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/13/BarCode.png",
       "PackagePath": "staticwebassets/images/OrdersData/13/BarCode.png"
     },
@@ -51,6 +43,38 @@
     {
       "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/16/QRCode.png",
       "PackagePath": "staticwebassets/images/OrdersData/16/QRCode.png"
+    },
+    {
+      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/2/BarCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/2/BarCode.png"
+    },
+    {
+      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/2/QRCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/2/QRCode.png"
+    },
+    {
+      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/3/BarCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/3/BarCode.png"
+    },
+    {
+      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/3/QRCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/3/QRCode.png"
+    },
+    {
+      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/5/BarCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/5/BarCode.png"
+    },
+    {
+      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/5/QRCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/5/QRCode.png"
+    },
+    {
+      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/6/BarCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/6/BarCode.png"
+    },
+    {
+      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/6/QRCode.png",
+      "PackagePath": "staticwebassets/images/OrdersData/6/QRCode.png"
     },
     {
       "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/js/photo.js",
@@ -291,10 +315,6 @@
     {
       "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
-    },
-    {
-      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/ordersFiles/1909202401.txt",
-      "PackagePath": "staticwebassets/ordersFiles/1909202401.txt"
     },
     {
       "Id": "obj/Release/net8.0/win-x64/staticwebassets/msbuild.PSV.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -1,0 +1,53 @@
+@model PSV.Models.DTOs.PaginationViewModel<PSV.Models.DTOs.ReleaserDetails>
+
+<main>
+    <a class="action-button" href="@Url.Action("Index", "Home")">
+        <span class="material-symbols-outlined">
+            arrow_back
+        </span>
+    </a>
+    @{
+        if (Model.Items.Count == 0)
+        {
+            <h1>Brak wydawców w bazie danych</h1>
+        }
+        else
+        {
+            <table class="orders-list">
+                <thead>
+                <tr>
+                    <th>Nazwisko</th>
+                    <th>Imię</th>
+                    <th>Lokalizacja</th>
+                </tr>
+                </thead>
+                <tbody>
+                @{
+                    foreach (var rel in Model.Items)
+                    {
+                        <tr class="orders-list-row">
+                            <td><a href="@Url.Action("", "", new {rel.Id})">@rel.LastName</a></td>
+                            <td>@rel.FirstName</td>
+                            <td>@rel.Location</td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+            
+            <div class="paging">
+                @if (Model.PageNumber > 1)
+                {
+                    <a href="@Url.Action("AllReleasers", "OrderRelease", new { pageNumber = Model.PageNumber - 1, pageSize = Model.PageSize })">Poprzednia</a>
+                }
+
+                <span>Strona @Model.PageNumber z @Model.TotalPages</span>
+                
+                @if (Model.PageNumber < Model.TotalPages)
+                {
+                    <a href="@Url.Action("AllReleasers", "OrderRelease", new { pageNumber = Model.PageNumber + 1, pageSize = Model.PageSize })">Następna</a>
+                }
+            </div>
+        }
+    }
+</main>

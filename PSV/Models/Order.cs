@@ -28,5 +28,9 @@ public class Order
     public int IdLocation { get; set; }
     public virtual Location Location { get; set; }
     public virtual List<Comment> Comments { get; set; }
-    
+    public int IdReleaser {get; set;}
+    public virtual Releaser Releaser { get; set;}
+    public int IdOrderStatus {get; set;}
+    public virtual OrderStatus OrderStatus {get; set;}
+    public DateTime ReleaseDate {get; set;}
 }

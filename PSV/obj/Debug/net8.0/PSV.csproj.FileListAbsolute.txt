@@ -92,3 +92,4 @@
 /home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/Deploy/PSV.deps.json
 /home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/Deploy/PSV.runtimeconfig.json
 /home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/msgtemplates.json
+/home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/Deploy/msgtemplates.json

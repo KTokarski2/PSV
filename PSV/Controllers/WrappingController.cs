@@ -83,7 +83,9 @@ public class WrappingController : Controller
     [HttpGet]
     public async Task<IActionResult> UpdateWrappingEndTime(int id, int operatorId, string edgeCode)
     {
+        
         await _service.UpdateWrappingEndTime(id, operatorId);
+
         if (await _service.CheckIfUsedDifferentProvided(id, edgeCode))
         {
             await _service.SetUsedEdgeCode(id, edgeCode);

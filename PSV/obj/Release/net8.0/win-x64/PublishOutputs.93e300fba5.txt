@@ -2,9 +2,12 @@
 /home/fedora/Projects/PSV/PSV/Deploy/appsettings.Development.json
 /home/fedora/Projects/PSV/PSV/Deploy/appsettings.json
 /home/fedora/Projects/PSV/PSV/Deploy/msgtemplates.json
-/home/fedora/Projects/PSV/PSV/Deploy/wwwroot/images/OrdersData/1/BarCode.png
-/home/fedora/Projects/PSV/PSV/Deploy/wwwroot/images/OrdersData/1/QRCode.png
 /home/fedora/Projects/PSV/PSV/Deploy/wwwroot/images/OrdersData/13/QRCode.png
+/home/fedora/Projects/PSV/PSV/Deploy/wwwroot/images/OrdersData/2/QRCode.png
+/home/fedora/Projects/PSV/PSV/Deploy/wwwroot/images/OrdersData/3/BarCode.png
+/home/fedora/Projects/PSV/PSV/Deploy/wwwroot/images/OrdersData/3/QRCode.png
+/home/fedora/Projects/PSV/PSV/Deploy/wwwroot/images/OrdersData/5/BarCode.png
+/home/fedora/Projects/PSV/PSV/Deploy/wwwroot/images/OrdersData/5/QRCode.png
 /home/fedora/Projects/PSV/PSV/Deploy/PSV.dll
 /home/fedora/Projects/PSV/PSV/Deploy/PSV.runtimeconfig.json
 /home/fedora/Projects/PSV/PSV/Deploy/PSV.pdb

@@ -60,7 +60,7 @@ public class DbService : IDbService
         order.OrderFile = await _fileService.GetTemporaryFile(order.OrderName);
 
         await _context.SaveChangesAsync();
-        await _smsservice.SendMessage(client.PhoneNumber, "OrderCreated", order.OrderNumber);
+        //await _smsservice.SendMessage(client.PhoneNumber, "OrderCreated", order.OrderNumber);
     }
             
     public async Task<List<OrderList>> GetAllOrders()
@@ -267,8 +267,11 @@ public class DbService : IDbService
             if (order.StagesCompleted != order.StagesTotal)
             {
                 order.StagesCompleted += 1;
+                order.Cut.ClientNotified = true;
                 await _context.SaveChangesAsync();
             }
+
+            /*
 
             if (order.StagesCompleted < order.StagesTotal)
             {
@@ -276,6 +279,8 @@ public class DbService : IDbService
                 order.Cut.ClientNotified = true;
                 await _context.SaveChangesAsync();
             }
+
+            */
 
             if (order.StagesCompleted == order.StagesTotal)
             {
@@ -325,8 +330,11 @@ public class DbService : IDbService
             if (order.StagesTotal != order.StagesCompleted)
             {
                 order.StagesCompleted += 1;
+                order.Milling.ClientNotified = true;
                 await _context.SaveChangesAsync();
             }
+
+            /*
 
             if (order.StagesCompleted < order.StagesTotal)
             {
@@ -334,6 +342,8 @@ public class DbService : IDbService
                 order.Milling.ClientNotified = true;
                 await _context.SaveChangesAsync();
             }
+
+            */
 
             if (order.StagesCompleted == order.StagesTotal)
             {
@@ -381,8 +391,11 @@ public class DbService : IDbService
             if (order.StagesCompleted != order.StagesTotal)
             {
                 order.StagesCompleted += 1;
+                order.Wrapping.ClientNotified = true;
                 await _context.SaveChangesAsync();
             }
+
+            /*
 
             if (order.StagesCompleted < order.StagesTotal)
             {
@@ -390,6 +403,8 @@ public class DbService : IDbService
                 order.Wrapping.ClientNotified = true;
                 await _context.SaveChangesAsync();
             }
+
+            */
 
             if (order.StagesCompleted == order.StagesTotal)
             {
@@ -827,5 +842,66 @@ public class DbService : IDbService
             stages += 1;
         
         return stages;
+    }
+
+    public async Task<bool> CheckIfEdgeCodeWasProvided(int orderId)
+    {
+        var order = await _context.Orders.FindAsync(orderId);
+        if (order.EdgeCodeProvided == null) return false;
+        return true;
+    }
+
+    public async Task AddReleaser(ReleaserPost newReleaser)
+    {
+        var location = await _context.Locations.FirstOrDefaultAsync(l => l.Id == Int32.Parse(newReleaser.Location));
+        var releaser = new Releaser
+        {
+            FirstName = newReleaser.FirstName,
+            LastName = newReleaser.LastName,
+            Location = location
+        };
+        await _context.AddAsync(releaser);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<ReleaserDetails>> GetReleasers()
+    {
+        var dto = await _context.Releasers.Select(re => new ReleaserDetails 
+        {
+            Id = re.Id,
+            FirstName = re.FirstName,
+            LastName = re.LastName,
+            Location = re.Location.Name
+        }).ToListAsync();
+        return dto;
+    }
+
+    public async Task<ReleaserDetails> GetReleaserDetails(int id)
+    {
+        var dto = await _context.Releasers.Where(r => r.Id == id).Select(r => new ReleaserDetails 
+        {
+            Id = r.Id,
+            FirstName = r.FirstName,
+            LastName = r.LastName,
+            Location = r.Location.Name
+        }).FirstOrDefaultAsync();
+        return dto;
+    }
+
+    public async Task EditReleaser(int id, ReleaserDetails rel)
+    {
+        var relDb = await _context.Releasers.FirstOrDefaultAsync(r => r.Id == id);
+        var loc = await _context.Locations.FirstOrDefaultAsync(l => l.Name == rel.Location);
+        relDb.FirstName = rel.FirstName;
+        relDb.LastName = rel.LastName;
+        relDb.Location = loc;
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteReleaser(int id)
+    {
+        var rel = await _context.Releasers.FindAsync(id);
+        _context.Releasers.Remove(rel);
+        await _context.SaveChangesAsync();
     }
 }

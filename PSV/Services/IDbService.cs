@@ -48,5 +48,11 @@ namespace PSV.Services
         public Task<List<CommentDto>> GetOrderComments(int orderId);
         public Task<string> GetOrderPhotosPath(int id);
         public Task<string> GenerateOrderNumber();
+        public Task<bool> CheckIfEdgeCodeWasProvided(int orderId);
+        public Task AddReleaser(ReleaserPost newReleaser);
+        public Task<List<ReleaserDetails>> GetReleasers();
+        public Task<ReleaserDetails> GetReleaserDetails(int id);
+        public Task EditReleaser(int id, ReleaserDetails rel);
+        public Task DeleteReleaser(int id);
     }
 }

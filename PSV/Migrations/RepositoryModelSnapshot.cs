@@ -22,6 +22,41 @@ namespace PSV.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("OrderStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("OrderStatus_pk");
+
+                    b.ToTable("OrderStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "W produkcji"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Gotowe do odbioru"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Odebrane"
+                        });
+                });
+
             modelBuilder.Entity("PSV.Models.Client", b =>
                 {
                     b.Property<int>("Id")
@@ -241,6 +276,12 @@ namespace PSV.Migrations
                     b.Property<int>("IdMilling")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdOrderStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdReleaser")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdWrapping")
                         .HasColumnType("int");
 
@@ -261,6 +302,9 @@ namespace PSV.Migrations
                     b.Property<string>("QrCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("ReleaseDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("StagesCompleted")
                         .HasColumnType("int");
 
@@ -279,6 +323,10 @@ namespace PSV.Migrations
 
                     b.HasIndex("IdMilling")
                         .IsUnique();
+
+                    b.HasIndex("IdOrderStatus");
+
+                    b.HasIndex("IdReleaser");
 
                     b.HasIndex("IdWrapping")
                         .IsUnique();
@@ -315,6 +363,33 @@ namespace PSV.Migrations
                     b.HasIndex("IdOperator");
 
                     b.ToTable("Wrapping", (string)null);
+                });
+
+            modelBuilder.Entity("Releaser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdLocation")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("Releaser_pk");
+
+                    b.HasIndex("IdLocation");
+
+                    b.ToTable("Releaser", (string)null);
                 });
 
             modelBuilder.Entity("PSV.Models.Comment", b =>
@@ -400,6 +475,20 @@ namespace PSV.Migrations
                         .IsRequired()
                         .HasConstraintName("Order_Milling");
 
+                    b.HasOne("OrderStatus", "OrderStatus")
+                        .WithMany("Orders")
+                        .HasForeignKey("IdOrderStatus")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("Order_OrderStatus");
+
+                    b.HasOne("Releaser", "Releaser")
+                        .WithMany("Orders")
+                        .HasForeignKey("IdReleaser")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("Order_Releaser");
+
                     b.HasOne("PSV.Models.Wrapping", "Wrapping")
                         .WithOne("Order")
                         .HasForeignKey("PSV.Models.Order", "IdWrapping")
@@ -415,6 +504,10 @@ namespace PSV.Migrations
 
                     b.Navigation("Milling");
 
+                    b.Navigation("OrderStatus");
+
+                    b.Navigation("Releaser");
+
                     b.Navigation("Wrapping");
                 });
 
@@ -427,6 +520,23 @@ namespace PSV.Migrations
                         .HasConstraintName("Operator_Wrapping");
 
                     b.Navigation("Operator");
+                });
+
+            modelBuilder.Entity("Releaser", b =>
+                {
+                    b.HasOne("PSV.Models.Location", "Location")
+                        .WithMany("Releasers")
+                        .HasForeignKey("IdLocation")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("Releaser_Location");
+
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("OrderStatus", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("PSV.Models.Client", b =>
@@ -445,6 +555,8 @@ namespace PSV.Migrations
                     b.Navigation("Operators");
 
                     b.Navigation("Orders");
+
+                    b.Navigation("Releasers");
                 });
 
             modelBuilder.Entity("PSV.Models.Milling", b =>
@@ -473,6 +585,11 @@ namespace PSV.Migrations
                 {
                     b.Navigation("Order")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Releaser", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
