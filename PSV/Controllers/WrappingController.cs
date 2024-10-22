@@ -53,7 +53,7 @@ public class WrappingController : Controller
         return View("NotPresent", dto);
     }
     
-    public async Task<IActionResult> Order(int id, bool startTimer, int operatorId, string edgeCode)
+    public async Task<IActionResult> Order(int id, bool startTimer, int operatorId)
     {
         var dto = await _service.GetWrappingControlData(id);
         if (await _service.IsWrappingPresent(id))
@@ -61,7 +61,6 @@ public class WrappingController : Controller
             dto.StartTimer = startTimer;
             dto.Operators = await _service.GetAllOperators();
             dto.OperatorId = operatorId;
-            dto.EdgeCode = edgeCode;
             return View("Control", dto);
         }
 
@@ -114,5 +113,12 @@ public class WrappingController : Controller
     {
         await _service.CommentOrder(dto, "oklejanie");
         return RedirectToAction("Menu");
+    }
+    
+    public async Task<IActionResult> RedirectToRelease()
+    {
+        var pg = new RedirectionModel { Controller = "Wrapping", Method = "Menu", ButtonText = "stanowiska oklejania"};
+        TempData["PreviousPage"] = Newtonsoft.Json.JsonConvert.SerializeObject(pg);
+        return RedirectToAction("ReleaseMenu", "OrderRelease");
     }
 }

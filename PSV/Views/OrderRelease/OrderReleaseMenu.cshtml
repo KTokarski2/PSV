@@ -1,18 +1,24 @@
-@model TModel
+@model PSV.Models.DTOs.RedirectionModel
 
-@{
-    Layout = null;
-}
+<main class="starting-page">
+    <h2>Wydawanie zamówień</h2>
+    <div class="search-container">
+        <form class="search-form" method="get" action="@Url.Action("Find", "OrderRelease")">
+            <div class="input-group-search">
+                <label for="orderNumber">Numer zamówienia: <span class="symbol-required">*</span></label>
+                <input type="text" name="orderNumber" id="orderNumber" placeholder="">
+                <span id="errorOrderNumber" class="errors-text"></span>
+                <input class="form-submit" type="submit" value="Wyszukaj">
+            </div>
+        </form>
+    </div>
+    <div class="button-wrapper">
+        <a class="starting-page-button" href="@Url.Action(Model.Method, Model.Controller)">Powrót do @Model.ButtonText</a>
+    </div>
+</main>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+<script>
+    window.onload = function() {
+        document.getElementById('orderNumber').focus();
+    };
+</script>

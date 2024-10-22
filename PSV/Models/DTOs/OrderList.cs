@@ -10,8 +10,11 @@ public class OrderList
     public bool Cut { get; set; }
     public bool Milling { get; set; }
     public bool Wrapping { get; set; }
+    public bool CutDone { get; set; }
+    public bool MillingDone { get; set; }
+    public bool WrappingDone { get; set; }
     public string EdgeCodeProvided { get; set; }
-    
     public string Location { get; set; }
+    public string Status { get; set; }
 
 }

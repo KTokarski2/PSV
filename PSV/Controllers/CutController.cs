@@ -102,5 +102,12 @@ public class CutController : Controller
         await _service.CommentOrder(dto, "cięcie");
         return RedirectToAction("Menu");
     }
+
+    public async Task<IActionResult> RedirectToRelease()
+    {
+        var pg = new RedirectionModel { Controller = "Cut", Method = "Menu", ButtonText = "stanowiska cięcia"};
+        TempData["PreviousPage"] = Newtonsoft.Json.JsonConvert.SerializeObject(pg);
+        return RedirectToAction("ReleaseMenu", "OrderRelease");
+    }
     
 }

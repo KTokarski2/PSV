@@ -1,0 +1,41 @@
+@model PSV.Models.DTOs.ReleaserDetails
+
+<main>
+    <div class="details-container">
+        <div class="back-buttons-div">
+            <a class="back-button" href="@Url.Action("Index", "Home")">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+                Strona główna
+            </a>
+            <a class="back-button" href="@Url.Action("AllReleasers", "OrderRelease")">
+                <span class="material-symbols-outlined">
+                    list
+                </span>
+                Lista wydawców
+            </a>
+        </div>
+        <form class="order-details">
+            <div class="input-group">
+                <label for="firstName">Imię: <span class="symbol-required">*</span></label>
+                <input type="text" name="firstName" id="firstName" value="@Model.FirstName" disabled>
+                <span id="errorFirstName" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="lastName">Nazwisko: <span class="symbol-required">*</span></label>
+                <input type="text" name="lastName" id="lastName" value="@Model.LastName" disabled>
+                <span id="lastName" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="location">Lokalizacja: <span class="symbol-required">*</span></label>
+                <input type="text" name="location" id="client" value="@Model.Location" disabled>
+                <span id="errorLocation" class="errors-text"></span>
+            </div>
+        </form>
+        <div class="actions-container">
+            <a href="@Url.Action("ReleaserEditForm", "OrderRelease", new { Model.Id })" class="details-action">Edytuj</a>
+            <a href="@Url.Action("DeleteReleaser", "OrderRelease", new { Model.Id })" class="details-action">Usuń</a>
+        </div>
+    </div>
+</main>

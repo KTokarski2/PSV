@@ -26,7 +26,7 @@
                     foreach (var rel in Model.Items)
                     {
                         <tr class="orders-list-row">
-                            <td><a href="@Url.Action("", "", new {rel.Id})">@rel.LastName</a></td>
+                            <td><a href="@Url.Action("ReleaserDetails", "OrderRelease", new {rel.Id})">@rel.LastName</a></td>
                             <td>@rel.FirstName</td>
                             <td>@rel.Location</td>
                         </tr>

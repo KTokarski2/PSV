@@ -35,4 +35,7 @@ public class OrderDetails
     public int ClientId { get; set; }
     public string? EdgeCodeProvided{ get; set; }
     public string? EdgeCodeUsed { get; set; }
+    public string? Status { get; set; }
+    public string? ReleasedAt { get; set; }
+    public string? ReleasedBy { get; set; }
 }

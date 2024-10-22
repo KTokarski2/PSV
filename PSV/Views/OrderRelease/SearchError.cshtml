@@ -1,8 +1,10 @@
+@model PSV.Models.DTOs.SearchError
+
 <main>
-    <a class="action-button" href="@Url.Action("Menu", "Cut")">
+    <a class="action-button" href="@Url.Action(Model.Redirection.Method, Model.Redirection.Controller)">
         <span class="material-symbols-outlined">
             arrow_back
         </span>
     </a>
-    <h1>Brak zamówień o podanym numerze</h1>
+    <h1>@Model.Message</h1>
 </main>

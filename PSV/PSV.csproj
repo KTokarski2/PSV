@@ -100,6 +100,10 @@
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\34\QRCode.png" />
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3\BarCode.png" />
       <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\3\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\6\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\6\QRCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\1005\BarCode.png" />
+      <_ContentIncludedByDefault Remove="wwwroot\images\OrdersData\1005\QRCode.png" />
     </ItemGroup>
 
 </Project>

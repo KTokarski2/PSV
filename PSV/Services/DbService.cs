@@ -35,6 +35,7 @@ public class DbService : IDbService
             Wrapping = new Wrapping { IsPresent = request.Wrapping },
             Cut = new Cut { IsPresent = request.Cut },
             EdgeCodeProvided = request.EdgeCodeProvided,
+            IdOrderStatus = 1
         };
 
         await _context.AddAsync(order);
@@ -65,7 +66,9 @@ public class DbService : IDbService
             
     public async Task<List<OrderList>> GetAllOrders()
     {
-        return await _context.Orders.Select(o => new OrderList
+        return await _context.Orders
+            .OrderByDescending(o => o.CreatedAt)
+            .Select(o => new OrderList
         {
             Id = o.Id,
             OrderNumber = o.OrderNumber,
@@ -76,7 +79,12 @@ public class DbService : IDbService
             Cut = o.Cut.IsPresent,
             Milling = o.Milling.IsPresent,
             Wrapping = o.Wrapping.IsPresent,
-            EdgeCodeProvided = o.EdgeCodeProvided
+            EdgeCodeProvided = o.EdgeCodeProvided,
+            Status = o.OrderStatus.Name,
+            CutDone = o.Cut.To != null,
+            MillingDone = o.Milling.To != null,
+            WrappingDone = o.Wrapping.To != null
+            
         }).ToListAsync();
     }
 
@@ -84,6 +92,8 @@ public class DbService : IDbService
     {
         var order = await _context.Orders
             .Include(o => o.Client)
+            .Include(o => o.OrderStatus)
+            .Include(o => o.Releaser)
             .Include(o => o.Cut)
                 .ThenInclude(c => c.Operator)
             .Include(o => o.Milling)
@@ -123,7 +133,13 @@ public class DbService : IDbService
             CutOperator = cutOperator,
             MillingOperator = millingOperator,
             WrappingOperator = wrappingOperator,
-            CreatedAt = order.CreatedAt.ToString("dd.MM.yyyy HH:mm")
+            CreatedAt = order.CreatedAt.ToString("dd.MM.yyyy HH:mm"),
+            Status = order.OrderStatus.Name,
+            ReleasedBy = order.Releaser != null ? $"{order.Releaser.FirstName} {order.Releaser.LastName}" : "",
+            ReleasedAt = order.ReleaseDate != null && order.ReleaseDate.Value != DateTime.MinValue 
+                ? order.ReleaseDate.Value.ToString("dd.MM.yyyy HH:mm") 
+                : ""
+
         };
 
         if (order.Cut is { IsPresent: true, From: not null, To: not null })
@@ -251,6 +267,7 @@ public class DbService : IDbService
         var order = await _context.Orders
             .Include(o => o.Cut)
             .Include(o => o.Client)
+            .Include(o => o.OrderStatus)
             .FirstOrDefaultAsync(o => o.Id == orderId);
 
         var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
@@ -286,6 +303,12 @@ public class DbService : IDbService
             {
                 await _smsservice.SendMessage(order.Client.PhoneNumber, "OrderFinished", order.OrderNumber);
                 order.Cut.ClientNotified = true;
+
+                if (order.OrderStatus.Id != 2)
+                {
+                    order.OrderStatus = await _context.OrderStatuses.FirstOrDefaultAsync(s => s.Id == 2);
+                }
+                
                 await _context.SaveChangesAsync();
             }
             
@@ -314,6 +337,7 @@ public class DbService : IDbService
         var order = await _context.Orders
             .Include(o => o.Milling)
             .Include(o => o.Client)
+            .Include(o => o.OrderStatus)
             .FirstOrDefaultAsync(o => o.Id == orderId);
 
         var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
@@ -349,6 +373,12 @@ public class DbService : IDbService
             {
                 await _smsservice.SendMessage(order.Client.PhoneNumber, "OrderFinished", order.OrderNumber);
                 order.Milling.ClientNotified = true;
+                
+                if (order.OrderStatus.Id != 2)
+                {
+                    order.OrderStatus = await _context.OrderStatuses.FirstOrDefaultAsync(s => s.Id == 2);
+                }
+                
                 await _context.SaveChangesAsync();
             }
         }
@@ -375,6 +405,7 @@ public class DbService : IDbService
         var order = await _context.Orders
             .Include(o => o.Wrapping)
             .Include(o => o.Client)
+            .Include(o => o.OrderStatus)
             .FirstOrDefaultAsync(o => o.Id == orderId);
 
         var opr = await _context.Operators.FirstOrDefaultAsync(o => o.Id == operatorId);
@@ -410,6 +441,12 @@ public class DbService : IDbService
             {
                 await _smsservice.SendMessage(order.Client.PhoneNumber, "OrderFinished", order.OrderNumber);
                 order.Wrapping.ClientNotified = true;
+                
+                if (order.OrderStatus.Id != 2)
+                {
+                    order.OrderStatus = await _context.OrderStatuses.FirstOrDefaultAsync(s => s.Id == 2);
+                }
+                
                 await _context.SaveChangesAsync();
             }
         }
@@ -903,5 +940,73 @@ public class DbService : IDbService
         var rel = await _context.Releasers.FindAsync(id);
         _context.Releasers.Remove(rel);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<OrderList>> GetFinishedOrders()
+    {
+        return await _context.Orders
+            .OrderByDescending(o => o.CreatedAt)
+            .Where(o => o.OrderStatus.Id == 2)
+            .Select(o => new OrderList
+            {
+                Id = o.Id,
+                OrderNumber = o.OrderNumber,
+                OrderName = o.OrderName,
+                CreatedAt = o.CreatedAt.ToString("dd.MM.yyyy HH:mm"),
+                Client = o.Client.Name,
+                Location = o.Location.Name,
+                Cut = o.Cut.IsPresent,
+                Milling = o.Milling.IsPresent,
+                Wrapping = o.Wrapping.IsPresent,
+                EdgeCodeProvided = o.EdgeCodeProvided,
+                Status = o.OrderStatus.Name
+            }).ToListAsync();
+    }
+
+    public async Task<OrderRelease?> GetReleaseOrderData(int? orderId)
+    {
+        var allReleasers = await GetReleasers();
+        return await _context.Orders
+            .Where(o => o.Id == orderId)
+            .Select(o => new OrderRelease
+            {
+                OrderId = o.Id,
+                OrderNumber = o.OrderNumber,
+                Releasers = allReleasers
+            }).FirstOrDefaultAsync();
+    }
+
+    public async Task ReleaseOrder(int orderId, int releaserId)
+    {
+        var order = await _context.Orders
+            .Include(o => o.OrderStatus)
+            .FirstOrDefaultAsync(o => o.Id == orderId);
+        var releaser = await _context.Releasers.FindAsync(releaserId);
+        order.Releaser = releaser;
+        order.OrderStatus = await _context.OrderStatuses.FindAsync(3);;
+        order.ReleaseDate = DateTime.Now;
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<bool> CheckIfReadyForRelease(int? id)
+    {
+        var order = await _context.Orders.Include(o => o.OrderStatus).FirstOrDefaultAsync(o => o.Id == id);
+        if (order.OrderStatus.Id == 2)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public async Task<bool> CheckIfAlreadyReleased(int? id)
+    {
+        var order = await _context.Orders.Include(o => o.OrderStatus).FirstOrDefaultAsync(o => o.Id == id);
+        if (order.OrderStatus.Id == 3)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

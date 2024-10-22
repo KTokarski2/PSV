@@ -86,10 +86,4 @@
 /home/fedora/Projects/PSV/PSV/obj/Debug/net8.0/PSV.genruntimeconfig.cache
 /home/fedora/Projects/PSV/PSV/obj/Debug/net8.0/ref/PSV.dll
 /home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/Newtonsoft.Json.dll
-/home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/Deploy/web.config
-/home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/Deploy/appsettings.Development.json
-/home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/Deploy/appsettings.json
-/home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/Deploy/PSV.deps.json
-/home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/Deploy/PSV.runtimeconfig.json
 /home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/msgtemplates.json
-/home/fedora/Projects/PSV/PSV/bin/Debug/net8.0/Deploy/msgtemplates.json

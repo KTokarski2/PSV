@@ -54,5 +54,9 @@ namespace PSV.Services
         public Task<ReleaserDetails> GetReleaserDetails(int id);
         public Task EditReleaser(int id, ReleaserDetails rel);
         public Task DeleteReleaser(int id);
+        public Task<OrderRelease?> GetReleaseOrderData(int? orderId);
+        public Task ReleaseOrder(int orderId, int releaserId);
+        public Task<bool> CheckIfReadyForRelease(int? id);
+        public Task<bool> CheckIfAlreadyReleased(int? id);
     }
 }

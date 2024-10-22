@@ -13,14 +13,6 @@
       "PackagePath": "staticwebassets/css/style.css"
     },
     {
-      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/5/BarCode.png",
-      "PackagePath": "staticwebassets/images/OrdersData/5/BarCode.png"
-    },
-    {
-      "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/images/OrdersData/5/QRCode.png",
-      "PackagePath": "staticwebassets/images/OrdersData/5/QRCode.png"
-    },
-    {
       "Id": "/home/fedora/Projects/PSV/PSV/wwwroot/js/photo.js",
       "PackagePath": "staticwebassets/js/photo.js"
     },

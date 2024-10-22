@@ -28,7 +28,7 @@
             </div>
             <div class="edge-code-info">
                 <h3>Kod obrzeża (Wpisz jeśli zastosowano inny): </h3>
-                <input name="edgeCode" class="wrapping-edge-code-input" type="text" placeholder="podaj zastosowany kod obrzeża" value="@Model.EdgeCode"/>
+                <input name="edgeCode" class="wrapping-edge-code-input" type="text" placeholder="podaj zastosowany kod obrzeża" value="@Model.EdgeCode" required/>
             </div>
             <div id="timerOn" style="display: none">@Html.Raw(Json.Serialize(Model.StartTimer))</div>
             @{

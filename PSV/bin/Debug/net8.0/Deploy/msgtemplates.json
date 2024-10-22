@@ -1,7 +1,0 @@
-{
-    "SmsTemplates": {
-        "OrderCreated": "Twoje zamówienie o numerze {0} jest już w systemie",
-        "StageFinished": "Twoje zamówienie o numerze {0} przeszło {1} z {2} etapów produkcji",
-        "OrderFinished": "Twoje zamówienie o numerze {0} jest już skończone"
-    }
-}

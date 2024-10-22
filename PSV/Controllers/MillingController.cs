@@ -103,4 +103,11 @@ public class MillingController : Controller
         await _service.CommentOrder(dto, "frezowanie");
         return RedirectToAction("Menu");
     }
+
+    public async Task<IActionResult> RedirectToRelease()
+    {
+        var pg = new RedirectionModel { Controller = "Milling", Method = "Menu", ButtonText = "stanowiska frezowania" };
+        TempData["PreviousPage"] = Newtonsoft.Json.JsonConvert.SerializeObject(pg);
+        return RedirectToAction("ReleaseMenu", "OrderRelease");
+    }
 }

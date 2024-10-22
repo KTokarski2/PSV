@@ -1,18 +1,33 @@
-@model TModel
+@model PSV.Models.DTOs.OrderRelease
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+<main>
+    <h2 class="page-title">Wydawanie zamówień - zamówienie nr. </h2>
+    <div class="control-buttons">
+        <form method="get" action="@Url.Action("")">
+            <div class="operator-select">
+                <h3>Wybierz wydawcę:</h3>
+                <select name="releaserId">
+                    @{
+                        if (Model.Releasers.Count == 0)
+                        {
+                            <option value="">Brak wydawców</option>
+                        }
+                        foreach (var opr in Model.Releasers)
+                        {
+                            <option value="@opr.Id">
+                                @opr.FirstName @opr.LastName, @opr.Location
+                            </option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="start-end">
+                <input type="hidden" name="id" value="@Model.OrderId" />
+                <input type="hidden" name="originController" value="@Model.Redirection.Controller"/>
+                <input type="hidden" name="originAction" value="@Model.Redirection.Method"/>
+                <button type="submit" formaction="@Url.Action(Model.Redirection.Method, Model.Redirection.Controller)" class="control-button-start">Powrót do Menu</button>
+                <button type="submit" formaction="@Url.Action("ReleaseOrder")" class="control-button-end">Wydaj zamówienie</button>
+            </div>
+        </form>
+    </div>
+</main>

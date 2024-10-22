@@ -24,6 +24,7 @@
                     <th>Cięcie</th>
                     <th>Frezowanie</th>
                     <th>Oklejanie</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,9 +40,18 @@
                             <td>
                                 @if (order.Cut)
                                 {
-                                    <span class="material-symbols-outlined">
-                                        done
-                                    </span>
+                                    @if (order.CutDone)
+                                    {
+                                        <span class="material-symbols-outlined" style="background-color: green">
+                                            done
+                                        </span>
+                                    }
+                                    @if (!order.CutDone)
+                                    {
+                                        <span class="material-symbols-outlined" style="background-color: red">
+                                            done
+                                        </span>
+                                    }
                                 }
                                 else
                                 {
@@ -53,9 +63,19 @@
                             <td>
                                 @if (order.Milling)
                                 {
-                                    <span class="material-symbols-outlined">
-                                        done
-                                    </span>
+                                    @if (order.MillingDone)
+                                    {
+                                        <span class="material-symbols-outlined" style="background-color: green">
+                                            done
+                                        </span>
+                                    }
+                                    @if (!order.MillingDone)
+                                    {
+                                        <span class="material-symbols-outlined" style="background-color: red">
+                                            done
+                                        </span>
+                                    }
+                                    
                                 }
                                 else
                                 {
@@ -67,9 +87,19 @@
                             <td>
                                 @if (order.Wrapping)
                                 {
-                                    <span class="material-symbols-outlined">
-                                        done
-                                    </span>
+                                    if (order.WrappingDone)
+                                    {
+                                        <span class="material-symbols-outlined" style="background-color: green">
+                                            done
+                                        </span>
+                                    }
+
+                                    if (!order.WrappingDone)
+                                    {
+                                        <span class="material-symbols-outlined" style="background-color: red">
+                                            done
+                                        </span> 
+                                    }
                                 }
                                 else
                                 {
@@ -78,6 +108,7 @@
                                     </span>
                                 }
                             </td>
+                            <td>@order.Status</td>
                         </tr>
                     }
                 }

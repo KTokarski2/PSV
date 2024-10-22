@@ -80,6 +80,21 @@
                 <span id="errorOrderNumber" class="errors-text"></span>
             </div>
             <div class="input-group">
+                <label for="orderNumber">Status zamówienia: </label>
+                <input type="text" name="orderNumber" id="orderNumber" value="@Model.Status" disabled>
+                <span id="errorOrderNumber" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="orderNumber">Data wydania: </label>
+                <input type="text" name="orderNumber" id="orderNumber" value="@Model.ReleasedAt" disabled>
+                <span id="errorOrderNumber" class="errors-text"></span>
+            </div>
+            <div class="input-group">
+                <label for="orderNumber">Osoba wydająca: </label>
+                <input type="text" name="orderNumber" id="orderNumber" value="@Model.ReleasedBy" disabled>
+                <span id="errorOrderNumber" class="errors-text"></span>
+            </div>
+            <div class="input-group">
                 <label for="orderNumber">Numer zamówienia: </label>
                 <input type="text" name="orderNumber" id="orderNumber" value="@Model.OrderNumber" disabled>
                 <span id="errorOrderNumber" class="errors-text"></span>
